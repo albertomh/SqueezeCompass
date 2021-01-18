@@ -1,0 +1,76 @@
+@import "custom";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+html {
+  font-size: 16px;
+}
+
+// ----- CONSTITUENT GRID ------------------------------------------------------
+constituent-grid {
+  @extend .container-fluid;
+  @extend .d-flex;
+  @extend .flex-wrap;
+
+  margin: 1rem 0 1.5rem 0;
+}
+
+// Media breakpoints: xs, sm, md, lg, xl, xxl.
+// Factors of 506: 1×506; 2×253; 11×46; 22×23.
+$constituent-margin: 1px;
+@mixin constituent-tile() {
+  @include media-breakpoint-down(xs) {
+    $constituents-per-row: 9;
+    flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
+  }
+  @include media-breakpoint-up(sm) {
+    $constituents-per-row: 16;
+    flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
+  }
+  @include media-breakpoint-up(lg) {
+    $constituents-per-row: 20;
+    flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
+  }
+}
+@mixin constituent-tile__content() {
+  @include media-breakpoint-down(xs) {
+    font-size: 0.65rem;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 0.75rem;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 0.80rem;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 0.85rem;
+  }
+  @include media-breakpoint-up(xl) {
+    font-size: 1.25rem;
+  }
+}
+
+.constituent-grid__constituent-tile {
+  position: relative;
+  @include constituent-tile;
+  margin: $constituent-margin;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.constituent-grid__constituent-tile::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.constituent-grid__constituent-tile__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  @include constituent-tile__content;
+
+  // Center text
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

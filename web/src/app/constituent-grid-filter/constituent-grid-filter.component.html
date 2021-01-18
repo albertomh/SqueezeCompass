@@ -1,5 +1,22 @@
+<div class="btn-group" role="group">
+  <a role="button"
+     class="btn btn-secondary"
+     [ngClass]="{'active': queryParams?.order === 'alphabetical'}"
+     (click)="toggleOrder('alphabetical')">
+    A🠖Z
+  </a>
+  <a role="button"
+     class="btn btn-secondary"
+     [ngClass]="{'active': queryParams?.order === 'reverse'}"
+     (click)="toggleOrder('reverse')">
+    A🠔Z
+  </a>
+</div>
+
 <div>
-  <button (click)="toggleOrder('alphabetical')">A🠖Z</button>
-  <button (click)="toggleOrder('reverse')">A🠔Z</button>
-  <button (click)="clearQueryParams()">clear</button>
+  <a role="button"
+     class="btn btn-secondary"
+     (click)="clearQueryParams()">
+    clear
+  </a>
 </div>

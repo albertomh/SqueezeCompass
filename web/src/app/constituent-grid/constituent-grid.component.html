@@ -1,7 +1,7 @@
 <div *ngFor="let constituent of snapshots"
-     class="constituent-grid__constituent-square"
+     class="constituent-grid__constituent-tile"
      [ngClass]="recommendationClasses[constituent.summary.recommendation]">
-  <div class="constituent-grid__constituent-square__content">
+  <div class="constituent-grid__constituent-tile__content">
     {{constituent.symbol}}
   </div>
 </div>
