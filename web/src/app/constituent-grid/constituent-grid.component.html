@@ -1,0 +1,7 @@
+<div *ngFor="let constituent of snapshots"
+     class="constituent-grid__constituent-square"
+     [ngClass]="recommendationClasses[constituent.summary.recommendation]">
+  <div class="constituent-grid__constituent-square__content">
+    {{constituent.symbol}}
+  </div>
+</div>

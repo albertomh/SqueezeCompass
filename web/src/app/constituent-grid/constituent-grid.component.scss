@@ -1,0 +1,60 @@
+// Grid of squares: [stackoverflow.com/a/46550527]
+:host {  /* <constituent-grid> */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+$constituents-per-row: 23;  // Factors of 506: 1×506; 2×253; 11×46; 22×23.
+$constituent-margin: 1px;
+.constituent-grid__constituent-square {
+  position: relative;
+  flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
+  margin: $constituent-margin;
+  //border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 2px 2px 2px 2px;
+}
+
+.constituent-grid__constituent-square::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+// Pastel palette:
+// ORIGINAL: [coolors.co/f77e88-ffcec6-fbfbda-bdf8b3-86e998]
+// CUSTOM: [coolors.co/f0192b-f66069-ffcec6-fbfbda-bdf8b3-64e076-26cf45]
+.constituent-grid__constituent-square--strong-buy {
+  background: #20AC39;
+}
+.constituent-grid__constituent-square--buy {
+  background: #64E076;
+}
+.constituent-grid__constituent-square--overperform {
+  background: #BDF8B3;
+}
+.constituent-grid__constituent-square--hold {
+  background: #FBFBDA;
+}
+.constituent-grid__constituent-square--underperform {
+  background: #FFCEC6;
+}
+.constituent-grid__constituent-square--sell {
+  background: #F66069;
+}
+.constituent-grid__constituent-square--strong-sell {
+  background: #D30D1E;
+}
+
+.constituent-grid__constituent-square__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  /* Center text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
