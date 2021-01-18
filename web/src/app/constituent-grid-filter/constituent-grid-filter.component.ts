@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilterQueryParams";
 
 @Component({
   selector: 'constituent-grid-filter',
@@ -7,8 +8,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./constituent-grid-filter.component.scss']
 })
 export class ConstituentGridFilterComponent implements OnInit {
+  queryParams: ConstituentGridFilterQueryParams = {};
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, route: ActivatedRoute) {
+    // Listen for changes to the query params.
+    route.queryParams.subscribe(p => {
+      this.queryParams = p;
+    });
+  }
 
   ngOnInit(): void {
   }

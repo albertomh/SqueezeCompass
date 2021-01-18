@@ -14,14 +14,14 @@ export class ConstituentGridComponent implements OnInit {
   originalSnapshots: ConstituentSnapshot[];  // Store original array.
   snapshots: ConstituentSnapshot[];  // Transform originalSnapshots according to applied filters.
   readonly recommendationClasses: { [className: string]: string } = {
-    'strong_buy': 'constituent-grid__constituent-square--strong-buy',
-    'buy': 'constituent-grid__constituent-square--buy',
-    'overperform': 'constituent-grid__constituent-square--overperform',
-    'hold': 'constituent-grid__constituent-square--hold',
-    'none': 'constituent-grid__constituent-square--hold',
-    'underperform': 'constituent-grid__constituent-square--underperform',
-    'sell': 'constituent-grid__constituent-square--sell',
-    'strong_sell': 'constituent-grid__constituent-square--strong-sell'
+    'strong_buy': 'constituent-grid__constituent-tile--strong-buy',
+    'buy': 'constituent-grid__constituent-tile--buy',
+    'overperform': 'constituent-grid__constituent-tile--overperform',
+    'hold': 'constituent-grid__constituent-tile--hold',
+    'none': 'constituent-grid__constituent-tile--hold',
+    'underperform': 'constituent-grid__constituent-tile--underperform',
+    'sell': 'constituent-grid__constituent-tile--sell',
+    'strong_sell': 'constituent-grid__constituent-tile--strong-sell'
   };
 
   constructor(route: ActivatedRoute) {
@@ -52,7 +52,7 @@ export class ConstituentGridComponent implements OnInit {
     if (order == null) {
       this.snapshots = this.originalSnapshots;
     } else {
-      let orderedSnapshots: ConstituentSnapshot[] = [...this.snapshots].sort((a, b) => a.symbol.localeCompare(b.symbol));
+      let orderedSnapshots: ConstituentSnapshot[] = [...this.originalSnapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
       if (order === 'alphabetical') {
         this.snapshots = orderedSnapshots;
       } else if (order === 'reverse') {
