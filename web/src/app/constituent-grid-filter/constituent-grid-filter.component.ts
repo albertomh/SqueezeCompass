@@ -8,7 +8,9 @@ import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilt
   styleUrls: ['./constituent-grid-filter.component.scss']
 })
 export class ConstituentGridFilterComponent implements OnInit {
+  filterTrayButtonCaption: string = "Show filters";
   queryParams: ConstituentGridFilterQueryParams = {};
+  objectKeys = Object.keys;
 
   constructor(private router: Router, route: ActivatedRoute) {
     // Listen for changes to the query params.
@@ -18,6 +20,14 @@ export class ConstituentGridFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onToggleFilterTrayVisibility() {
+    if (this.filterTrayButtonCaption === "Show filters") {
+      this.filterTrayButtonCaption = "Hide filters";
+    } else {
+      this.filterTrayButtonCaption = "Show filters";
+    }
   }
 
   clearQueryParams(): void {
