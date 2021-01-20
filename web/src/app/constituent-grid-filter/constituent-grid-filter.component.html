@@ -1,22 +1,49 @@
-<div class="btn-group" role="group">
-  <a role="button"
-     class="btn btn-secondary"
-     [ngClass]="{'active': queryParams?.order === 'alphabetical'}"
-     (click)="toggleOrder('alphabetical')">
-    A🠖Z
-  </a>
-  <a role="button"
-     class="btn btn-secondary"
-     [ngClass]="{'active': queryParams?.order === 'reverse'}"
-     (click)="toggleOrder('reverse')">
-    A🠔Z
-  </a>
-</div>
+<div class="container-fluid" id="filter-tray">
 
-<div>
-  <a role="button"
-     class="btn btn-secondary"
-     (click)="clearQueryParams()">
-    clear
-  </a>
+  <!-- FIRST ROW OF FILTER TRAY -->
+  <div class="collapse" id="filter-tray__collapsible">
+    <div class="row">
+      <div class="col">
+
+        <div class="btn-group" role="group">
+          <a role="button"
+             class="btn btn-secondary"
+             [ngClass]="{'active': queryParams?.order === 'alphabetical'}"
+             (click)="toggleOrder('alphabetical')">
+            A🠖Z
+          </a>
+          <a role="button"
+             class="btn btn-secondary"
+             [ngClass]="{'active': queryParams?.order === 'reverse'}"
+             (click)="toggleOrder('reverse')">
+            A🠔Z
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- TOGGLE FILTER VISIBILITY -->
+  <div class="row" id="filter-tray__buttons-row">
+
+    <div class="col">
+      <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
+         (click)="onToggleFilterTrayVisibility()">
+        <i class="bi-toggles"></i> {{filterTrayButtonCaption}}
+      </a>
+    </div>
+
+    <div class="col">
+      <a role="button" class="btn btn-outline-danger float-end"
+         [ngClass]="{'disabled': objectKeys(queryParams).length === 0}"
+         (click)="clearQueryParams()">
+        <i class="bi-x"></i> Reset filters
+      </a>
+    </div>
+
+  </div>
+
 </div>
