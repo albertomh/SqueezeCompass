@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ConstituentGridComponent } from './constituent-grid/constituent-grid.component';
 import { ConstituentGridFilterComponent } from './constituent-grid-filter/constituent-grid-filter.component';
 import { ConstituentGridDataWrapperComponent } from './constituent-grid-data-wrapper/constituent-grid-data-wrapper.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConstituentGridComponent,
     ConstituentGridFilterComponent,
-    ConstituentGridDataWrapperComponent
+    ConstituentGridDataWrapperComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
