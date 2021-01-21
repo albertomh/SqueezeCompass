@@ -9,12 +9,12 @@
     </h1>
 
     <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas"
-            (click)="onToggleMobileOffCanvasMenu()">
-      <span class="navbar-toggler-icon" [ngClass]="{'navbar-toggler-icon--open': mobileOffCanvasMenuIsOpen}"></span>
+            (click)="onToggleoffCanvasMenu()">
+      <span class="navbar-toggler-icon" [ngClass]="{'navbar-toggler-icon--open': offCanvasMenuIsOpen}"></span>
     </button>
 
     <div class="navbar-collapse offcanvas-collapse"
-         [ngClass]="{'open': mobileOffCanvasMenuIsOpen}">
+         [ngClass]="{'open': offCanvasMenuIsOpen}">
       <div class="navbar-nav">
         <a class="nav-link" href="#">About</a> <!-- TODO: dynamically set .active -->
       </div>
