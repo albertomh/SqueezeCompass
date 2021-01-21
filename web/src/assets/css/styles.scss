@@ -10,34 +10,49 @@ html {
 }
 
 @include media-breakpoint-up(xl) {
-  body {
+  nav,
+  constituent-grid-filter,
+  constituent-grid {
     padding: 0 3rem;
   }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lexend Mega', sans-serif;
+  letter-spacing: -0.5px;
 }
 
+
+// Media breakpoints:
+// xs  X-Small devices (portrait phones, less than 576px)
+// sm  Small devices (landscape phones, 576px and up)
+// md  Medium devices (tablets, 768px and up)
+// lg  Large devices (desktops, 992px and up)
+// xl  X-Large devices (large desktops, 1200px and up)
+// xxl XX-Large devices (larger desktops, 1400px and up)
+
+// ----- NAVBAR ----------------------------------------------------------------
+#wordmark { transform: translateY(-1px); }
 .small-h1 {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
 }
-#title-compass {
+#wordmark--compass {
   font-size: 1.2rem;
   position: relative;
   top: -0.25rem;
 }
 @include media-breakpoint-up(md) {
-  .small-h1 { font-size: 1.6rem; }
-  #title-compass {
-    font-size: 1.3rem;
+  .small-h1 { font-size: 1.7rem; }
+  #wordmark--compass {
+    font-size: 1.4rem;
     position: relative;
     top: -0.26rem;
   }
 }
 @include media-breakpoint-up(lg) {
+  #wordmark { transform: translateY(-2px); }
   .small-h1 { font-size: 2rem; }
-  #title-compass {
+  #wordmark--compass {
     font-size: 1.6rem;
     position: relative;
     top: -0.28rem;
@@ -45,10 +60,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 @include media-breakpoint-up(xl) {
   .small-h1 { font-size: 2.2rem; }
-  #title-compass {
+  #wordmark--compass {
     font-size: 1.8rem;
     position: relative;
     top: -0.3rem;
+  }
+}
+
+.navbar-collapse {
+  width: fit-content;
+}
+
+.navbar-toggler-icon--open {
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(0.03906185,0,0,0.03906185,5.0002129,5.0001611)"><path d="M 284.29,256 506.15,34.14 c 7.811,-7.811 7.811,-20.475 0,-28.285 -7.811,-7.81 -20.475,-7.811 -28.285,0 L 256.005,227.715 34.145,5.855 c -7.811,-7.811 -20.475,-7.811 -28.285,0 -7.81,7.811 -7.811,20.475 0,28.285 L 227.72,256 5.86,477.86 c -7.811,7.811 -7.811,20.475 0,28.285 3.905,3.905 9.024,5.857 14.143,5.857 5.119,0 10.237,-1.952 14.143,-5.857 l 221.86,-221.86 221.86,221.86 c 3.905,3.905 9.024,5.857 14.143,5.857 5.119,0 10.237,-1.952 14.143,-5.857 7.811,-7.811 7.811,-20.475 0,-28.285 z" fill="rgba%28255, 255, 255, 0.55%29"/></g></svg>') !important;
+}
+
+@include media-breakpoint-down(lg) {
+  .offcanvas-collapse {
+    position: fixed;
+    z-index: 1;
+    top: 49px;  // Height of <nav>.
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #343a40;
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
   }
 }
 
@@ -61,14 +105,16 @@ constituent-grid-filter {
 }
 
 #filter-tray {
-  padding: 0;
+  //padding: 0;
+  background: $gray-100;
 }
 #filter-tray__collapsible {
 
 }
 #filter-tray__buttons-row {
-  padding-top: 1rem;
+  padding: 0.5rem 0;
 }
+
 
 // ----- CONSTITUENT GRID ------------------------------------------------------
 constituent-grid {
@@ -76,16 +122,8 @@ constituent-grid {
   @extend .d-flex;
   @extend .flex-wrap;
 
-  margin: 1rem 0 1.5rem 0;
+  margin: 0.5rem 0 1.5rem 0;
 }
-
-// Media breakpoints:
-// xs  X-Small devices (portrait phones, less than 576px)
-// sm  Small devices (landscape phones, 576px and up)
-// md  Medium devices (tablets, 768px and up)
-// lg  Large devices (desktops, 992px and up)
-// xl  X-Large devices (large desktops, 1200px and up)
-// xxl XX-Large devices (larger desktops, 1400px and up)
 
 // Factors of 506: 1×506; 2×253; 11×46; 22×23.
 $constituent-margin: 1px;
@@ -146,3 +184,6 @@ $constituent-margin: 1px;
   justify-content: center;
   align-items: center;
 }
+
+
+// -----------------------------------------------------------------------------
