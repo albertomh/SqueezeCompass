@@ -4,17 +4,19 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import '../../../node_modules/bootstrap-icons/font/bootstrap-icons';
 
-
-html {
-  font-size: 16px;
+// ----- UTILITIES -------------------------------------------------------------
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-@include media-breakpoint-up(xl) {
-  nav,
-  constituent-grid-filter,
-  constituent-grid {
-    padding: 0 3rem;
-  }
+
+// ----- HTML ELEMENTS -----------------------------------------------------====
+html {
+  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,22 +33,43 @@ h1, h2, h3, h4, h5, h6 {
 // xl  X-Large devices (large desktops, 1200px and up)
 // xxl XX-Large devices (larger desktops, 1400px and up)
 
+// ----- CONTAINER PADDING -----------------------------------------------------
+constituent-grid-filter {
+  padding: 0;
+}
+
+@include media-breakpoint-up(xl) {
+  nav,
+  constituent-grid-filter .col,
+  constituent-grid {
+    padding: 0 3rem;
+  }
+  nav > div {
+    padding: 0 !important;
+  }
+
+}
+
+
 // ----- NAVBAR ----------------------------------------------------------------
-#wordmark { transform: translateY(-1px); }
+#wordmark {
+  @include no-select;
+  transform: translateY(-1px);
+}
 .small-h1 {
   font-size: 1.5rem;
 }
 #wordmark--compass {
   font-size: 1.2rem;
   position: relative;
-  top: -0.25rem;
+  top: -0.28rem;
 }
 @include media-breakpoint-up(md) {
   .small-h1 { font-size: 1.7rem; }
   #wordmark--compass {
     font-size: 1.4rem;
     position: relative;
-    top: -0.26rem;
+    top: -0.3rem;
   }
 }
 @include media-breakpoint-up(lg) {
@@ -55,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
   #wordmark--compass {
     font-size: 1.6rem;
     position: relative;
-    top: -0.28rem;
+    top: -0.3rem;
   }
 }
 @include media-breakpoint-up(xl) {
@@ -63,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   #wordmark--compass {
     font-size: 1.8rem;
     position: relative;
-    top: -0.3rem;
+    top: -0.32rem;
   }
 }
 
@@ -109,7 +132,7 @@ constituent-grid-filter {
   background: $gray-100;
 }
 #filter-tray__collapsible {
-
+  padding: 0.75rem 0 0.25rem 0;
 }
 #filter-tray__buttons-row {
   padding: 0.5rem 0;

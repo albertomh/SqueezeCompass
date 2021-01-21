@@ -7,15 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  mobileOffCanvasMenuIsOpen: boolean = false;
+  offCanvasMenuIsOpen: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onToggleMobileOffCanvasMenu() {
-    this.mobileOffCanvasMenuIsOpen = !this.mobileOffCanvasMenuIsOpen;
+  onToggleoffCanvasMenu() {
+    this.offCanvasMenuIsOpen = !this.offCanvasMenuIsOpen;
   }
 
 }
