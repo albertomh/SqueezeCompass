@@ -5,7 +5,8 @@ import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilt
 
 @Component({
   selector: 'constituent-grid-data-wrapper',
-  templateUrl: './constituent-grid-data-wrapper.component.html'
+  templateUrl: './constituent-grid-data-wrapper.component.html',
+  styleUrls: []
 })
 export class ConstituentGridDataWrapperComponent implements OnInit {
 
