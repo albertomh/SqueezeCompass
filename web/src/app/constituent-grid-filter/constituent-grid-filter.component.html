@@ -1,9 +1,9 @@
-<div class="container-fluid" id="filter-tray">
+<div class="container-fluid bg-light" id="filter-tray">
 
   <!-- FIRST ROW OF FILTER TRAY -->
-  <div class="collapse" id="filter-tray__collapsible">
+  <div class="collapse pt-2 pb-1" id="filter-tray__collapsible">
     <div class="row">
-      <div class="col">
+      <div class="col px-lg-5">
 
         <div class="btn-group" role="group">
           <a role="button"
@@ -27,23 +27,21 @@
 
 
   <!-- TOGGLE FILTER VISIBILITY -->
-  <div class="row" id="filter-tray__buttons-row">
+  <div class="row py-2" id="filter-tray__buttons-row">
 
-    <div class="col">
+    <div class="col px-lg-5">
       <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
          (click)="onToggleFilterTrayVisibility()">
         <i class="bi-toggles"></i> {{filterTrayButtonCaption}}
       </a>
-      <a role="button" class="d-none d-lg-block btn btn-link float-start ms-4"
-         [ngClass]="{'disabled': objectKeys(queryParams).length === 0, 'text-danger': objectKeys(queryParams).length > 0}"
+      <a role="button" class="d-none d-lg-block btn btn-link text-decoration-none float-start ms-4"
          (click)="clearQueryParams()">
         Reset filters
       </a>
     </div>
 
-    <div class="col d-block d-lg-none">
-      <a role="button" class="btn btn-link float-end"
-         [ngClass]="{'disabled': objectKeys(queryParams).length === 0, 'text-danger': objectKeys(queryParams).length > 0}"
+    <div class="col px-lg-5 d-block d-lg-none">
+      <a role="button" class="btn btn-link text-decoration-none float-end"
          (click)="clearQueryParams()">
         Reset filters
       </a>

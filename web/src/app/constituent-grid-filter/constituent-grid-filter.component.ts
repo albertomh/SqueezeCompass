@@ -5,12 +5,11 @@ import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilt
 @Component({
   selector: 'constituent-grid-filter',
   templateUrl: './constituent-grid-filter.component.html',
-  styleUrls: ['./constituent-grid-filter.component.scss']
+  styleUrls: []
 })
 export class ConstituentGridFilterComponent implements OnInit {
   filterTrayButtonCaption: string = "Show filters";
   queryParams: ConstituentGridFilterQueryParams = {};
-  objectKeys = Object.keys;
 
   constructor(private router: Router, route: ActivatedRoute) {
     // Listen for changes to the query params.
