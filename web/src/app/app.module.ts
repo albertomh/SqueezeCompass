@@ -7,6 +7,7 @@ import { ConstituentGridComponent } from './constituent-grid/constituent-grid.co
 import { ConstituentGridFilterComponent } from './constituent-grid-filter/constituent-grid-filter.component';
 import { ConstituentGridDataWrapperComponent } from './constituent-grid-data-wrapper/constituent-grid-data-wrapper.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ConstituentGridComponent,
     ConstituentGridFilterComponent,
     ConstituentGridDataWrapperComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
