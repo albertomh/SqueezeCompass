@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'constituent-grid',
@@ -21,7 +22,7 @@ export class ConstituentGridComponent implements OnInit, OnChanges {
     'strong_sell': 'constituent-grid__constituent-tile--strong-sell'
   };
 
-  constructor() {
+  constructor(private router: Router) {
     this.data = [];
     this.snapshots = [];
   }
@@ -34,7 +35,10 @@ export class ConstituentGridComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.snapshots = this.data;
-    console.log(this.data);
+  }
+
+  onConstituentTileClick(symbol: string) {
+    this.router.navigate([`/${symbol}`], { queryParamsHandling: "merge" });
   }
 
 }
