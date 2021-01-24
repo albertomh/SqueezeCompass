@@ -3,9 +3,9 @@
 
   <div class="row py-2">
     <div class="col px-lg-5">
-      <a role="button" class="btn btn-link text-decoration-none float-start"
+      <a role="button" class="btn btn-link text-decoration-none float-start px-0"
          (click)="onClickBackLink()">
-        <i class="bi-arrow-left-circle"></i> Back
+        <i class="bi bi-arrow-left-circle"></i> Back
       </a>
     </div>
   </div>
@@ -13,7 +13,46 @@
 </div>
 
 <!-- MAIN CONTENT -->
-<div class="container-fluid pt-3">
-  <h1 class="constituent-detail__symbol-header">{{symbol}}</h1>
+<div class="container-fluid pt-2 px-lg-5">
+
+  <div class="row">
+    <div class="col col-10 offset-1">
+      <h1 class="constituent-detail__symbol-header m-0">{{constituent.symbol}}</h1>
+      <p class="text-muted">{{constituent.name}}</p>
+    </div>
+  </div>
+
+  <div class="row mt-1">
+
+    <div class="col-10 offset-1 col-md-6">
+      <div class="row">
+        <div class="col-3 col-md-2 d-flex flex-column align-items-center align-items-md-start align-items-xl-center pe-0">
+          <i class="bi constituent-detail__gics__icon"
+             [ngClass]="[gicsSectorIcons[constituent.gics_sector][0] + ' ' + [gicsSectorIcons[constituent.gics_sector][1]]]"></i>
+        </div>
+        <div class="col-9 col-md-10 ps-md-0">
+          <p class="fw-bold m-0">{{constituent.gics_sector}}</p>
+          <p class="text-muted">{{constituent["gics_sub-industry"]}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!--div class="col-4 col-md-6">
+      <ol class="constituent-detail__timeline ps-0"
+          [ngClass]="[gicsSectorIcons[constituent.gics_sector][1]]">
+        <li *ngIf="constituent.founded">
+          <span class="fw-bold">{{constituent.founded.slice(0, 4)}}</span><br>
+          <span class="text-muted">Founded</span>
+        </li>
+        <li *ngIf="constituent.added">
+          <span class="fw-bold">{{constituent.added.slice(0, 4)}}</span><br>
+          <span class="text-muted">Joined S&P500</span>
+        </li>
+      </ol>
+    </div-->
+
+  </div>
+
+
 
 </div>
