@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
+
 @Component({
-  selector: 'app-constituent-detail',
+  selector: 'constituent-detail',
   templateUrl: './constituent-detail.component.html',
   styleUrls: ['./constituent-detail.component.scss']
 })
