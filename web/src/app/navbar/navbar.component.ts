@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+
 
 @Component({
   selector: 'navbar',
@@ -9,9 +11,19 @@ export class NavbarComponent implements OnInit {
 
   offCanvasMenuIsOpen: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) {
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.offCanvasMenuIsOpen = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  navigateToHomepage() {
+    this.router.navigate(['/'], { queryParamsHandling: "merge" });
   }
 
   onToggleoffCanvasMenu() {
