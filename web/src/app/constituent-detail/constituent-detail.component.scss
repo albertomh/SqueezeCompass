@@ -1,3 +1,53 @@
 .constituent-detail__symbol-header {
   font-size: 3rem;
 }
+
+.constituent-detail__gics__icon {
+  transform: translateY(-1rem);
+  font-size: 3rem;
+}
+
+// css-tricks.com/snippets/css/unordered-list-as-a-timeline/
+.constituent-detail__timeline {
+  list-style-type: none;
+}
+.constituent-detail__timeline li {
+  position: relative;
+  margin: 0;
+  padding-bottom: 1rem;
+  padding-left: 1.2rem;
+
+  &:before {
+    content: '';
+    background-color: #adb5bd;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 6px;
+    width: 3px;
+  }
+
+  &:after {
+    content: '';
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 0.15rem;
+    left: -5px;
+  }
+
+  $buffer-y: 0.6rem;
+  &:first-of-type {
+    padding-top: $buffer-y;
+    &:after {
+      top: calc(#{$buffer-y} + 0.1rem);
+    }
+  }
+  &:last-of-type {
+    padding-bottom: $buffer-y;
+  }
+
+  span:first-of-type {
+    font-size: 1.2rem;
+  }
+}

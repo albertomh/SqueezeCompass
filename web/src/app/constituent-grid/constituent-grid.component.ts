@@ -8,7 +8,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./constituent-grid.component.scss']
 })
 export class ConstituentGridComponent implements OnInit, OnChanges {
-  @Input() data: ConstituentSnapshot[];
+
+  @Input() snapshotData: ConstituentSnapshot[];
   snapshots: ConstituentSnapshot[];
 
   readonly recommendationClasses: { [className: string]: string } = {
@@ -23,18 +24,18 @@ export class ConstituentGridComponent implements OnInit, OnChanges {
   };
 
   constructor(private router: Router) {
-    this.data = [];
+    this.snapshotData = [];
     this.snapshots = [];
   }
 
   ngOnInit(): void {
-    if (this.data) {
-      this.snapshots = this.data;
+    if (this.snapshotData) {
+      this.snapshots = this.snapshotData;
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.snapshots = this.data;
+    this.snapshots = this.snapshotData;
   }
 
   onConstituentTileClick(symbol: string) {

@@ -13,6 +13,14 @@
   user-select: none;
 }
 
+@function encodecolor($string) {
+	@if type-of($string) == 'color' {
+        $hex: str-slice(ie-hex-str($string), 4);
+        $string:unquote("#{$hex}");
+    }
+    $string: '%23' + $string;
+	@return $string;
+}
 
 // ----- HTML ELEMENTS -----------------------------------------------------====
 html {
@@ -34,6 +42,10 @@ h1, h2, h3, h4, h5, h6 {
 // xxl XX-Large devices (larger desktops, 1400px and up)
 
 // ----- NAVBAR ----------------------------------------------------------------
+nav {
+  z-index: 10;
+}
+
 #wordmark {
   @include no-select;
   transform: translateY(-1px);
@@ -83,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
 @include media-breakpoint-down(lg) {
   .offcanvas-collapse {
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     top: 49px;  // Height of <nav>.
     bottom: 0;
     left: 100%;
@@ -159,6 +171,7 @@ $constituent-margin: 1px;
   margin: $constituent-margin;
   box-sizing: border-box;
   border-radius: 3px;
+  cursor: pointer;
 }
 .constituent-grid__constituent-tile::before {
   content: '';
@@ -179,5 +192,88 @@ $constituent-margin: 1px;
   align-items: center;
 }
 
+
+// ----- CONSTITUENT DETAIL ----------------------------------------------------
+$gics-communication: $cyan-500;
+$gics-discretionary: $red-500;
+$gics-staples: $green-500;
+$gics-energy: $yellow-500;
+$gics-financials: $green-500;
+$gics-health: $teal-500;
+$gics-industrials: $indigo-500;
+$gics-it: $blue-500;
+$gics-materials: $orange-500;
+$gics-realestate: $orange-500;
+$gics-utilities: $yellow-500;
+.--gics-communication { color: $gics-communication; }
+.--gics-discretionary { color: $gics-discretionary; }
+.--gics-staples { color: $gics-staples; }
+.--gics-energy { color: $gics-energy; }
+.--gics-financials { color: $gics-financials; }
+.--gics-health { color: $gics-health; }
+.--gics-industrials { color: $gics-industrials; }
+.--gics-it { color: $gics-it; }
+.--gics-materials { color: $gics-materials; }
+.--gics-realestate { color: $gics-realestate; }
+.--gics-utilities { color: $gics-utilities; }
+
+.constituent-detail__timeline {
+
+  &.--gics-communication {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-communication)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-discretionary {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-discretionary)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-staples {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-staples)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-energy {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-energy)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-financials {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-financials)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-health {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-health)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-industrials {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-industrials)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-it {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-it)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-materials {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-materials)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-realestate {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-realestate)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+  &.--gics-utilities {
+    li:after {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20aria-hidden%3D'true'%20viewBox%3D'0%200%2032%2032'%3E%3Ccircle%20stroke%3D'none'%20fill%3D'#{encodecolor($gics-utilities)}'%20cx%3D'20'%20cy%3D'20'%20r%3D'12'%3E%3C%2Fcircle%3E%3C%2Fsvg%3E");
+    }
+  }
+}
 
 // -----------------------------------------------------------------------------

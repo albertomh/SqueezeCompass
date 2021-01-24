@@ -9,6 +9,7 @@ import { ConstituentGridFilterComponent } from './constituent-grid-filter/consti
 import { ConstituentGridDataWrapperComponent } from './constituent-grid-data-wrapper/constituent-grid-data-wrapper.component';
 import { ConstituentGridComponent } from './constituent-grid/constituent-grid.component';
 import { ConstituentDetailComponent } from './constituent-detail/constituent-detail.component';
+import { ConstituentDetailDataWrapperComponent } from './constituent-detail-data-wrapper/constituent-detail-data-wrapper.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ConstituentDetailComponent } from './constituent-detail/constituent-det
     ConstituentGridFilterComponent,
     ConstituentGridDataWrapperComponent,
     ConstituentGridComponent,
-    ConstituentDetailComponent
+    ConstituentDetailComponent,
+    ConstituentDetailDataWrapperComponent
   ],
   imports: [
     BrowserModule,

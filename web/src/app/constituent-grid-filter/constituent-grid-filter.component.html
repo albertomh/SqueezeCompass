@@ -10,13 +10,13 @@
              class="btn btn-secondary"
              [ngClass]="{'active': queryParams?.order === 'alphabetical'}"
              (click)="toggleOrder('alphabetical')">
-            A🠖Z
+            A<i class="bi bi-arrow-right"></i>Z
           </a>
           <a role="button"
              class="btn btn-secondary"
              [ngClass]="{'active': queryParams?.order === 'reverse'}"
              (click)="toggleOrder('reverse')">
-            A🠔Z
+            A<i class="bi bi-arrow-left"></i>Z
           </a>
         </div>
 
@@ -31,7 +31,7 @@
     <div class="col px-lg-5">
       <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
          (click)="onToggleFilterTrayVisibility()">
-        <i class="bi-toggles"></i> {{filterTrayButtonCaption}}
+        <i class="bi bi-toggles"></i> {{filterTrayButtonCaption}}
       </a>
       <a role="button" class="d-none d-lg-block btn btn-link text-decoration-none float-start ms-4"
          (click)="clearQueryParams()">
