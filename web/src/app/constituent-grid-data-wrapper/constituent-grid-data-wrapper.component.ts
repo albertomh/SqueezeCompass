@@ -11,13 +11,11 @@ import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilt
 export class ConstituentGridDataWrapperComponent implements OnInit {
 
   private route: ActivatedRoute;
-  dataHasLoaded: boolean;
   originalSnapshots: ConstituentSnapshot[];  // Store original array as fetched from JSON.
   snapshots: ConstituentSnapshot[];  // Store transformations of originalSnapshots according to applied filters.
 
   constructor(route: ActivatedRoute) {
     this.route = route;
-    this.dataHasLoaded = false;
     this.originalSnapshots = [];
     this.snapshots = [];
   }
@@ -28,7 +26,6 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
     .then(data => {
       this.originalSnapshots = data.data;
       this.snapshots = data.data;
-      this.dataHasLoaded = true;
 
       // Listen for changes to the query params.
       this.route.queryParams.subscribe(p => {
