@@ -9,45 +9,27 @@
 
 // css-tricks.com/snippets/css/unordered-list-as-a-timeline/
 .constituent-detail__timeline {
-  list-style-type: none;
-}
-.constituent-detail__timeline li {
-  position: relative;
-  margin: 0;
-  padding-bottom: 1rem;
-  padding-left: 1.2rem;
-
   &:before {
-    content: '';
-    background-color: #adb5bd;
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 6px;
-    width: 3px;
+    display: inline-block;
+    content: "";
+    border-top: .2rem solid #adb5bd;
+    width: 100%;
+    margin: 0;
   }
 
-  &:after {
-    content: '';
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    top: 0.15rem;
-    left: -5px;
-  }
+  .col {
+    padding-top: 0.4rem;
 
-  $buffer-y: 0.6rem;
-  &:first-of-type {
-    padding-top: $buffer-y;
-    &:after {
-      top: calc(#{$buffer-y} + 0.1rem);
+    &:before {
+      content: '';
+      background-color: white;
+      border: 3px solid;
+      border-radius: 50%;
+      height: 1rem;
+      width: 1rem;
+      display: inline-block;
+      position: absolute;
+      transform: translate(0.7rem, -1rem);
     }
-  }
-  &:last-of-type {
-    padding-bottom: $buffer-y;
-  }
-
-  span:first-of-type {
-    font-size: 1.2rem;
   }
 }

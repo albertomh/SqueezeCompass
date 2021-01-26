@@ -1,8 +1,8 @@
 <!-- BACK BAR -->
 <div class="container-fluid bg-light">
 
-  <div class="row py-2">
-    <div class="col px-lg-5">
+  <div class="row py-2 px-lg-5">
+    <div class="col">
       <a role="button" class="btn btn-link text-decoration-none float-start px-0"
          (click)="onClickBackLink()">
         <i class="bi bi-arrow-left-circle"></i> Back
@@ -24,32 +24,38 @@
 
   <div class="row mt-1">
 
-    <div class="col-10 offset-1 col-md-6">
+    <!-- GICS: ICON AND SECTOR & SUB-INDUSTRY. -->
+    <div class="col-10 offset-1 col-md-5">
       <div class="row">
-        <div class="col-3 col-md-2 d-flex flex-column align-items-center align-items-md-start align-items-xl-center pe-0">
+        <div class="col-3 col-lg-2 d-flex flex-column align-items-center align-items-md-start align-items-xl-center pe-0">
           <i class="bi constituent-detail__gics__icon"
              [ngClass]="[gicsSectorIcons[constituent.gics_sector][0] + ' ' + [gicsSectorIcons[constituent.gics_sector][1]]]"></i>
         </div>
-        <div class="col-9 col-md-10 ps-md-0">
+        <div class="col-9 ps-md-0 col-lg-10">
           <p class="fw-bold m-0">{{constituent.gics_sector}}</p>
           <p class="text-muted">{{constituent["gics_sub-industry"]}}</p>
         </div>
       </div>
     </div>
 
-    <!--div class="col-4 col-md-6">
-      <ol class="constituent-detail__timeline ps-0"
-          [ngClass]="[gicsSectorIcons[constituent.gics_sector][1]]">
-        <li *ngIf="constituent.founded">
+    <!-- TIMELINE -->
+    <div class="col-10 offset-1 mt-3 mt-sm-0 col-md-5 offset-md-0">
+      <div class="row text-center constituent-detail__timeline"
+           [ngClass]="[gicsSectorIcons[constituent.gics_sector][1]]">
+        <div class="col text-center">
           <span class="fw-bold">{{constituent.founded.slice(0, 4)}}</span><br>
           <span class="text-muted">Founded</span>
-        </li>
-        <li *ngIf="constituent.added">
+        </div>
+        <div class="col">
           <span class="fw-bold">{{constituent.added.slice(0, 4)}}</span><br>
-          <span class="text-muted">Joined S&P500</span>
-        </li>
-      </ol>
-    </div-->
+          <span class="text-muted">Listed on S&P500</span>
+        </div>
+      </div>
+    <div>
+
+  </div>
+
+  <div class="row">
 
   </div>
 
