@@ -1,4 +1,4 @@
-.constituent-detail__symbol-header {
+.constituent-detail__symbol {
   font-size: 3rem;
 }
 
@@ -12,7 +12,7 @@
   &:before {
     display: inline-block;
     content: "";
-    border-top: .2rem solid #adb5bd;
+    border-top: .2rem solid #adb5bd;  // $gray-500
     width: 100%;
     margin: 0;
   }

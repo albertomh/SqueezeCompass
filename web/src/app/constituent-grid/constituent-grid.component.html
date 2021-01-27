@@ -1,6 +1,6 @@
 <div *ngFor="let constituent of snapshots"
      class="constituent-grid__constituent-tile"
-     [ngClass]="recommendationClasses[constituent.summary.recommendation]"
+     [ngClass]="'constituent-grid__constituent-tile' + recommendationClasses[constituent.summary.recommendation]"
      (click)="onConstituentTileClick(constituent.symbol)">
 
   <div class="constituent-grid__constituent-tile__content">

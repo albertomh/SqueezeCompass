@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Constituent} from "../interface/Constituent";
+import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 
 
 @Component({
@@ -10,35 +11,62 @@ import {Constituent} from "../interface/Constituent";
 })
 export class ConstituentDetailComponent implements OnInit, OnChanges {
 
+  @Input() snapshotData: ConstituentSnapshot;
+  snapshot: ConstituentSnapshot;
   @Input() constituentData: Constituent;
   constituent: Constituent;
 
   readonly gicsSectorIcons: {[sector: string]: [icon: string, color: string]} = {
-    "Communication Services": ['bi-broadcast-pin', '--gics-communication'],
-    "Consumer Discretionary": ['bi-cart4', '--gics-discretionary'],
-    "Consumer Staples": ['bi-cup-straw', '--gics-staples'],
-    "Energy": ['bi-lightning-fill', '--gics-energy'],
-    "Financials": ['bi-graph-up', '--gics-financials'],
-    "Health Care": ['bi-asterisk', '--gics-health'],
-    "Industrials": ['bi-building', '--gics-industrials'],
-    "Information Technology": ['bi-cpu-fill', '--gics-it'],
-    "Materials": ['bi-bucket-fill', '--gics-materials'],
-    "Real Estate": ['bi-house-fill', '--gics-realestate'],
-    "Utilities": ['bi-lightbulb-fill', '--gics-utilities'],
+    "Communication Services": ['bi-broadcast-pin', '--communication'],
+    "Consumer Discretionary": ['bi-cart4', '--discretionary'],
+    "Consumer Staples": ['bi-cup-straw', '--staples'],
+    "Energy": ['bi-lightning-fill', '--energy'],
+    "Financials": ['bi-graph-up', '--financials'],
+    "Health Care": ['bi-asterisk', '--health'],
+    "Industrials": ['bi-building', '--industrials'],
+    "Information Technology": ['bi-cpu-fill', '--it'],
+    "Materials": ['bi-bucket-fill', '--materials'],
+    "Real Estate": ['bi-house-fill', '--realestate'],
+    "Utilities": ['bi-lightbulb-fill', '--utilities'],
+  };
+
+  readonly sentimentsHumanized: {[slug: string]: string} = {
+    "strong_buy": 'Strong buy',
+    "buy": 'Buy',
+    "overperform": 'Overperforming',
+    "hold": 'Hold',
+    "none": 'None',
+    "underperform": 'Underperforming',
+    "sell": 'Sell',
+    "strong_sell": 'Strong sell',
+  };
+  readonly sentimentsClasses: {[slug: string]: string} = {
+    "strong_buy": '--strong-buy',
+    "buy": '--buy',
+    "overperform": '--overperform',
+    "hold": '--hold',
+    "none": '--none',
+    "underperform": '--underperform',
+    "sell": '--sell',
+    "strong_sell": '--strong-sell',
   };
 
   constructor(private router: Router) {
-    this.constituentData = {symbol: "", name: "", gics_sector: "", "gics_sub-industry": "", added: "", founded: ""};
-    this.constituent = {symbol: "", name: "", gics_sector: "", "gics_sub-industry": "", added: "", founded: ""};
+    this.snapshotData = <ConstituentSnapshot>{};
+    this.snapshot = <ConstituentSnapshot>{};
+    this.constituentData = <Constituent>{};
+    this.constituent = <Constituent>{};
   }
 
   ngOnInit(): void {
-    if (this.constituentData.symbol !== "") {
+    if (Object.keys(this.snapshotData).length > 0 && Object.keys(this.constituentData).length > 0) {
+      this.snapshot = this.snapshotData;
       this.constituent = this.constituentData;
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.snapshot = this.snapshotData;
     this.constituent = this.constituentData;
   }
 
