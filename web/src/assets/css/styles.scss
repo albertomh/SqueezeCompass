@@ -286,10 +286,6 @@ $gics-utilities: $yellow-500;
   }
 }
 
-.constituent-detail__summary {
-  border-left: 3px solid $gray-500;
-}
-
 @mixin recommendation-icon($recommendation-color) {
     color: $recommendation-color;
     &:before {
