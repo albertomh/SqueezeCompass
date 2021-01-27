@@ -13,7 +13,7 @@
 </div>
 
 <!-- MAIN CONTENT -->
-<div class="container-fluid pt-2 px-lg-5">
+<div class="container-fluid pt-2 px-lg-5 mb-3">
 
 <!-- SYMBOL & NAME -->
   <div class="row">
@@ -62,15 +62,16 @@
 
     <!-- SNAPSHOT.SUMMARY-->
     <div class="col-10 offset-1 col-md-5">
-      <div class="row constituent-detail__summary">
+      <div class="row constituent-detail__card">
+        <i class="bi bi-compass watermark"></i>
         <div class="col ps-0 ms-md-3">
 
-          <dl class="row m-0">
+          <dl class="row m-0" *ngIf="snapshot.summary.recommendation; let recommendation">
             <dt class="col-7">Market sentiment</dt>
-            <dd class="col-5">
+            <dd class="col-5" [class.pe-0]="recommendation === 'underperform' || recommendation === 'overperform'">
               <i class="bi bi-square-fill pe-1"
-                 [ngClass]="'constituent-detail__summary__recommendation constituent-detail__summary__recommendation' + sentimentsClasses[snapshot.summary.recommendation]"></i>
-              {{sentimentsHumanized[snapshot.summary.recommendation]}}
+                 [ngClass]="'constituent-detail__summary__recommendation constituent-detail__summary__recommendation' + sentimentsClasses[recommendation]"></i>
+              <span [class.small]="recommendation === 'underperform' || recommendation === 'overperform'">{{sentimentsHumanized[recommendation]}}</span>
             </dd>
 
             <dt class="col-7">Avg vol (3 months)</dt>
@@ -79,6 +80,41 @@
             <dt class="col-7">Avg vol (10 days)</dt>
             <dd class="col-5">{{snapshot.summary.avg_vol_10_days / 1000000 | currency}}M</dd>
           </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- SNAPSHOT.FINANCIAL-->
+    <div class="col-10 offset-1 col-md-5 mt-4 mt-sm-0">
+      <div class="row constituent-detail__card">
+        <i class="bi bi-cash-stack watermark"></i>
+        <div class="col ps-0 ms-md-3">
+
+          <dl class="row m-0">
+              <dt class="col-7">Market cap</dt>
+              <dd class="col-5" *ngIf="snapshot.financial.market_cap <= 1000000000">{{snapshot.financial.market_cap / 1000000 | currency}}M</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.market_cap > 1000000000">{{snapshot.financial.market_cap / 1000000000 | currency}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.market_cap > 1000000000000">{{snapshot.financial.market_cap / 1000000000000 | currency}}T</dd>
+
+              <dt class="col-7">Total revenue</dt>
+              <dd class="col-5" *ngIf="snapshot.financial.total_revenue <= 1000000000">{{snapshot.financial.total_revenue / 1000000 | currency}}M</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_revenue > 1000000000">{{snapshot.financial.total_revenue / 1000000000 | currency}}B</dd>
+
+              <dt class="col-7">Total cash</dt>
+              <dd class="col-5" *ngIf="snapshot.financial.total_cash <= 1000000000">{{snapshot.financial.total_cash / 1000000 | currency}}M</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_cash > 1000000000">{{snapshot.financial.total_cash / 1000000000 | currency}}B</dd>
+
+              <dt class="col-7">Total debt</dt>
+              <dd class="col-5" *ngIf="snapshot.financial.total_debt <= 1000000000">{{snapshot.financial.total_debt / 1000000 | currency}}M</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_debt > 1000000000">{{snapshot.financial.total_debt / 1000000000 | currency}}B</dd>
+
+              <dt class="col-7">Gross profits</dt>
+              <dd class="col-5" *ngIf="abs(snapshot.financial.gross_profits) <= 1000000000" [ngClass]="{'text-success': snapshot.financial.gross_profits > 0, 'text-danger': snapshot.financial.gross_profits < 0}">
+                {{snapshot.financial.gross_profits / 1000000 | currency}}M</dd>
+              <dd class="col-5" *ngIf="abs(snapshot.financial.gross_profits) > 1000000000" [ngClass]="{'text-success': snapshot.financial.gross_profits > 0, 'text-danger': snapshot.financial.gross_profits < 0}">
+                {{snapshot.financial.gross_profits / 1000000000 | currency}}B</dd>
+          </dl>
+
         </div>
       </div>
     </div>

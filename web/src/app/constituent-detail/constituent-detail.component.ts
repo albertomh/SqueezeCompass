@@ -33,10 +33,10 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
   readonly sentimentsHumanized: {[slug: string]: string} = {
     "strong_buy": 'Strong buy',
     "buy": 'Buy',
-    "overperform": 'Overperforming',
+    "overperform": 'Overperform',
     "hold": 'Hold',
     "none": 'None',
-    "underperform": 'Underperforming',
+    "underperform": 'Underperform',
     "sell": 'Sell',
     "strong_sell": 'Strong sell',
   };
@@ -50,6 +50,8 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
     "sell": '--sell',
     "strong_sell": '--strong-sell',
   };
+
+  abs = Math.abs;
 
   constructor(private router: Router) {
     this.snapshotData = <ConstituentSnapshot>{};

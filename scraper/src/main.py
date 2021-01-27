@@ -53,6 +53,7 @@ if __name__ == '__main__':
             squeeze_compass.data_scraper.scrape_new_daily_snapshot()
             squeeze_compass.data_scraper.save_snapshot_as_json()
         else:
+            print(f"{conf.TIMESTAMP()} | prev_short_interest_date {squeeze_compass.prev_short_interest_date} | cur_short_interest_date {squeeze_compass.cur_short_interest_date}.")
             print(f"{conf.TIMESTAMP()} | Data has not changed since the last scrape on {squeeze_compass.date_of_last_snapshot}.")
     else:
         print(f"{conf.TIMESTAMP()} | Performing first data scrape and snapshot.")

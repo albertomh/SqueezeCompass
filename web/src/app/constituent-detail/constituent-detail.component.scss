@@ -33,3 +33,16 @@
     }
   }
 }
+
+.constituent-detail__card {
+  border-left: 3px solid #adb5bd;  // $gray-500
+
+  i.watermark {
+    width: fit-content;
+    z-index: -1;
+    color: #e9ecef;
+    font-size: 4.2rem;
+    position: absolute;
+    transform: translateY(-0.8rem);
+  }
+}
