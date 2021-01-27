@@ -170,7 +170,7 @@ $constituent-margin: 1px;
   @include constituent-tile;
   margin: $constituent-margin;
   box-sizing: border-box;
-  border-radius: 3px;
+  border-radius: 0.25rem;
   cursor: pointer;
 }
 .constituent-grid__constituent-tile::before {
@@ -192,6 +192,37 @@ $constituent-margin: 1px;
   align-items: center;
 }
 
+// CONSTITUENT TILES COLOR SCHEMES
+
+@mixin constituent-tile($recommendation-color) {
+  background: $recommendation-color;
+  border-bottom: 2px solid darken($recommendation-color, 18%);
+  &:hover {
+    background: darken($recommendation-color, 18%);
+    border-bottom: 2px solid darken($recommendation-color, 36%);
+  }
+}
+
+// summary.recommendation pastel palette:
+// ORIGINAL: [coolors.co/f77e88-ffcec6-fbfbda-bdf8b3-86e998]
+// CUSTOM: [coolors.co/f0192b-f66069-ffcec6-fbfbda-bdf8b3-64e076-26cf45]
+$recommendation-none: $gray-300;
+$recommendation-strong-buy: #20AC39;
+$recommendation-buy: #64E076;
+$recommendation-overperform: #BDF8B3;
+$recommendation-hold: #FBFBDA;
+$recommendation-underperform: #FFCEC6;
+$recommendation-sell: #F66069;
+$recommendation-strong-sell: #D30D1E;
+.constituent-grid__constituent-tile--none { @include constituent-tile($recommendation-none); }
+.constituent-grid__constituent-tile--strong-buy { @include constituent-tile($recommendation-strong-buy); }
+.constituent-grid__constituent-tile--buy { @include constituent-tile($recommendation-buy); }
+.constituent-grid__constituent-tile--overperform { @include constituent-tile($recommendation-overperform); }
+.constituent-grid__constituent-tile--hold { @include constituent-tile($recommendation-hold); }
+.constituent-grid__constituent-tile--underperform { @include constituent-tile($recommendation-underperform); }
+.constituent-grid__constituent-tile--sell { @include constituent-tile($recommendation-sell); }
+.constituent-grid__constituent-tile--strong-sell { @include constituent-tile($recommendation-strong-sell); }
+
 
 // ----- CONSTITUENT DETAIL ----------------------------------------------------
 $gics-communication: $cyan-500;
@@ -205,53 +236,79 @@ $gics-it: $blue-500;
 $gics-materials: $orange-500;
 $gics-realestate: $orange-500;
 $gics-utilities: $yellow-500;
-.--gics-communication { color: $gics-communication; }
-.--gics-discretionary { color: $gics-discretionary; }
-.--gics-staples { color: $gics-staples; }
-.--gics-energy { color: $gics-energy; }
-.--gics-financials { color: $gics-financials; }
-.--gics-health { color: $gics-health; }
-.--gics-industrials { color: $gics-industrials; }
-.--gics-it { color: $gics-it; }
-.--gics-materials { color: $gics-materials; }
-.--gics-realestate { color: $gics-realestate; }
-.--gics-utilities { color: $gics-utilities; }
+.constituent-detail__gics__icon {
+  &--communication { color: $gics-communication; }
+  &--discretionary { color: $gics-discretionary; }
+  &--staples { color: $gics-staples; }
+  &--energy { color: $gics-energy; }
+  &--financials { color: $gics-financials; }
+  &--health { color: $gics-health; }
+  &--industrials { color: $gics-industrials; }
+  &--it { color: $gics-it; }
+  &--materials { color: $gics-materials; }
+  &--realestate { color: $gics-realestate; }
+  &--utilities { color: $gics-utilities; }
+}
 
 .constituent-detail__timeline {
+  &--communication {
+    .col:before { border-color: $gics-communication !important; }
+  }
+  &--discretionary {
+    .col:before { border-color: $gics-discretionary !important; }
+  }
+  &--staples {
+    .col:before { border-color: $gics-staples !important; }
+  }
+  &--energy {
+    .col:before { border-color: $gics-energy !important; }
+  }
+  &--financials {
+    .col:before { border-color: $gics-financials !important; }
+  }
+  &--health {
+    .col:before { border-color: $gics-health !important; }
+  }
+  &--industrials {
+    .col:before { border-color: $gics-industrials !important; }
+  }
+  &--it {
+    .col:before { border-color: $gics-it !important; }
+  }
+  &--materials {
+    .col:before { border-color: $gics-materials !important; }
+  }
+  &--realestate {
+    .col:before { border-color: $gics-realestate !important; }
+  }
+  &--utilities {
+    .col:before { border-color: $gics-utilities !important; }
+  }
+}
 
-  &.--gics-communication {
-    .col:before { border-color: $gics-communication; }
+.constituent-detail__summary {
+  border-left: 3px solid $gray-500;
+}
+
+@mixin recommendation-icon($recommendation-color) {
+    color: $recommendation-color;
+    &:before {
+      border-bottom: 2px solid darken($recommendation-color, 36%);
+    }
+}
+
+.constituent-detail__summary__recommendation {
+  &:before {
+    border-radius: 0.25rem;
   }
-  &.--gics-discretionary {
-    .col:before { border-color: $gics-discretionary; }
-  }
-  &.--gics-staples {
-    .col:before { border-color: $gics-staples; }
-  }
-  &.--gics-energy {
-    .col:before { border-color: $gics-energy; }
-  }
-  &.--gics-financials {
-    .col:before { border-color: $gics-financials; }
-  }
-  &.--gics-health {
-    .col:before { border-color: $gics-health; }
-  }
-  &.--gics-industrials {
-    .col:before { border-color: $gics-industrials; }
-  }
-  &.--gics-it {
-    .col:before { border-color: $gics-it; }
-  }
-  &.--gics-materials {
-    .col:before { border-color: $gics-materials; }
-  }
-  &.--gics-realestate {
-    .col:before { border-color: $gics-realestate; }
-  }
-  &.--gics-uti.colties {
-    .col:before { border-color: $gics-utilities; }
-  }
+  &--strong-buy { @include recommendation-icon($recommendation-strong-buy); }
+  &--buy { @include recommendation-icon($recommendation-buy); }
+  &--overperform { @include recommendation-icon($recommendation-overperform); }
+  &--hold { @include recommendation-icon($recommendation-hold); }
+  &--none { @include recommendation-icon($recommendation-none); }
+  &--underperform { @include recommendation-icon($recommendation-underperform); }
+  &--sell { @include recommendation-icon($recommendation-sell); }
+  &--strong-sell { @include recommendation-icon($recommendation-strong-sell); }
 }
 
 // -----------------------------------------------------------------------------

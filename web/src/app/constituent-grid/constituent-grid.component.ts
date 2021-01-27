@@ -13,14 +13,14 @@ export class ConstituentGridComponent implements OnInit, OnChanges {
   snapshots: ConstituentSnapshot[];
 
   readonly recommendationClasses: { [className: string]: string } = {
-    'strong_buy': 'constituent-grid__constituent-tile--strong-buy',
-    'buy': 'constituent-grid__constituent-tile--buy',
-    'overperform': 'constituent-grid__constituent-tile--overperform',
-    'hold': 'constituent-grid__constituent-tile--hold',
-    'none': 'constituent-grid__constituent-tile--hold',
-    'underperform': 'constituent-grid__constituent-tile--underperform',
-    'sell': 'constituent-grid__constituent-tile--sell',
-    'strong_sell': 'constituent-grid__constituent-tile--strong-sell'
+    'strong_buy': '--strong-buy',
+    'buy': '--buy',
+    'overperform': '--overperform',
+    'hold': '--hold',
+    'underperform': '--underperform',
+    'sell': '--sell',
+    'strong_sell': '--strong-sell',
+    'none': '--none'
   };
 
   constructor(private router: Router) {

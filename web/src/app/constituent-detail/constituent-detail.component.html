@@ -15,21 +15,23 @@
 <!-- MAIN CONTENT -->
 <div class="container-fluid pt-2 px-lg-5">
 
+<!-- SYMBOL & NAME -->
   <div class="row">
     <div class="col col-10 offset-1">
-      <h1 class="constituent-detail__symbol-header m-0">{{constituent.symbol}}</h1>
-      <p class="text-muted">{{constituent.name}}</p>
+      <h1 class="constituent-detail__symbol m-0">{{constituent.symbol}}</h1>
+      <p class="text-muted ms-1">{{constituent.name}}</p>
     </div>
   </div>
 
+<!-- GICS & TIMELINE -->
   <div class="row mt-1">
 
     <!-- GICS: ICON AND SECTOR & SUB-INDUSTRY. -->
     <div class="col-10 offset-1 col-md-5">
       <div class="row">
         <div class="col-3 col-lg-2 d-flex flex-column align-items-center align-items-md-start align-items-xl-center pe-0">
-          <i class="bi constituent-detail__gics__icon"
-             [ngClass]="[gicsSectorIcons[constituent.gics_sector][0] + ' ' + [gicsSectorIcons[constituent.gics_sector][1]]]"></i>
+          <i class="bi"
+             [ngClass]="[gicsSectorIcons[constituent.gics_sector][0] + ' constituent-detail__gics__icon constituent-detail__gics__icon' + [gicsSectorIcons[constituent.gics_sector][1]]]"></i>
         </div>
         <div class="col-9 ps-md-0 col-lg-10">
           <p class="fw-bold m-0">{{constituent.gics_sector}}</p>
@@ -40,25 +42,47 @@
 
     <!-- TIMELINE -->
     <div class="col-10 offset-1 mt-3 mt-sm-0 col-md-5 offset-md-0">
-      <div class="row text-center constituent-detail__timeline"
-           [ngClass]="[gicsSectorIcons[constituent.gics_sector][1]]">
-        <div class="col text-center">
+      <div class="row text-center"
+           [ngClass]="'constituent-detail__timeline constituent-detail__timeline' + [gicsSectorIcons[constituent.gics_sector][1]]">
+        <div class="col" *ngIf="constituent.founded !== null">
           <span class="fw-bold">{{constituent.founded.slice(0, 4)}}</span><br>
           <span class="text-muted">Founded</span>
         </div>
-        <div class="col">
+        <div class="col" *ngIf="constituent.added !== null">
           <span class="fw-bold">{{constituent.added.slice(0, 4)}}</span><br>
           <span class="text-muted">Listed on S&P500</span>
         </div>
       </div>
-    <div>
+    </div>
 
   </div>
 
-  <div class="row">
+<!-- -->
+  <div class="row mt-4">
+
+    <!-- SNAPSHOT.SUMMARY-->
+    <div class="col-10 offset-1 col-md-5">
+      <div class="row constituent-detail__summary">
+        <div class="col ps-0 ms-md-3">
+
+          <dl class="row m-0">
+            <dt class="col-7">Market sentiment</dt>
+            <dd class="col-5">
+              <i class="bi bi-square-fill pe-1"
+                 [ngClass]="'constituent-detail__summary__recommendation constituent-detail__summary__recommendation' + sentimentsClasses[snapshot.summary.recommendation]"></i>
+              {{sentimentsHumanized[snapshot.summary.recommendation]}}
+            </dd>
+
+            <dt class="col-7">Avg vol (3 months)</dt>
+            <dd class="col-5">{{snapshot.summary.avg_vol_3_months / 1000000 | currency}}M</dd>
+
+            <dt class="col-7">Avg vol (10 days)</dt>
+            <dd class="col-5">{{snapshot.summary.avg_vol_10_days / 1000000 | currency}}M</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
 
   </div>
-
-
 
 </div>
