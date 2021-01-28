@@ -51,6 +51,9 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
     "strong_sell": '--strong-sell',
   };
 
+  readonly million = 1000000;
+  readonly billion = 1000000000;
+  readonly trillion = 1000000000000;
   abs = Math.abs;
 
   constructor(private router: Router) {
