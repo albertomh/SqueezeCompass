@@ -4,8 +4,7 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'constituent-grid',
-  templateUrl: './constituent-grid.component.html',
-  styleUrls: ['./constituent-grid.component.scss']
+  templateUrl: './constituent-grid.component.html'
 })
 export class ConstituentGridComponent implements OnInit, OnChanges {
 
