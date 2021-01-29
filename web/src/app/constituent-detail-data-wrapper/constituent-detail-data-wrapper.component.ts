@@ -6,8 +6,7 @@ import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 
 @Component({
   selector: 'constituent-detail-data-wrapper',
-  templateUrl: './constituent-detail-data-wrapper.component.html',
-  styleUrls: ['./constituent-detail-data-wrapper.component.scss']
+  templateUrl: './constituent-detail-data-wrapper.component.html'
 })
 export class ConstituentDetailDataWrapperComponent implements OnInit {
 

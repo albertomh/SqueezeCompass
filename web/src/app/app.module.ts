@@ -10,6 +10,7 @@ import { ConstituentGridDataWrapperComponent } from './constituent-grid-data-wra
 import { ConstituentGridComponent } from './constituent-grid/constituent-grid.component';
 import { ConstituentDetailComponent } from './constituent-detail/constituent-detail.component';
 import { ConstituentDetailDataWrapperComponent } from './constituent-detail-data-wrapper/constituent-detail-data-wrapper.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ConstituentDetailDataWrapperComponent } from './constituent-detail-data
     ConstituentGridDataWrapperComponent,
     ConstituentGridComponent,
     ConstituentDetailComponent,
-    ConstituentDetailDataWrapperComponent
+    ConstituentDetailDataWrapperComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -14,9 +14,23 @@
 }
 
 
-// ----- HTML ELEMENTS -----------------------------------------------------====
+// ----- HTML ELEMENTS ---------------------------------------------------------
 html {
   font-size: 16px;
+}
+
+html,
+body {
+  height: 100%;
+  position: relative;
+}
+
+app-root {
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 63px;  // Height of footer.
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -53,14 +67,14 @@ nav {
 .small-h1 {
   font-size: 1.5rem;
 }
-#wordmark--compass {
+#wordmark__compass {
   font-size: 1.2rem;
   position: relative;
   top: -0.28rem;
 }
 @include media-breakpoint-up(md) {
   .small-h1 { font-size: 1.7rem; }
-  #wordmark--compass {
+  #wordmark__compass {
     font-size: 1.4rem;
     position: relative;
     top: -0.3rem;
@@ -69,7 +83,7 @@ nav {
 @include media-breakpoint-up(lg) {
   #wordmark { transform: translateY(-2px); }
   .small-h1 { font-size: 2rem; }
-  #wordmark--compass {
+  #wordmark__compass {
     font-size: 1.6rem;
     position: relative;
     top: -0.3rem;
@@ -77,7 +91,7 @@ nav {
 }
 @include media-breakpoint-up(xl) {
   .small-h1 { font-size: 2.2rem; }
-  #wordmark--compass {
+  #wordmark__compass {
     font-size: 1.8rem;
     position: relative;
     top: -0.32rem;
@@ -123,14 +137,6 @@ constituent-grid-filter {
 
 
 // ----- CONSTITUENT GRID ------------------------------------------------------
-constituent-grid {
-  @extend .container-fluid;
-  @extend .d-flex;
-  @extend .flex-wrap;
-
-  margin: 0.5rem 0 1.5rem 0;
-}
-
 // Factors of 506: 1×506; 2×253; 11×46; 22×23.
 $constituent-margin: 1px;
 @mixin constituent-tile() {
@@ -306,5 +312,15 @@ $gics-utilities: $yellow-500;
   &--sell { @include recommendation-icon($recommendation-sell); }
   &--strong-sell { @include recommendation-icon($recommendation-strong-sell); }
 }
+
+
+// ----- FOOTER ----------------------------------------------------------------
+.footer {
+  border-top: 4px solid var(--bs-dark);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 
 // -----------------------------------------------------------------------------
