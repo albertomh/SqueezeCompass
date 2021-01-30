@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ConstituentGridFilterComponent } from './constituent-grid-filter/constituent-grid-filter.component';
-import { ConstituentGridDataWrapperComponent } from './constituent-grid-data-wrapper/constituent-grid-data-wrapper.component';
+import { ConstituentGridDataWrapperComponent } from './constituent-grid/constituent-grid-data-wrapper.component';
 import { ConstituentGridComponent } from './constituent-grid/constituent-grid.component';
 import { ConstituentDetailComponent } from './constituent-detail/constituent-detail.component';
-import { ConstituentDetailDataWrapperComponent } from './constituent-detail-data-wrapper/constituent-detail-data-wrapper.component';
+import { ConstituentDetailDataWrapperComponent } from './constituent-detail/constituent-detail-data-wrapper.component';
 import { FooterComponent } from './footer/footer.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FooterComponent } from './footer/footer.component';
     ConstituentGridComponent,
     ConstituentDetailComponent,
     ConstituentDetailDataWrapperComponent,
-    FooterComponent
+    FooterComponent,
+    FourOhFourComponent
   ],
   imports: [
     BrowserModule,

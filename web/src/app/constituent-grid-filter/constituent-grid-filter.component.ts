@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilterQueryParams";
 
+
 @Component({
   selector: 'constituent-grid-filter',
   templateUrl: './constituent-grid-filter.component.html',

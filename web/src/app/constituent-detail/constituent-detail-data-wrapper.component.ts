@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Constituent} from "../interface/Constituent";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 
 
@@ -15,8 +15,9 @@ export class ConstituentDetailDataWrapperComponent implements OnInit {
   constituents: Constituent[];
   selectedConstituent: Constituent;
   symbol: string = "";
+  objKeys = Object.keys;
 
-  constructor(route: ActivatedRoute) {
+  constructor(private router: Router, route: ActivatedRoute) {
     this.snapshots = [];
     this.constituents = [];
     this.selectedSnapshot = <ConstituentSnapshot>{};
@@ -32,18 +33,23 @@ export class ConstituentDetailDataWrapperComponent implements OnInit {
     Promise.all([
       fetch('/assets/data/2021-01-31_snapshot.json'),
       fetch('/assets/data/2021-02-01_constituents.json')
+
     ]).then(responses => {
       return Promise.all(responses.map(response => response.json()));  // Get a JSON object from each of the responses.
+
     }).then(data => {
       this.snapshots = data[0].data;
       this.selectedSnapshot = this.snapshots.filter(s => s.symbol === this.symbol)[0];
       this.constituents = data[1];
       this.selectedConstituent = this.constituents.filter(c => c.symbol === this.symbol)[0];
+
+      if (typeof this.selectedConstituent === 'undefined') {
+        this.router.navigate(['/404'], { queryParamsHandling: "merge" });
+      }
+
     }).catch(function (error) {
       console.log(error);
     });
-
-    // TODO: show 404 if symbol not in this.constituents.
   }
 
 }

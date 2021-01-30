@@ -1,7 +1,7 @@
 <div *ngFor="let constituent of snapshots"
      class="constituent-grid__constituent-tile"
      [ngClass]="'constituent-grid__constituent-tile' + recommendationClasses[constituent.summary.recommendation]"
-     (click)="onConstituentTileClick(constituent.symbol)">
+     [routerLink]="['', constituent.symbol]" queryParamsHandling="merge">
 
   <div class="constituent-grid__constituent-tile__content">
     {{constituent.symbol}}

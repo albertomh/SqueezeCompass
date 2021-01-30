@@ -4,7 +4,7 @@
   <div class="row py-2 px-lg-5">
     <div class="col">
       <a role="button" class="btn btn-link text-decoration-none float-start px-0"
-         (click)="onClickBackLink()">
+         [routerLink]="['/']" queryParamsHandling="merge">
         <i class="bi bi-arrow-left-circle"></i> Back
       </a>
     </div>
