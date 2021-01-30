@@ -12,6 +12,7 @@ import { ConstituentDetailComponent } from './constituent-detail/constituent-det
 import { ConstituentDetailDataWrapperComponent } from './constituent-detail/constituent-detail-data-wrapper.component';
 import { FooterComponent } from './footer/footer.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
     ConstituentDetailComponent,
     ConstituentDetailDataWrapperComponent,
     FooterComponent,
-    FourOhFourComponent
+    FourOhFourComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

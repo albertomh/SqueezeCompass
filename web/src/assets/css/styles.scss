@@ -13,6 +13,12 @@
   user-select: none;
 }
 
+.external-link {
+  font-size: 0.8em;
+  &:before {
+    transform: translateY(-4px);
+  }
+}
 
 // ----- HTML ELEMENTS ---------------------------------------------------------
 html {
@@ -311,6 +317,12 @@ $gics-utilities: $yellow-500;
   &--underperform { @include recommendation-icon($recommendation-underperform); }
   &--sell { @include recommendation-icon($recommendation-sell); }
   &--strong-sell { @include recommendation-icon($recommendation-strong-sell); }
+}
+
+
+// ----- ABOUT ----------------------------------------------------------------
+.about__content {
+  font-size: 1.15rem;
 }
 
 
