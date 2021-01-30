@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
 import {Constituent} from "../interface/Constituent";
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 
@@ -56,7 +55,7 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
   readonly trillion = 1000000000000;
   abs = Math.abs;
 
-  constructor(private router: Router) {
+  constructor() {
     this.snapshotData = <ConstituentSnapshot>{};
     this.snapshot = <ConstituentSnapshot>{};
     this.constituentData = <Constituent>{};
@@ -73,10 +72,6 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.snapshot = this.snapshotData;
     this.constituent = this.constituentData;
-  }
-
-  onClickBackLink() {
-    this.router.navigate(['/'], { queryParamsHandling: "merge" });
   }
 
 }

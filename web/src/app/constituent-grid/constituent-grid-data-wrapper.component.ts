@@ -3,6 +3,7 @@ import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 import {ActivatedRoute} from "@angular/router";
 import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilterQueryParams";
 
+
 @Component({
   selector: 'constituent-grid-data-wrapper',
   templateUrl: './constituent-grid-data-wrapper.component.html',
