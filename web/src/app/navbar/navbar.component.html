@@ -14,7 +14,10 @@
     <div class="navbar-collapse offcanvas-collapse"
          [ngClass]="{'open': offCanvasMenuIsOpen}">
       <div class="navbar-nav">
-        <a class="nav-link" href="#">About</a> <!-- TODO: dynamically set .active -->
+        <a class="nav-link" [class.active]="url === '/about'"
+           [routerLink]="['/about']" queryParamsHandling="merge">
+          About
+        </a>
       </div>
     </div>
 

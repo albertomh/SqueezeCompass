@@ -24,7 +24,7 @@
   </div>
 
 <!-- GICS & TIMELINE -->
-  <div class="row mt-1">
+  <div class="row mt-1 mt-xl-3">
 
     <!-- GICS: ICON AND SECTOR & SUB-INDUSTRY. -->
     <div class="col-10 offset-1 col-md-5">
@@ -41,7 +41,7 @@
     </div>
 
     <!-- TIMELINE -->
-    <div class="col-10 offset-1 mt-3 mt-sm-0 col-md-5 offset-md-0">
+    <div class="col-10 offset-1 mt-3 mt-sm-0 col-md-4 offset-xl-0 col-xl-3">
       <div class="row text-center"
            [ngClass]="'constituent-detail__timeline constituent-detail__timeline' + [gicsSectorIcons[constituent.gics_sector][1]]">
         <div class="col" *ngIf="constituent.founded !== null">
@@ -57,11 +57,11 @@
 
   </div>
 
-<!-- -->
+<!-- SNAPSHOT SUMMARY -->
   <div class="row mt-4">
 
     <!-- SNAPSHOT.SUMMARY-->
-    <div class="col-10 offset-1 col-md-5">
+    <div class="col-10 offset-1 col-md-5 col-xl-4">
       <div class="row constituent-detail__card">
         <i class="bi bi-compass watermark"></i>
         <div class="col ps-0 ms-md-3">
@@ -84,8 +84,13 @@
       </div>
     </div>
 
+  </div>
+
+<!-- SNAPSHOT FINANCIAL & KEY_STATS -->
+  <div class="row mt-1">
+
     <!-- SNAPSHOT.FINANCIAL-->
-    <div class="col-10 offset-1 col-md-5 mt-4 mt-sm-0">
+    <div class="col-10 offset-1 col-md-5 col-xl-4 mt-4">
       <div class="row constituent-detail__card">
         <i class="bi bi-cash-stack watermark"></i>
         <div class="col ps-0 ms-md-3">
@@ -119,9 +124,8 @@
       </div>
     </div>
 
-
     <!-- SNAPSHOT.KEY_STATS-->
-    <div class="col-10 offset-1 col-md-5 mt-4 mt-sm-0">
+    <div class="col-10 offset-1 col-md-5 col-xl-4 mt-4">
       <div class="row constituent-detail__card">
         <i class="bi bi-bar-chart-fill watermark"></i>
         <div class="col ps-0 ms-md-3">
