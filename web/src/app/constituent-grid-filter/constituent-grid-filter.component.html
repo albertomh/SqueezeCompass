@@ -2,31 +2,75 @@
 
   <div class="collapse pt-2 pb-1" id="filter-tray__collapsible"
        [class.show]="filterTrayOpen">
-  <!-- FIRST ROW OF FILTER TRAY -->
+
+<!-- FIRST ROW OF FILTER TRAY -->
     <div class="row">
       <div class="col px-lg-5">
 
-        <div class="btn-group" role="group">
-          <a role="button"
-             class="btn btn-secondary"
-             [ngClass]="{'active': queryParams?.order === 'alphabetical'}"
-             (click)="toggleOrder('alphabetical')">
-            A<i class="bi bi-arrow-right"></i>Z
-          </a>
-          <a role="button"
-             class="btn btn-secondary"
-             [ngClass]="{'active': queryParams?.order === 'reverse'}"
-             (click)="toggleOrder('reverse')">
-            A<i class="bi bi-arrow-left"></i>Z
-          </a>
+        <div class="row">
+          <div class="col">
+            <label>Ticker symbol</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="queryParams['o'] === AlphabeticalOrder[AlphabeticalOrder.a] || typeOf(queryParams?.o) === 'undefined'"
+                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.a)">
+                A<i class="bi bi-arrow-right"></i>Z
+              </a>
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="queryParams['o'] === AlphabeticalOrder[AlphabeticalOrder.r]"
+                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.r)">
+                Z<i class="bi bi-arrow-left"></i>A
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
     </div>
+
+<!-- SECOND ROW: MARKET SENTIMENT -->
+    <div class="row mt-2">
+      <div class="col px-lg-5">
+
+        <div class="row">
+          <div class="col">
+            <label>Market sentiment</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="false"
+                 (click)="true">
+                Sell
+              </a>
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="false"
+                 (click)="true">
+                Hold
+              </a>
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="false"
+                 (click)="true">
+                Buy
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
   </div>
 
 
-  <!-- FILTER METACONTROLS: SHOW/HIDE TRAY AND CLEAR FILTERS. -->
+<!-- FILTER METACONTROLS: SHOW/HIDE TRAY AND CLEAR FILTERS. -->
   <div class="row py-2" id="filter-tray__buttons-row">
     <div class="col-auto me-auto me-xl-0 ps-lg-5">
       <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
