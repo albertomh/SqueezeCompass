@@ -9,7 +9,7 @@ import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilt
   styleUrls: []
 })
 export class ConstituentGridFilterComponent implements OnInit {
-  filterTrayButtonCaption: string = "Show filters";
+  filterTrayOpen: boolean = false;
   queryParams: ConstituentGridFilterQueryParams = {};
 
   constructor(private router: Router, route: ActivatedRoute) {
@@ -22,15 +22,12 @@ export class ConstituentGridFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onToggleFilterTrayVisibility() {
-    if (this.filterTrayButtonCaption === "Show filters") {
-      this.filterTrayButtonCaption = "Hide filters";
-    } else {
-      this.filterTrayButtonCaption = "Show filters";
-    }
+  onToggleFilterTrayOpen() {
+    this.filterTrayOpen = !this.filterTrayOpen;
   }
 
-  clearQueryParams(): void {
+  resetFilters(): void {
+    // Clear query params.
     this.router.navigate(['/'], { queryParams: {} });
   }
 

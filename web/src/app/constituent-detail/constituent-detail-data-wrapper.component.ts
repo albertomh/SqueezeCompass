@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Constituent} from "../interface/Constituent";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -31,8 +32,8 @@ export class ConstituentDetailDataWrapperComponent implements OnInit {
 
   ngOnInit(): void {
     Promise.all([
-      fetch('/assets/data/2021-01-31_snapshot.json'),
-      fetch('/assets/data/2021-02-01_constituents.json')
+      fetch(environment.filePathForSnapshot),
+      fetch(environment.filePathForConstituents)
 
     ]).then(responses => {
       return Promise.all(responses.map(response => response.json()));  // Get a JSON object from each of the responses.

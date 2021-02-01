@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Meta, Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -8,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: Title, private metaService: Meta) {
+    let title: string = "SqueezeCompass";
+    titleService.setTitle(title);
+    metaService.updateTag({ property: 'og:title', content: title });
+    metaService.updateTag({ property: 'og:url', content: 'https://www.albertomh.com/SqueezeCompass' });
+  }
 
   ngOnInit(): void {
   }

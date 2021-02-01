@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Constituent} from "../interface/Constituent";
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
+import {Meta, Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -55,7 +56,7 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
   readonly trillion = 1000000000000;
   abs = Math.abs;
 
-  constructor() {
+  constructor(private titleService: Title, private metaService: Meta) {
     this.snapshotData = <ConstituentSnapshot>{};
     this.snapshot = <ConstituentSnapshot>{};
     this.constituentData = <Constituent>{};
@@ -66,6 +67,11 @@ export class ConstituentDetailComponent implements OnInit, OnChanges {
     if (Object.keys(this.snapshotData).length > 0 && Object.keys(this.constituentData).length > 0) {
       this.snapshot = this.snapshotData;
       this.constituent = this.constituentData;
+
+      let title: string = this.constituent.symbol + ': ' + this.constituent.name + ' | ' + this.titleService.getTitle();
+      this.titleService.setTitle(title);
+      this.metaService.updateTag({ property: 'og:title', content: title });
+      this.metaService.updateTag({ property: 'og:url', content: 'https://www.albertomh.com/SqueezeCompass/' + this.constituent.symbol });
     }
   }
 
