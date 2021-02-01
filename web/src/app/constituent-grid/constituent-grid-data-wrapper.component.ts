@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 import {ActivatedRoute} from "@angular/router";
-import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilterQueryParams";
+import { AlphabeticalOrder, MarketSentiment } from '../enum/FilterQueryParameters';
+import {FilterQueryParams} from "../interface/FilterQueryParams";
 import {environment} from "../../environments/environment";
 
 
@@ -36,19 +37,19 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
     });
   }
 
-  onQueryParamsChange(queryParams: ConstituentGridFilterQueryParams): void {
-    this.filterOrder(queryParams.order);
+  onQueryParamsChange(queryParams: FilterQueryParams): void {
+    this.applyAlphabeticalOrderFilter(queryParams.o);
   }
 
   // ----- Filter methods
-  filterOrder(order?: string) {
+  applyAlphabeticalOrderFilter(order?: string) {
     if (order == null) {
       this.snapshots = this.originalSnapshots;
     } else {
       let orderedSnapshots: ConstituentSnapshot[] = [...this.originalSnapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
-      if (order === 'alphabetical') {
+      if (order === AlphabeticalOrder[AlphabeticalOrder.a]) {
         this.snapshots = orderedSnapshots;
-      } else if (order === 'reverse') {
+      } else if (order === AlphabeticalOrder[AlphabeticalOrder.r]) {
         this.snapshots = orderedSnapshots.reverse();
       }
     }

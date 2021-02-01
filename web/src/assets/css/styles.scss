@@ -134,14 +134,6 @@ nav {
 }
 
 
-// ----- CONSTITUENT GRID FILTER TRAY ------------------------------------------
-constituent-grid-filter {
-  @extend .container-fluid;
-  @extend .d-flex;
-  @extend .flex-wrap;
-}
-
-
 // ----- CONSTITUENT GRID ------------------------------------------------------
 // Factors of 506: 1×506; 2×253; 11×46; 22×23.
 $constituent-margin: 1px;
