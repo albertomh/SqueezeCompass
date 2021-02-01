@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 import {ActivatedRoute} from "@angular/router";
 import {ConstituentGridFilterQueryParams} from "../interface/ConstituentGridFilterQueryParams";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  fetch('/assets/data/2021-01-31_snapshot.json')
+  fetch(environment.filePathForSnapshot)
     .then(response => response.json())
     .then(data => {
       this.originalSnapshots = data.data;

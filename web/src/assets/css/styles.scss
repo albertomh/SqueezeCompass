@@ -5,6 +5,10 @@
 @import '../../../node_modules/bootstrap-icons/font/bootstrap-icons';
 
 // ----- UTILITIES -------------------------------------------------------------
+@mixin brand-font {
+  font-family: 'Lexend Mega', sans-serif;
+}
+
 @mixin no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -31,16 +35,18 @@ body {
   position: relative;
 }
 
+$footer-height: 71px;  // Height including margin.
 app-root {
+  // Push the footer to the bottom of the viewport.
   min-height: 100vh;
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 63px;  // Height of footer.
+  padding-bottom: $footer-height;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lexend Mega', sans-serif;
+  @include brand-font;
   letter-spacing: -0.5px;
 }
 
@@ -56,13 +62,6 @@ h1, h2, h3, h4, h5, h6 {
 // ----- NAVBAR ----------------------------------------------------------------
 nav {
   z-index: 10;
-
-  /*@include media-breakpoint-up(md) {
-    padding: 0 calc(8.3333333333%);
-  }
-  @include media-breakpoint-up(lg) {
-    padding: 0 calc(8.3333333333% + 3rem);
-  }*/
 }
 
 #wordmark {
@@ -76,14 +75,14 @@ nav {
 #wordmark__compass {
   font-size: 1.2rem;
   position: relative;
-  top: -0.28rem;
+  top: -0.29rem;
 }
 @include media-breakpoint-up(md) {
   .small-h1 { font-size: 1.7rem; }
   #wordmark__compass {
     font-size: 1.4rem;
     position: relative;
-    top: -0.3rem;
+    top: -0.35rem;
   }
 }
 @include media-breakpoint-up(lg) {
@@ -100,7 +99,7 @@ nav {
   #wordmark__compass {
     font-size: 1.8rem;
     position: relative;
-    top: -0.32rem;
+    top: -0.36rem;
   }
 }
 
@@ -120,12 +119,13 @@ nav {
     bottom: 0;
     left: 100%;
     width: 100%;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding: 1rem 2rem;
     overflow-y: auto;
     visibility: hidden;
-    background-color: #343a40;
     transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+    background-color: #343a40;
+    font-size: 1.4rem;
   }
   .offcanvas-collapse.open {
     visibility: visible;
@@ -160,6 +160,7 @@ $constituent-margin: 1px;
   }
 }
 @mixin constituent-tile__content() {
+  @extend .font-monospace;
   @include media-breakpoint-down(xs) {
     font-size: 0.65rem;
   }
@@ -332,6 +333,32 @@ $gics-utilities: $yellow-500;
   position: absolute;
   bottom: 0;
   width: 100%;
+
+  $footer-icon-size: 2rem;
+  $footer-text-padding: 0.5rem;
+  h6 {
+    padding-top: $footer-text-padding;
+  }
+  .icon-wrapper {
+    height: $footer-icon-size;
+    width: $footer-icon-size;
+    min-width: $footer-icon-size;
+    position: absolute;
+    left: calc(50vw - (#{$footer-icon-size} / 4));
+    bottom: 1.8rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    background-color: var(--bs-dark);
+    border-radius: 50%;
+
+    i {
+      font-size: $footer-icon-size * 0.8;
+      transform: translate(0.0375rem, -0.075rem);
+    }
+  }
 }
 
 

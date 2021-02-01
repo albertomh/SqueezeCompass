@@ -44,7 +44,28 @@ All requests receive a random UserAgent string by having their headers set to `c
 3.
 4.
 
+In order to update the snapshot or constituents file, simply update the paths in `environment.ts` and `environment.prod.ts`.
+
 Serve from the `/web` directory with `ng serve`
 
-Build for hosting on GitHub pages with `ng build --prod --output-path dist --base-href /SqueezeCompass/`
+Build for hosting on GitHub pages with `ng build --prod --output-path dist --base-href https://www.albertomh.com/SqueezeCompass/`
 
+
+TODO:
+- Make open filter tray default on some breakpoints?
+- Add 'top 10' stock quicklinks to mobile menu / filtered view quicklinks.
+
+
+- <s>SEO tags & open graph metadata [ogp.me]</s>
+- Force a new snapshot before deploy.
+
+
+- Brotli compression [medium.com/@subodhkumarjc/angular-build-optimization-part-2-compression-b866dd0593c3]
+- Ensure the base tag has a correct value [angular.io/guide/deployment#the-base-tag]
+  or use APP_BASE_HREF [angular.io/api/common/APP_BASE_HREF]
+
+
+- Lighthouse report on live.
+
+
+- Add amh.com 404 and index with link to SQZC.

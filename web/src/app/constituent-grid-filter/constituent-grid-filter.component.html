@@ -1,7 +1,8 @@
 <div class="container-fluid bg-light" id="filter-tray">
 
+  <div class="collapse pt-2 pb-1" id="filter-tray__collapsible"
+       [class.show]="filterTrayOpen">
   <!-- FIRST ROW OF FILTER TRAY -->
-  <div class="collapse pt-2 pb-1" id="filter-tray__collapsible">
     <div class="row">
       <div class="col px-lg-5">
 
@@ -27,25 +28,19 @@
 
   <!-- FILTER METACONTROLS: SHOW/HIDE TRAY AND CLEAR FILTERS. -->
   <div class="row py-2" id="filter-tray__buttons-row">
-
-    <div class="col px-lg-5">
+    <div class="col-auto me-auto me-xl-0 ps-lg-5">
       <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
-         (click)="onToggleFilterTrayVisibility()">
-        <i class="bi bi-toggles"></i> {{filterTrayButtonCaption}}
-      </a>
-      <a role="button" class="d-none d-lg-block btn btn-link text-decoration-none float-start ms-4"
-         (click)="clearQueryParams()">
-        Reset filters
+         (click)="onToggleFilterTrayOpen()">
+        <i class="bi" [ngClass]="{'bi-caret-down-fill': !filterTrayOpen, 'bi-caret-up-fill': filterTrayOpen}"></i> {{filterTrayOpen ? 'Hide filters' : 'Show filters'}}
       </a>
     </div>
 
-    <div class="col px-lg-5 d-block d-lg-none">
-      <a role="button" class="btn btn-link text-decoration-none float-end"
-         (click)="clearQueryParams()">
+    <div class="col-auto pe-lg-5">
+      <a role="button" class="btn btn-link text-decoration-none float-end float-lg-start pe-0 pe-lg-2"
+         (click)="resetFilters()">
         Reset filters
       </a>
     </div>
-
   </div>
 
 </div>

@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  filePathForSnapshot: '/assets/data/2021-01-31_snapshot.json',
+  filePathForConstituents: '/assets/data/2021-02-01_constituents.json'
 };
 
 /*
