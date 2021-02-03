@@ -1,0 +1,11 @@
+#filter-tray__collapsible {
+  .btn {
+    &.active {
+      box-shadow: inset 0 1px 3px 1px rgb(0 0 0 / 50%);
+    }
+    /*&:active {
+      color: initial;
+      background: initial;
+    }*/
+  }
+}

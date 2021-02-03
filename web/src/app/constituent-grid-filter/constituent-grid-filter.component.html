@@ -18,12 +18,12 @@
               <a role="button" class="btn btn-outline-secondary"
                  [class.active]="queryParams['o'] === AlphabeticalOrder[AlphabeticalOrder.a] || typeOf(queryParams?.o) === 'undefined'"
                  (click)="toggleAlphabeticalOrder(AlphabeticalOrder.a)">
-                A<i class="bi bi-arrow-right"></i>Z
+                <i class="bi"></i>A<i class="bi bi-arrow-right"></i>Z
               </a>
               <a role="button" class="btn btn-outline-secondary"
                  [class.active]="queryParams['o'] === AlphabeticalOrder[AlphabeticalOrder.r]"
                  (click)="toggleAlphabeticalOrder(AlphabeticalOrder.r)">
-                Z<i class="bi bi-arrow-left"></i>A
+                <i class="bi"></i>Z<i class="bi bi-arrow-right"></i>A
               </a>
             </div>
           </div>
@@ -45,19 +45,19 @@
           <div class="col">
             <div class="btn-group" role="group">
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="false"
-                 (click)="true">
-                Sell
+                 [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])"
+                 (click)="updateMarketSentiment(MarketSentiment.s)">
+                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])?'bi-check2-square':'bi-square'"></i> Sell
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="false"
-                 (click)="true">
-                Hold
+                 [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])"
+                 (click)="updateMarketSentiment(MarketSentiment.h)">
+                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])?'bi-check2-square':'bi-square'"></i> Hold
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="false"
-                 (click)="true">
-                Buy
+                 [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])"
+                 (click)="updateMarketSentiment(MarketSentiment.b)">
+                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])?'bi-check2-square':'bi-square'"></i> Buy
               </a>
             </div>
           </div>

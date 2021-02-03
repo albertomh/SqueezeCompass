@@ -1,4 +1,5 @@
 export interface FilterQueryParams {
-  o?: string;
-  ms?: string;
+  o?: string | undefined;
+  ms?: string | undefined;
+  [key: string]: string | undefined;
 }
