@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { AlphabeticalOrder, MarketSentiment } from '../enum/FilterQueryParameters';
+import { AlphabeticalOrder, MarketSentiment } from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 
 
@@ -15,8 +15,15 @@ export class ConstituentGridFilterComponent implements OnInit {
   public MarketSentiment = MarketSentiment;
 
   filterTrayOpen: boolean = false;
-  queryParams: FilterQueryParams = {};
-  typeOf = (val: any) => typeof val;
+  queryParams: FilterQueryParams = <FilterQueryParams>{};
+  inQueryParams = (key: string, val: string): boolean => {
+    if (typeof this.queryParams[key] !== 'undefined') {
+      // @ts-ignore
+      return this.queryParams[key].includes(val);
+    }
+    return false;
+  };
+  typeOf = (val: any): string => typeof val;
 
   constructor(public router: Router, public route: ActivatedRoute) {
     // Listen for changes to the query params.
@@ -66,13 +73,28 @@ export class ConstituentGridFilterComponent implements OnInit {
     this.router.navigate(['/'], { queryParams: { o: AlphabeticalOrder[newQueryValue] }, queryParamsHandling: "merge" });
   }
 
-  /*toggleMarketSentiment(sentiment: string): void {
+  updateMarketSentiment(sentiment: MarketSentiment): void {
     let msQueryString: string = <string>this.route.snapshot.queryParamMap.get('ms');
-    if (msQueryString !== null) {
 
+    if (msQueryString === null) {
+      // If no ms filter is applied, apply the one that was clicked.
+      msQueryString = MarketSentiment[sentiment];
+    } else {
+      let msQueryParams: string[] = msQueryString.split(',');  // Get the currently applied ms filter.
+      if (msQueryParams.includes(MarketSentiment[sentiment])) {
+        // If the clicked filter was already applied, remove it.
+        msQueryParams = msQueryParams.filter(item => item !== MarketSentiment[sentiment]);
+        msQueryString = msQueryParams.join(',');
+      } else {
+        msQueryString += ',' + MarketSentiment[sentiment];  // Add the clicked filter.
+      }
     }
-    //let msQueryParams: string[] = Array.from();
 
-  }*/
+    if (msQueryString.length > 0) {
+      this.router.navigate(['/'], { queryParams: { ms: msQueryString }, queryParamsHandling: "merge" });
+      return;
+    }
+    this.router.navigate(['/'], { queryParams: { ms: null }, queryParamsHandling: "merge" });
+  }
 
 }
