@@ -1,73 +1,75 @@
 <div class="container-fluid bg-light" id="filter-tray">
 
-  <div class="collapse pt-2 pb-1" id="filter-tray__collapsible"
+  <div class="collapse py-2" id="filter-tray__collapsible"
        [class.show]="filterTrayOpen">
 
-<!-- FIRST ROW OF FILTER TRAY -->
-    <div class="row">
-      <div class="col px-lg-5">
+    <div class="row px-lg-5">
+<!-- COLUMN 1: FILTER BY -->
+      <div class="col-12 col-md-6 ps-lg-0">
 
+    <!-- FIRST ROW: FILTER BY MARKET SENTIMENT -->
         <div class="row">
           <div class="col">
-            <label>Ticker symbol</label>
+            <span class="filter-label fw-bold">Market sentiment</span>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <div class="btn-group" role="group">
-              <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="queryParams['o'] === AlphabeticalOrder[AlphabeticalOrder.a] || typeOf(queryParams?.o) === 'undefined'"
-                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.a)">
-                <i class="bi"></i>A<i class="bi bi-arrow-right"></i>Z
-              </a>
-              <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="queryParams['o'] === AlphabeticalOrder[AlphabeticalOrder.r]"
-                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.r)">
-                <i class="bi"></i>Z<i class="bi bi-arrow-right"></i>A
-              </a>
-            </div>
-          </div>
-        </div>
 
-      </div>
-    </div>
-
-<!-- SECOND ROW: MARKET SENTIMENT -->
-    <div class="row mt-2">
-      <div class="col px-lg-5">
-
-        <div class="row">
-          <div class="col">
-            <label>Market sentiment</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
             <div class="btn-group" role="group">
               <a role="button" class="btn btn-outline-secondary"
                  [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])"
                  (click)="updateMarketSentiment(MarketSentiment.s)">
-                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])?'bi-check2-square':'bi-square'"></i> Sell
+                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])?'bi-check-square-fill':'bi-square'"></i> Sell
               </a>
               <a role="button" class="btn btn-outline-secondary"
                  [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])"
                  (click)="updateMarketSentiment(MarketSentiment.h)">
-                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])?'bi-check2-square':'bi-square'"></i> Hold
+                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])?'bi-check-square-fill':'bi-square'"></i> Hold
               </a>
               <a role="button" class="btn btn-outline-secondary"
                  [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])"
                  (click)="updateMarketSentiment(MarketSentiment.b)">
-                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])?'bi-check2-square':'bi-square'"></i> Buy
+                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])?'bi-check-square-fill':'bi-square'"></i> Buy
               </a>
             </div>
+
           </div>
         </div>
 
+      </div>
+<!-- COLUMN 2: ORDER BY -->
+      <div class="col-12 col-md-6">
+
+    <!-- SECOND ROW: ORDER BY -->
+        <div class="row">
+          <div class="col">
+            <span class="filter-label fw-bold">Ticker symbol</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.a])"
+                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.a)">
+                <i class="bi" [ngClass]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.a])?'bi-record-circle-fill':'bi-circle'"></i> A<i class="bi bi-arrow-right"></i>Z
+              </a>
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.r])"
+                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.r)">
+                <i class="bi" [ngClass]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.r])?'bi-record-circle-fill':'bi-circle'"></i> Z<i class="bi bi-arrow-right"></i>A
+              </a>
+            </div>
+
+          </div>
+        </div>
 
       </div>
     </div>
 
-  </div>
+  </div> <!-- /filter-tray__collapsible -->
 
 
 <!-- FILTER METACONTROLS: SHOW/HIDE TRAY AND CLEAR FILTERS. -->
@@ -81,7 +83,7 @@
 
     <div class="col-auto pe-lg-5">
       <a role="button" class="btn btn-link text-decoration-none float-end float-lg-start pe-0 pe-lg-2"
-         (click)="resetFilters()">
+         (click)="resetToDefaultFilters()">
         Reset filters
       </a>
     </div>

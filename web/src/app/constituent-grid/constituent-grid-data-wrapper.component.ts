@@ -41,12 +41,8 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   onQueryParamsChange(queryParams: FilterQueryParams): void {
     let filteredSnapshots: ConstituentSnapshot[] = this.originalSnapshots;
 
-    if (Object.keys(queryParams).length === 0) {
-      filteredSnapshots = this.originalSnapshots;
-    } else {
-      filteredSnapshots = this.applyAlphabeticalOrderFilter(filteredSnapshots, queryParams.o);
-      filteredSnapshots = this.applyMarketSentimentFilter(filteredSnapshots, queryParams.ms);
-    }
+    filteredSnapshots = this.applyAlphabeticalOrderFilter(filteredSnapshots, queryParams.o);
+    filteredSnapshots = this.applyMarketSentimentFilter(filteredSnapshots, queryParams.ms);
 
     this.snapshots = filteredSnapshots;
   }
@@ -71,13 +67,14 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
       's': ['underperform', 'sell', 'strong_sell'],
     };
 
-    if (marketSentiment != null) {
-      let sentiments: string[] = marketSentiment.split(',');
-      let sentimentSlugs: string[] = sentiments.reduce((acc: string[], s: string) => acc.concat(sentimentMap[s]), []);
-      let filteredSnapshots = [...snapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
-      return filteredSnapshots;
+    if (marketSentiment == null) {
+      return [];
     }
-    return snapshots;
+
+    let sentiments: string[] = marketSentiment.split(',');
+    let sentimentSlugs: string[] = sentiments.reduce((acc: string[], s: string) => acc.concat(sentimentMap[s]), []);
+    let filteredSnapshots = [...snapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
+    return filteredSnapshots;
   }
 
 }

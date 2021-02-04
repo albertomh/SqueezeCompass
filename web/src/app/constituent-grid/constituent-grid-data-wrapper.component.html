@@ -1,3 +1,14 @@
+<div *ngIf="snapshots.length === 0">
+  <div class="container-fluid">
+    <div class="row mt-5 text-center">
+      <i class="bi bi-eyeglasses display-1 text-muted"></i>
+    </div>
+    <div class="row pt-1 text-center">
+      <p class="fs-5">No stocks match the selected filters.</p>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="snapshots.length > 0">
   <constituent-grid class="container-fluid d-flex flex-wrap mt-2 px-lg-5" [snapshotData]="snapshots"></constituent-grid>
 </div>

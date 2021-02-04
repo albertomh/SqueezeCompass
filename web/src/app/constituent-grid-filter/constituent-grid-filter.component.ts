@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { AlphabeticalOrder, MarketSentiment } from '../enum/FilterQueryParamValues';
+import {AlphabeticalOrder, MarketSentiment} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 
 
@@ -14,8 +14,12 @@ export class ConstituentGridFilterComponent implements OnInit {
   public AlphabeticalOrder = AlphabeticalOrder;
   public MarketSentiment = MarketSentiment;
 
-  filterTrayOpen: boolean = false;
   queryParams: FilterQueryParams = <FilterQueryParams>{};
+  readonly defaultParams: FilterQueryParams = {
+    o: AlphabeticalOrder[AlphabeticalOrder.a],
+    ms: [MarketSentiment[MarketSentiment.s], MarketSentiment[MarketSentiment.h], MarketSentiment[MarketSentiment.b]].join(','),
+  }
+
   inQueryParams = (key: string, val: string): boolean => {
     if (typeof this.queryParams[key] !== 'undefined') {
       // @ts-ignore
@@ -23,9 +27,14 @@ export class ConstituentGridFilterComponent implements OnInit {
     }
     return false;
   };
+
   typeOf = (val: any): string => typeof val;
 
+  filterTrayOpen: boolean = false;
+
   constructor(public router: Router, public route: ActivatedRoute) {
+    this.resetToDefaultFilters();
+
     // Listen for changes to the query params.
     route.queryParams.subscribe(p => {
       this.queryParams = p;
@@ -40,9 +49,8 @@ export class ConstituentGridFilterComponent implements OnInit {
     this.filterTrayOpen = !this.filterTrayOpen;
   }
 
-  resetFilters(): void {
-    // Clear query params.
-    this.router.navigate(['/'], { queryParams: {} });
+  resetToDefaultFilters(): void {
+    this.router.navigate(['/'], { queryParams: this.defaultParams, queryParamsHandling: "merge" });
   }
 
   // --- Filters
