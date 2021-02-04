@@ -1,11 +1,38 @@
 #filter-tray__collapsible {
-  .btn {
-    &.active {
-      box-shadow: inset 0 1px 3px 1px rgb(0 0 0 / 50%);
+  .filter-label {
+    font-size: 1.1rem;
+    font-variant: all-small-caps;
+  }
+
+  .form-check,
+  .form-check * {
+    cursor: pointer;
+  }
+
+  .form-check {
+    border-bottom: 4px solid #f8f9fa;
+    &:not([checked]) {
+      color: #6c757d;
     }
-    /*&:active {
+    &:not([checked]):hover,
+    &[checked] {
+      color: black;
+      border-bottom: 4px solid black;
+    }
+  }
+
+  .btn-group > .btn {
+    border: none;
+    border-bottom: 4px solid #f8f9fa;
+    border-radius: 0;
+    margin: 0 0.2rem;
+    padding: 0.3rem 0.6rem;
+
+    &:hover,
+    &.active {
       color: initial;
       background: initial;
-    }*/
+      border-bottom: 4px solid black;
+    }
   }
 }
