@@ -1,16 +1,26 @@
-export enum ColourSchemes {  // c:
-  mc,  // market cap
-  ms,  // market sentiment
-  si,  // short interest
-}
 
-export enum AlphabeticalOrder {  // o:
-  a,  // alphabetical
-  r,  // reverse
-}
+// ----- 1/3 FILTER ------------------------------------------------------------
 
-export enum MarketSentiment {  // ms:
+export enum FilterSentiment {  // fms:
   s,  // sell
   h,  // hold
   b,  // buy
+}
+
+
+// ----- 2/3 SORT --------------------------------------------------------------
+
+export enum SortBy {  // so:
+  al,  // alphabetical
+  re,  // reverse alphabetical
+}
+
+
+// ----- 3/3 COLOUR ------------------------------------------------------------
+
+export enum ColourScheme {  // cs:
+  ms,  // market sentiment
+  ca,  // market cap
+  sh,  // short interest
+  gi,  // GICS sector
 }

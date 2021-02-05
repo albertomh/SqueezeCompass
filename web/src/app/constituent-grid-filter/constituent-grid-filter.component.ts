@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AlphabeticalOrder, MarketSentiment} from '../enum/FilterQueryParamValues';
+import {FilterSentiment, SortBy} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 
 
@@ -11,13 +11,14 @@ import {FilterQueryParams} from "../interface/FilterQueryParams";
 })
 export class ConstituentGridFilterComponent implements OnInit {
 
-  public AlphabeticalOrder = AlphabeticalOrder;
-  public MarketSentiment = MarketSentiment;
+  public SortBy = SortBy;
+  public FilterSentiment = FilterSentiment;
 
   queryParams: FilterQueryParams = <FilterQueryParams>{};
   readonly defaultParams: FilterQueryParams = {
-    o: AlphabeticalOrder[AlphabeticalOrder.a],
-    ms: [MarketSentiment[MarketSentiment.s], MarketSentiment[MarketSentiment.h], MarketSentiment[MarketSentiment.b]].join(','),
+    fms: [FilterSentiment[FilterSentiment.s], FilterSentiment[FilterSentiment.h], FilterSentiment[FilterSentiment.b]].join(','),
+    so: SortBy[SortBy.al],
+    //co: ColourScheme.ms // TODO:
   }
 
   inQueryParams = (key: string, val: string): boolean => {
@@ -53,56 +54,60 @@ export class ConstituentGridFilterComponent implements OnInit {
     this.router.navigate(['/'], { queryParams: this.defaultParams, queryParamsHandling: "merge" });
   }
 
-  // --- Filters
+  // --- Filter, Sort, and Visualise Query Parameters
   /*
-  * filter query param key: meaning ['query param value': meaning <|,> ... ]
+  * FILTER:
+  * fms: market sentiment [s: sell, h: hold, b: buy]
   *
-  *  o:  alphabetical order ['a': alphabetical | 'r': reverse]
-  * ms: market sentiment   ['s': sell, 'h': hold, 'b': buy]
+  * SORT:
+  * so: [al: alphabetical | re: reverse]
   *
+  * COLOUR SCHEME:
+  * cs: [ms: market sentiment | ca: market cap | sh: short interest | gi: GICS sector]
   */
-  toggleAlphabeticalOrder(order: AlphabeticalOrder): void {
-    let alphaOrderQueryString: string = <string>this.route.snapshot.queryParamMap.get('o');
 
-    if (alphaOrderQueryString === null) {
-      alphaOrderQueryString = AlphabeticalOrder[AlphabeticalOrder.a];
-    }
-    if (AlphabeticalOrder[order] === alphaOrderQueryString) {
-      return;
-    }
-
-    let newQueryValue: AlphabeticalOrder;
-    if (alphaOrderQueryString === AlphabeticalOrder[AlphabeticalOrder.a]) {
-      newQueryValue = AlphabeticalOrder.r;
-    } else {
-      newQueryValue = AlphabeticalOrder.a;
-    }
-
-    this.router.navigate(['/'], { queryParams: { o: AlphabeticalOrder[newQueryValue] }, queryParamsHandling: "merge" });
-  }
-
-  updateMarketSentiment(sentiment: MarketSentiment): void {
-    let msQueryString: string = <string>this.route.snapshot.queryParamMap.get('ms');
+  filterByMarketSentiment(sentiment: FilterSentiment): void {
+    let msQueryString: string = <string>this.route.snapshot.queryParamMap.get('fms');
 
     if (msQueryString === null) {
       // If no ms filter is applied, apply the one that was clicked.
-      msQueryString = MarketSentiment[sentiment];
+      msQueryString = FilterSentiment[sentiment];
     } else {
       let msQueryParams: string[] = msQueryString.split(',');  // Get the currently applied ms filter.
-      if (msQueryParams.includes(MarketSentiment[sentiment])) {
+      if (msQueryParams.includes(FilterSentiment[sentiment])) {
         // If the clicked filter was already applied, remove it.
-        msQueryParams = msQueryParams.filter(item => item !== MarketSentiment[sentiment]);
+        msQueryParams = msQueryParams.filter(item => item !== FilterSentiment[sentiment]);
         msQueryString = msQueryParams.join(',');
       } else {
-        msQueryString += ',' + MarketSentiment[sentiment];  // Add the clicked filter.
+        msQueryString += ',' + FilterSentiment[sentiment];  // Add the clicked filter.
       }
     }
 
     if (msQueryString.length > 0) {
-      this.router.navigate(['/'], { queryParams: { ms: msQueryString }, queryParamsHandling: "merge" });
+      this.router.navigate(['/'], { queryParams: { fms: msQueryString }, queryParamsHandling: "merge" });
       return;
     }
-    this.router.navigate(['/'], { queryParams: { ms: null }, queryParamsHandling: "merge" });
+    this.router.navigate(['/'], { queryParams: { fms: null }, queryParamsHandling: "merge" });
+  }
+
+  orderAlphabetically(order: SortBy): void {
+    let alphaOrderQueryString: string = <string>this.route.snapshot.queryParamMap.get('so');
+
+    if (alphaOrderQueryString === null) {
+      alphaOrderQueryString = SortBy[SortBy.al];
+    }
+    if (SortBy[order] === alphaOrderQueryString) {
+      return;
+    }
+
+    let newQueryValue: SortBy;
+    if (alphaOrderQueryString === SortBy[SortBy.al]) {
+      newQueryValue = SortBy.re;
+    } else {
+      newQueryValue = SortBy.al;
+    }
+
+    this.router.navigate(['/'], { queryParams: { so: SortBy[newQueryValue] }, queryParamsHandling: "merge" });
   }
 
 }
