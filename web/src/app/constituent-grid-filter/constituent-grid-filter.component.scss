@@ -21,18 +21,34 @@
     }
   }
 
-  .btn-group > .btn {
+  .filter-tray__collapsible__btn-group .btn,
+  .--btn-radio > .btn {
+    background: initial;
     border: none;
-    border-bottom: 4px solid #f8f9fa;
-    border-radius: 0;
     margin: 0 0.2rem;
     padding: 0.3rem 0.6rem;
 
     &:hover,
     &.active {
       color: initial;
-      background: initial;
-      border-bottom: 4px solid black;
     }
   }
+  .filter-tray__collapsible__btn-group .btn {
+    border-radius: 3px;
+    &:hover {
+      background: #E7E9EA;
+    }
+    &.active {
+    }
+  }
+  .--btn-radio > .btn {
+    border-radius: 1rem;
+    &:hover {
+      background: #E7E9EA;
+    }
+    &.active {
+    }
+  }
+
+
 }
