@@ -66,6 +66,6 @@ TODO:
 
 
 - Lighthouse report on live.
-
+- Test OG cards.
 
 - Add amh.com 404 and index with link to SQZC.

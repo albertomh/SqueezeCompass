@@ -148,6 +148,22 @@ nav {
 }
 
 
+// ----- COLLAPSIBLE FILTER TRAY -----------------------------------------------
+@include media-breakpoint-down(sm) {
+  .filter-tray__collapsible__btn-group .btn {
+    flex: 1;
+    i, i + span {
+      float: left;
+    }
+  }
+  .--mobile-border-right {
+    border-right: 1px solid $gray-400;
+  }
+}
+
+
+
+
 // ----- CONSTITUENT GRID ------------------------------------------------------
 // Factors of 506: 1×506; 2×253; 11×46; 22×23.
 $constituent-margin: 1px;

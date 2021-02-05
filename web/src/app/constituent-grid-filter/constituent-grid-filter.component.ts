@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FilterSentiment, SortBy} from '../enum/FilterQueryParamValues';
+import {Visualise, FilterSentiment, SortBy, FilterCap} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 
 
@@ -11,14 +11,17 @@ import {FilterQueryParams} from "../interface/FilterQueryParams";
 })
 export class ConstituentGridFilterComponent implements OnInit {
 
-  public SortBy = SortBy;
   public FilterSentiment = FilterSentiment;
+  public FilterCap = FilterCap;
+  public SortBy = SortBy;
+  public Visualise = Visualise;
 
   queryParams: FilterQueryParams = <FilterQueryParams>{};
   readonly defaultParams: FilterQueryParams = {
     fms: [FilterSentiment[FilterSentiment.s], FilterSentiment[FilterSentiment.h], FilterSentiment[FilterSentiment.b]].join(','),
+    fcp: [FilterCap[FilterCap.lt], FilterCap[FilterCap.bt], FilterCap[FilterCap.gt]].join(','),
     so: SortBy[SortBy.al],
-    //co: ColourScheme.ms // TODO:
+    vi: Visualise[Visualise.ms],
   }
 
   inQueryParams = (key: string, val: string): boolean => {
@@ -62,10 +65,11 @@ export class ConstituentGridFilterComponent implements OnInit {
   * SORT:
   * so: [al: alphabetical | re: reverse]
   *
-  * COLOUR SCHEME:
-  * cs: [ms: market sentiment | ca: market cap | sh: short interest | gi: GICS sector]
+  * VISUALISE - COLOUR SCHEME:
+  * vi: [ms: market sentiment | ca: market cap | sh: short interest | gi: GICS sector]
   */
 
+// ----- FILTER ----------------------------------------------------------------
   filterByMarketSentiment(sentiment: FilterSentiment): void {
     let msQueryString: string = <string>this.route.snapshot.queryParamMap.get('fms');
 
@@ -90,24 +94,38 @@ export class ConstituentGridFilterComponent implements OnInit {
     this.router.navigate(['/'], { queryParams: { fms: null }, queryParamsHandling: "merge" });
   }
 
-  orderAlphabetically(order: SortBy): void {
-    let alphaOrderQueryString: string = <string>this.route.snapshot.queryParamMap.get('so');
+  filterByMarketCap(cap: FilterCap): void {
+    // TODO: implement by creating generic checkbox filter handler and using it to replacing filterByMarketSentiment too.
+  }
 
-    if (alphaOrderQueryString === null) {
-      alphaOrderQueryString = SortBy[SortBy.al];
+// ----- SORT ------------------------------------------------------------------
+  orderAlphabetically(order: SortBy): void {
+    let alphaSortQueryString: string = <string>this.route.snapshot.queryParamMap.get('so');
+
+    if (alphaSortQueryString === null) {
+      alphaSortQueryString = SortBy[SortBy.al];
     }
-    if (SortBy[order] === alphaOrderQueryString) {
+    if (SortBy[order] === alphaSortQueryString) {
       return;
     }
 
     let newQueryValue: SortBy;
-    if (alphaOrderQueryString === SortBy[SortBy.al]) {
+    if (alphaSortQueryString === SortBy[SortBy.al]) {
       newQueryValue = SortBy.re;
     } else {
       newQueryValue = SortBy.al;
     }
 
     this.router.navigate(['/'], { queryParams: { so: SortBy[newQueryValue] }, queryParamsHandling: "merge" });
+  }
+
+  sortByUpdateRoute(order: SortBy) {
+    this.router.navigate(['/'], { queryParams: { so: SortBy[order] }, queryParamsHandling: "merge" });
+  }
+
+// ----- VISUALISE -------------------------------------------------------------
+  visualiseByUpdateRoute(scheme: Visualise) {
+    this.router.navigate(['/'], { queryParams: { vi: Visualise[scheme] }, queryParamsHandling: "merge" });
   }
 
 }

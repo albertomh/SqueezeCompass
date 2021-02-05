@@ -45,25 +45,13 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
     // Filter
     resultSnapshots = this.applyMarketSentimentFilter(resultSnapshots, queryParams.fms);
     // Sort
-    resultSnapshots = this.applyAlphabeticalOrderFilter(resultSnapshots, queryParams.so);
+    resultSnapshots = this.sortAlphabetical(resultSnapshots, queryParams.so);
 
     this.filtersReturnNothing = resultSnapshots.length === 0;
     this.snapshots = resultSnapshots;
   }
 
-  // ----- Filter methods
-  applyAlphabeticalOrderFilter(snapshots: ConstituentSnapshot[], order?: string): ConstituentSnapshot[] {
-    if (order != null) {
-      let orderedSnapshots: ConstituentSnapshot[] = [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
-      if (order === SortBy[SortBy.al]) {
-        return orderedSnapshots;
-      } else if (order === SortBy[SortBy.re]) {
-        return orderedSnapshots.reverse();
-      }
-    }
-    return snapshots;
-  }
-
+// ----- FILTER ----------------------------------------------------------------
   applyMarketSentimentFilter(snapshots: ConstituentSnapshot[], marketSentiment?: string) {
     const sentimentMap: {[sentiment: string]: string[]} = {
       'b': ['strong_buy', 'buy', 'overperform'],
@@ -80,5 +68,20 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
     let filteredSnapshots = [...snapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
     return filteredSnapshots;
   }
+
+// ----- SORT ------------------------------------------------------------------
+  sortAlphabetical(snapshots: ConstituentSnapshot[], order?: string): ConstituentSnapshot[] {
+    if (order != null) {
+      let orderedSnapshots: ConstituentSnapshot[] = [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
+      if (order === SortBy[SortBy.al]) {
+        return orderedSnapshots;
+      } else if (order === SortBy[SortBy.re]) {
+        return orderedSnapshots.reverse();
+      }
+    }
+    return snapshots;
+  }
+
+// ----- VISUALISE -------------------------------------------------------------
 
 }
