@@ -1,4 +1,4 @@
-<div *ngIf="snapshots.length === 0">
+<div *ngIf="filtersReturnNothing">
   <div class="container-fluid">
     <div class="row mt-5 text-center">
       <i class="bi bi-eyeglasses display-1 text-muted"></i>
@@ -9,6 +9,6 @@
   </div>
 </div>
 
-<div *ngIf="snapshots.length > 0">
+<div *ngIf="!filtersReturnNothing">
   <constituent-grid class="container-fluid d-flex flex-wrap mt-2 px-lg-5" [snapshotData]="snapshots"></constituent-grid>
 </div>

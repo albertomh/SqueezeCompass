@@ -1,16 +1,17 @@
 <div class="container-fluid bg-light" id="filter-tray">
 
+
   <div class="collapse py-2" id="filter-tray__collapsible"
        [class.show]="filterTrayOpen">
+    <div class="row px-4 px-sm-0 px-lg-5">
 
-    <div class="row px-lg-5">
-<!-- COLUMN 1: FILTER BY -->
-      <div class="col-12 col-md-6 ps-lg-0">
+<!-- COLUMN 1/3: FILTER BY -->
+      <div class="col-12 col-md-4 ps-lg-0">
 
-    <!-- FIRST ROW: FILTER BY MARKET SENTIMENT -->
+      <!-- FILTER BY MARKET SENTIMENT -->
         <div class="row">
           <div class="col">
-            <span class="filter-label fw-bold">Market sentiment</span>
+            <span class="filter-label fw-bold"><i class="bi bi-funnel pe-1"></i> Market sentiment</span>
           </div>
         </div>
         <div class="row">
@@ -18,33 +19,35 @@
 
             <div class="btn-group" role="group">
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])"
-                 (click)="updateMarketSentiment(MarketSentiment.s)">
-                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.s])?'bi-check-square-fill':'bi-square'"></i> Sell
+                 [class.active]="inQueryParams('fms', FilterSentiment[FilterSentiment.s])"
+                 (click)="filterByMarketSentiment(FilterSentiment.s)">
+                <i class="bi" [ngClass]="inQueryParams('fms', FilterSentiment[FilterSentiment.s])?'bi-check-square-fill':'bi-square'"></i> Sell
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])"
-                 (click)="updateMarketSentiment(MarketSentiment.h)">
-                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.h])?'bi-check-square-fill':'bi-square'"></i> Hold
+                 [class.active]="inQueryParams('fms', FilterSentiment[FilterSentiment.h])"
+                 (click)="filterByMarketSentiment(FilterSentiment.h)">
+                <i class="bi" [ngClass]="inQueryParams('fms', FilterSentiment[FilterSentiment.h])?'bi-check-square-fill':'bi-square'"></i> Hold
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])"
-                 (click)="updateMarketSentiment(MarketSentiment.b)">
-                <i class="bi" [ngClass]="inQueryParams('ms', MarketSentiment[MarketSentiment.b])?'bi-check-square-fill':'bi-square'"></i> Buy
+                 [class.active]="inQueryParams('fms', FilterSentiment[FilterSentiment.b])"
+                 (click)="filterByMarketSentiment(FilterSentiment.b)">
+                <i class="bi" [ngClass]="inQueryParams('fms', FilterSentiment[FilterSentiment.b])?'bi-check-square-fill':'bi-square'"></i> Buy
               </a>
             </div>
 
           </div>
         </div>
 
-      </div>
-<!-- COLUMN 2: ORDER BY -->
-      <div class="col-12 col-md-6">
+      </div> <!-- /col 1/3 -->
 
-    <!-- SECOND ROW: ORDER BY -->
+
+  <!-- COLUMN 2/3: SORT BY -->
+      <div class="col-12 col-md-4">
+
+      <!-- SORT ALPHABETICALLY -->
         <div class="row">
           <div class="col">
-            <span class="filter-label fw-bold">Ticker symbol</span>
+            <span class="filter-label fw-bold"><i class="bi bi-arrow-down-up pe-1"></i> Sort by</span>
           </div>
         </div>
         <div class="row">
@@ -52,23 +55,55 @@
 
             <div class="btn-group" role="group">
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.a])"
-                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.a)">
-                <i class="bi" [ngClass]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.a])?'bi-record-circle-fill':'bi-circle'"></i> A<i class="bi bi-arrow-right"></i>Z
+                 [class.active]="inQueryParams('so', SortBy[SortBy.al])"
+                 (click)="orderAlphabetically(SortBy.al)">
+                <i class="bi" [ngClass]="inQueryParams('so', SortBy[SortBy.al])?'bi-record-circle-fill':'bi-circle'"></i> A<i class="bi bi-arrow-right"></i>Z
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.r])"
-                 (click)="toggleAlphabeticalOrder(AlphabeticalOrder.r)">
-                <i class="bi" [ngClass]="inQueryParams('o', AlphabeticalOrder[AlphabeticalOrder.r])?'bi-record-circle-fill':'bi-circle'"></i> Z<i class="bi bi-arrow-right"></i>A
+                 [class.active]="inQueryParams('so', SortBy[SortBy.re])"
+                 (click)="orderAlphabetically(SortBy.re)">
+                <i class="bi" [ngClass]="inQueryParams('so', SortBy[SortBy.re])?'bi-record-circle-fill':'bi-circle'"></i> Z<i class="bi bi-arrow-right"></i>A
               </a>
             </div>
 
           </div>
         </div>
 
-      </div>
-    </div>
+      </div> <!-- /col 2/3 -->
 
+
+<!-- COLUMN 3/3: COLOUR SCHEME -->
+      <div class="col-12 col-md-4">
+
+      <!-- COLOUR BY -->
+        <div class="row">
+          <div class="col">
+            <span class="filter-label fw-bold"><i class="bi bi-brush pe-1"></i> Visualise</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+            <div class="btn-group" role="group">
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="inQueryParams('cs', SortBy[SortBy.al])"
+                 (click)="orderAlphabetically(SortBy.al)">
+                <i class="bi" [ngClass]="inQueryParams('cs', SortBy[SortBy.al])?'bi-record-circle-fill':'bi-circle'"></i> Short interest
+              </a>
+              <a role="button" class="btn btn-outline-secondary"
+                 [class.active]="inQueryParams('cs', SortBy[SortBy.re])"
+                 (click)="orderAlphabetically(SortBy.re)">
+                <i class="bi" [ngClass]="inQueryParams('cs', SortBy[SortBy.re])?'bi-record-circle-fill':'bi-circle'"></i> Market cap
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div> <!-- /col 3/3 -->
+
+
+    </div> <!-- /row -->
   </div> <!-- /filter-tray__collapsible -->
 
 
@@ -88,5 +123,6 @@
       </a>
     </div>
   </div>
+
 
 </div>

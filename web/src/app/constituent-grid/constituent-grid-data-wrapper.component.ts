@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 import {ActivatedRoute} from "@angular/router";
-import { AlphabeticalOrder, MarketSentiment } from '../enum/FilterQueryParamValues';
+import {SortBy} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 import {environment} from "../../environments/environment";
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
 
 
 @Component({
@@ -17,6 +16,7 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   private route: ActivatedRoute;
   originalSnapshots: ConstituentSnapshot[];  // Store original array as fetched from JSON.
   snapshots: ConstituentSnapshot[];  // Store transformations of originalSnapshots according to applied filters.
+  filtersReturnNothing: boolean = false;
 
   constructor(route: ActivatedRoute) {
     this.route = route;
@@ -39,21 +39,25 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   }
 
   onQueryParamsChange(queryParams: FilterQueryParams): void {
-    let filteredSnapshots: ConstituentSnapshot[] = this.originalSnapshots;
+    this.filtersReturnNothing = false;
+    let resultSnapshots: ConstituentSnapshot[] = this.originalSnapshots;
 
-    filteredSnapshots = this.applyAlphabeticalOrderFilter(filteredSnapshots, queryParams.o);
-    filteredSnapshots = this.applyMarketSentimentFilter(filteredSnapshots, queryParams.ms);
+    // Filter
+    resultSnapshots = this.applyMarketSentimentFilter(resultSnapshots, queryParams.fms);
+    // Sort
+    resultSnapshots = this.applyAlphabeticalOrderFilter(resultSnapshots, queryParams.so);
 
-    this.snapshots = filteredSnapshots;
+    this.filtersReturnNothing = resultSnapshots.length === 0;
+    this.snapshots = resultSnapshots;
   }
 
   // ----- Filter methods
   applyAlphabeticalOrderFilter(snapshots: ConstituentSnapshot[], order?: string): ConstituentSnapshot[] {
     if (order != null) {
       let orderedSnapshots: ConstituentSnapshot[] = [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
-      if (order === AlphabeticalOrder[AlphabeticalOrder.a]) {
+      if (order === SortBy[SortBy.al]) {
         return orderedSnapshots;
-      } else if (order === AlphabeticalOrder[AlphabeticalOrder.r]) {
+      } else if (order === SortBy[SortBy.re]) {
         return orderedSnapshots.reverse();
       }
     }
