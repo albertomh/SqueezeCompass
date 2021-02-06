@@ -49,19 +49,19 @@
 
             <div class="d-flex flex-row filter-tray__collapsible__btn-group">
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('fms', FilterCap[FilterCap.lt])"
-                 (click)="filterByMarketCap(FilterCap.lt)">
-                <i class="bi" [ngClass]="inQueryParams('fms', FilterCap[FilterCap.lt])?'bi-check-square-fill':'bi-square'"></i><span class="text-nowrap">&nbsp; &lt; $&#189;tn</span>
+                 [class.active]="inQueryParams('fcp', FilterMarketCap[FilterMarketCap.lt])"
+                 (click)="filterByMarketCap(FilterMarketCap.lt)">
+                <i class="bi" [ngClass]="inQueryParams('fcp', FilterMarketCap[FilterMarketCap.lt])?'bi-check-square-fill':'bi-square'"></i><span class="text-nowrap">&nbsp; &lt; $&#189;tn</span>
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('fms', FilterCap[FilterCap.bt])"
-                 (click)="filterByMarketCap(FilterCap.bt)">
-                <i class="bi" [ngClass]="inQueryParams('fms', FilterCap[FilterCap.bt])?'bi-check-square-fill':'bi-square'"></i><span class="text-nowrap">&nbsp; $&#189;-1tn</span>
+                 [class.active]="inQueryParams('fcp', FilterMarketCap[FilterMarketCap.bt])"
+                 (click)="filterByMarketCap(FilterMarketCap.bt)">
+                <i class="bi" [ngClass]="inQueryParams('fcp', FilterMarketCap[FilterMarketCap.bt])?'bi-check-square-fill':'bi-square'"></i><span class="text-nowrap">&nbsp; $&#189;-1tn</span>
               </a>
               <a role="button" class="btn btn-outline-secondary"
-                 [class.active]="inQueryParams('fms', FilterCap[FilterCap.gt])"
-                 (click)="filterByMarketCap(FilterCap.gt)">
-                <i class="bi" [ngClass]="inQueryParams('fms', FilterCap[FilterCap.gt])?'bi-check-square-fill':'bi-square'"></i><span class="text-nowrap">&nbsp; &gt; $1tn</span>
+                 [class.active]="inQueryParams('fcp', FilterMarketCap[FilterMarketCap.gt])"
+                 (click)="filterByMarketCap(FilterMarketCap.gt)">
+                <i class="bi" [ngClass]="inQueryParams('fcp', FilterMarketCap[FilterMarketCap.gt])?'bi-check-square-fill':'bi-square'"></i><span class="text-nowrap">&nbsp; &gt; $1tn</span>
               </a>
             </div>
 
