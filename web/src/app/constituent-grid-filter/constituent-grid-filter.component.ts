@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Visualise, FilterSentiment, SortBy, FilterCap} from '../enum/FilterQueryParamValues';
+import {FilterMarketCap, FilterSentiment, SortBy, Visualise} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 
 
@@ -12,14 +12,14 @@ import {FilterQueryParams} from "../interface/FilterQueryParams";
 export class ConstituentGridFilterComponent implements OnInit {
 
   public FilterSentiment = FilterSentiment;
-  public FilterCap = FilterCap;
+  public FilterMarketCap = FilterMarketCap;
   public SortBy = SortBy;
   public Visualise = Visualise;
 
   queryParams: FilterQueryParams = <FilterQueryParams>{};
   readonly defaultParams: FilterQueryParams = {
     fms: [FilterSentiment[FilterSentiment.s], FilterSentiment[FilterSentiment.h], FilterSentiment[FilterSentiment.b]].join(','),
-    fcp: [FilterCap[FilterCap.lt], FilterCap[FilterCap.bt], FilterCap[FilterCap.gt]].join(','),
+    fcp: [FilterMarketCap[FilterMarketCap.lt], FilterMarketCap[FilterMarketCap.bt], FilterMarketCap[FilterMarketCap.gt]].join(','),
     so: SortBy[SortBy.al],
     vi: Visualise[Visualise.ms],
   }
@@ -48,7 +48,7 @@ export class ConstituentGridFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // --- Filter metacontrols: open/close tray, clear filters.
+  // --- Filter metacontrols: open/close tray, clear filters. ------------------
   onToggleFilterTrayOpen() {
     this.filterTrayOpen = !this.filterTrayOpen;
   }
@@ -57,7 +57,7 @@ export class ConstituentGridFilterComponent implements OnInit {
     this.router.navigate(['/'], { queryParams: this.defaultParams, queryParamsHandling: "merge" });
   }
 
-  // --- Filter, Sort, and Visualise Query Parameters
+  // --- Filter, Sort, and Visualise Query Parameters --------------------------
   /*
   * FILTER:
   * fms: market sentiment [s: sell, h: hold, b: buy]
@@ -70,32 +70,51 @@ export class ConstituentGridFilterComponent implements OnInit {
   */
 
 // ----- FILTER ----------------------------------------------------------------
-  filterByMarketSentiment(sentiment: FilterSentiment): void {
-    let msQueryString: string = <string>this.route.snapshot.queryParamMap.get('fms');
+  filterBy(categoryQueryStringKey: string, filterOption: FilterSentiment | FilterMarketCap): void {
+    let filterValue: string = '';
+    switch (categoryQueryStringKey) {
+      case 'fms':
+        filterValue = FilterSentiment[filterOption];
+        break;
+      case 'fcp':
+        filterValue = FilterMarketCap[filterOption];
+        break;
+    }
 
-    if (msQueryString === null) {
-      // If no ms filter is applied, apply the one that was clicked.
-      msQueryString = FilterSentiment[sentiment];
+    if (filterValue === '') { return; }  // Exit if no filterValue is assigned.
+
+    let categoryQueryString: string = <string>this.route.snapshot.queryParamMap.get(categoryQueryStringKey);
+    if (categoryQueryString === null) {
+      // If no option is selected for this option, apply the one that was clicked.
+      categoryQueryString = filterValue;
     } else {
-      let msQueryParams: string[] = msQueryString.split(',');  // Get the currently applied ms filter.
-      if (msQueryParams.includes(FilterSentiment[sentiment])) {
-        // If the clicked filter was already applied, remove it.
-        msQueryParams = msQueryParams.filter(item => item !== FilterSentiment[sentiment]);
-        msQueryString = msQueryParams.join(',');
+      let categoryQueryParams: string[] = categoryQueryString.split(',');  // Get the currently applied filter options.
+      if (categoryQueryParams.includes(filterValue)) {
+        // If the clicked filter option was already applied, remove it.
+        categoryQueryParams = categoryQueryParams.filter(qp => qp !== filterValue);
+        categoryQueryString = categoryQueryParams.join(',');
+        console.log("filterBy | ", categoryQueryStringKey, filterValue, categoryQueryString)
       } else {
-        msQueryString += ',' + FilterSentiment[sentiment];  // Add the clicked filter.
+        // Add a filter option that had not yet been applied.
+        categoryQueryString += ',' + filterValue;
       }
     }
 
-    if (msQueryString.length > 0) {
-      this.router.navigate(['/'], { queryParams: { fms: msQueryString }, queryParamsHandling: "merge" });
-      return;
+    let queryParams: {[index: string]: string|null} = {};
+    if (categoryQueryString.length === 0) {
+      queryParams[categoryQueryStringKey] = null;
+    } else {
+      queryParams[categoryQueryStringKey] = categoryQueryString;
     }
-    this.router.navigate(['/'], { queryParams: { fms: null }, queryParamsHandling: "merge" });
+    this.router.navigate(['/'], { queryParams: queryParams, queryParamsHandling: "merge" })
   }
 
-  filterByMarketCap(cap: FilterCap): void {
-    // TODO: implement by creating generic checkbox filter handler and using it to replacing filterByMarketSentiment too.
+  filterByMarketSentiment(sentiment: FilterSentiment): void {
+    this.filterBy('fms', sentiment);
+  }
+
+  filterByMarketCap(marketCap: FilterMarketCap): void {
+    this.filterBy('fcp', marketCap);
   }
 
 // ----- SORT ------------------------------------------------------------------

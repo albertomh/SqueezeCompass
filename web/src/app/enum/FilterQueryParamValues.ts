@@ -7,7 +7,7 @@ export enum FilterSentiment {  // fms:
   b,  // buy
 }
 
-export enum FilterCap {  // fcp:
+export enum FilterMarketCap {  // fcp:
   lt,  // lower than $½tn
   bt,  // between $½-1tn
   gt,  // greater than $1tn
