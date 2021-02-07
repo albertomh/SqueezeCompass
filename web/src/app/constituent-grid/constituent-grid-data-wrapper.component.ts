@@ -58,6 +58,9 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
       case 'fl':
         orderedSnapshots = this.sortByShortPercentageOfFloat(filteredSnapshots);
         break;
+      case 'rp':
+        orderedSnapshots = this.sortByRevenuePerShare(filteredSnapshots);
+        break;
       case 'al':
       default:
         orderedSnapshots = this.sortAlphabetical(filteredSnapshots);
@@ -132,6 +135,10 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
 
   sortByShortPercentageOfFloat(snapshots: ConstituentSnapshot[]): ConstituentSnapshot[] {
     return [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => b.key_stats.short_percent_of_float - a.key_stats.short_percent_of_float);
+  }
+
+  sortByRevenuePerShare(snapshots: ConstituentSnapshot[]): ConstituentSnapshot[] {
+    return [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => b.financial.revenue_per_share - a.financial.revenue_per_share);
   }
 
 // ----- VISUALISE -------------------------------------------------------------

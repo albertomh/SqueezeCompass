@@ -49,7 +49,7 @@ export class ConstituentDetailDataWrapperComponent implements OnInit {
       }
 
     }).catch(function (error) {
-      console.log(error);
+      console.error(error);
     });
   }
 

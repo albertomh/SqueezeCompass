@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FilterMarketCap, FilterSentiment, SortBy, Visualise} from '../enum/FilterQueryParamValues';
+import {FilterMarketCap, FilterSentiment, FilterTrayOpen, SortBy, Visualise} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 
 
@@ -11,6 +11,7 @@ import {FilterQueryParams} from "../interface/FilterQueryParams";
 })
 export class ConstituentGridFilterComponent implements OnInit {
 
+  public FilterTrayOpen = FilterTrayOpen;
   public FilterSentiment = FilterSentiment;
   public FilterMarketCap = FilterMarketCap;
   public SortBy = SortBy;
@@ -18,6 +19,7 @@ export class ConstituentGridFilterComponent implements OnInit {
 
   queryParams: FilterQueryParams = <FilterQueryParams>{};
   readonly defaultParams: FilterQueryParams = {
+    ft: FilterTrayOpen[FilterTrayOpen.c],
     fms: [FilterSentiment[FilterSentiment.s], FilterSentiment[FilterSentiment.h], FilterSentiment[FilterSentiment.b]].join(','),
     fcp: [FilterMarketCap[FilterMarketCap.lt], FilterMarketCap[FilterMarketCap.bt], FilterMarketCap[FilterMarketCap.gt]].join(','),
     so: SortBy[SortBy.al],
@@ -34,15 +36,18 @@ export class ConstituentGridFilterComponent implements OnInit {
 
   typeOf = (val: any): string => typeof val;
 
-  filterTrayOpen: boolean = false;
+  //filterTrayOpen: boolean = false;
 
   constructor(public router: Router, public route: ActivatedRoute) {
-    this.resetToDefaultFilters();
-
     // Listen for changes to the query params.
     route.queryParams.subscribe(p => {
       this.queryParams = p;
     });
+
+    let queryParamKeys = Object.keys(this.queryParams);
+    if (queryParamKeys.length === 0 || JSON.stringify(queryParamKeys.sort()) !== JSON.stringify(Object.keys(this.defaultParams).sort())) {
+      this.resetToDefaultFilters();
+    }
   }
 
   ngOnInit(): void {
@@ -50,10 +55,20 @@ export class ConstituentGridFilterComponent implements OnInit {
 
   // --- Filter metacontrols: open/close tray, clear filters. ------------------
   onToggleFilterTrayOpen() {
-    this.filterTrayOpen = !this.filterTrayOpen;
+    let filterStatus: string;
+
+    if (this.queryParams.ft === FilterTrayOpen[FilterTrayOpen.c]) {
+      filterStatus = FilterTrayOpen[FilterTrayOpen.o];
+    } else {
+      filterStatus = FilterTrayOpen[FilterTrayOpen.c];
+    }
+
+    this.router.navigate(['/'], { queryParams: { ft: filterStatus }, queryParamsHandling: "merge" });
   }
 
   resetToDefaultFilters(): void {
+    let defaults = this.defaultParams;
+    defaults.ft = this.queryParams.ft;
     this.router.navigate(['/'], { queryParams: this.defaultParams, queryParamsHandling: "merge" });
   }
 

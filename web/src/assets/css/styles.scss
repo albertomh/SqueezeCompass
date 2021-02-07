@@ -247,35 +247,132 @@ $constituent-margin: 1px;
 
 // CONSTITUENT TILES COLOR SCHEMES
 
-@mixin constituent-tile($recommendation-color) {
-  background: $recommendation-color;
-  border-bottom: 2px solid darken($recommendation-color, 18%);
+@mixin constituent-tile($sentiment-color) {
+  background: $sentiment-color;
+  border-bottom: 2px solid darken($sentiment-color, 18%);
   &:hover {
-    background: darken($recommendation-color, 18%);
-    border-bottom: 2px solid darken($recommendation-color, 36%);
+    background: darken($sentiment-color, 18%);
+    border-bottom: 2px solid darken($sentiment-color, 36%);
   }
 }
 
-// summary.recommendation pastel palette:
+// ----- CONSTITUENT GRID PALETTES ---------------------------------------------
+// --- Market sentiment palette
 // ORIGINAL: [coolors.co/f77e88-ffcec6-fbfbda-bdf8b3-86e998]
 // CUSTOM: [coolors.co/f0192b-f66069-ffcec6-fbfbda-bdf8b3-64e076-26cf45]
-$recommendation-none: $gray-300;
-$recommendation-strong-buy: #20AC39;
-$recommendation-buy: #64E076;
-$recommendation-overperform: #BDF8B3;
-$recommendation-hold: #FBFBDA;
-$recommendation-underperform: #FFCEC6;
-$recommendation-sell: #F66069;
-$recommendation-strong-sell: #D30D1E;
-.constituent-grid__constituent-tile--none { @include constituent-tile($recommendation-none); }
-.constituent-grid__constituent-tile--strong-buy { @include constituent-tile($recommendation-strong-buy); }
-.constituent-grid__constituent-tile--buy { @include constituent-tile($recommendation-buy); }
-.constituent-grid__constituent-tile--overperform { @include constituent-tile($recommendation-overperform); }
-.constituent-grid__constituent-tile--hold { @include constituent-tile($recommendation-hold); }
-.constituent-grid__constituent-tile--underperform { @include constituent-tile($recommendation-underperform); }
-.constituent-grid__constituent-tile--sell { @include constituent-tile($recommendation-sell); }
-.constituent-grid__constituent-tile--strong-sell { @include constituent-tile($recommendation-strong-sell); }
+$sentiment-none: $gray-300;
+$sentiment-strong-buy: #20AC39;
+$sentiment-buy: #64E076;
+$sentiment-overperform: #BDF8B3;
+$sentiment-hold: #FBFBDA;
+$sentiment-underperform: #FFCEC6;
+$sentiment-sell: #F66069;
+$sentiment-strong-sell: #D30D1E;
+// --- Revenue per share palette
 
+// --- Market cap palette
+
+// --- Short ratio palette
+
+.constituent-grid__constituent-tile {
+  &--ms {
+    &--none { @include constituent-tile($sentiment-none); }
+    &--strong-buy { @include constituent-tile($sentiment-strong-buy); }
+    &--buy { @include constituent-tile($sentiment-buy); }
+    &--overperform { @include constituent-tile($sentiment-overperform); }
+    &--hold { @include constituent-tile($sentiment-hold); }
+    &--underperform { @include constituent-tile($sentiment-underperform); }
+    &--sell { @include constituent-tile($sentiment-sell); }
+    &--strong-sell { @include constituent-tile($sentiment-strong-sell); }
+  }
+
+  &--ca {  // Market cap | Seaborn green cubehelix
+    &--0 { background-color: #ffffff; }
+    &--1 { background-color: #bcdfc3; }
+    &--2 { background-color: #a2d0ac; }
+    &--3 { background-color: #81b98c; }
+    &--4 { background-color: #619e6d; }
+    &--5 { background-color: #437e4f; }
+    &--6 { background-color: #2c5f36; color: white; }
+    &--7 { background-color: #16391d; color: white; }
+    &--8 { background-color: #0d2512; color: white; }
+    &--9 { background-color: #000000; color: white; }
+  }
+  &--sh {  // Short ratio | Seaborn rocket
+    &--0 { background-color: #faeadc; }
+    &--1 { background-color: #f6bf9d; }
+    &--2 { background-color: #f59c73; }
+    &--3 { background-color: #f16546; }
+    &--4 { background-color: #de2d44; color: white; }
+    &--5 { background-color: #ae1759; color: white; }
+    &--6 { background-color: #781e58; color: white; }
+    &--7 { background-color: #471c48; color: white; }
+    &--8 { background-color: #291535; color: white; }
+    &--9 { background-color: #020419; color: white; }
+  }
+  &--fl {  // Short % of float | Truncated Seaborn viridis
+    &--0 { background-color: #6699dd; }
+    &--1 { background-color: #5f8dca; }
+    &--2 { background-color: #5982ba; }
+    &--3 { background-color: #5174a4; }
+    &--4 { background-color: #49668e; }
+    &--5 { background-color: #405777; }
+    &--6 { background-color: #384961; color: white; }
+    &--7 { background-color: #303b4b; color: white; }
+    &--8 { background-color: #2b323d; color: white; }
+    &--9 { background-color: #232529; color: white; }
+  }
+  &--rp {  // Revenue per share | Truncated Seaborn viridis
+    &--0 { background-color: #20908c; color: white; }
+    &--1 { background-color: #1e9e88; color: white; }
+    &--2 { background-color: #21a685; color: white; }
+    &--3 { background-color: #31b57a; }
+    &--4 { background-color: #4dc26b; }
+    &--5 { background-color: #6fce57; }
+    &--6 { background-color: #9cd93b; }
+    &--7 { background-color: #c1df23; }
+    &--8 { background-color: #d8e219; }
+    &--9 { background-color: #fde724; }
+  }
+}
+
+.colour-swatch {
+  &--ca {
+    &--1 { color: #bcdfc3; }
+    &--3 { color: #81b98c; }
+    &--5 { color: #437e4f; }
+    &--7 { color: #16391d; }
+    &--9 { color: #000000; }
+  }
+  &--sh {
+    &--1 { color: #f6bf9d; }
+    &--3 { color: #f16546; }
+    &--5 { color: #ae1759; }
+    &--7 { color: #471c48; }
+    &--9 { color: #020419; }
+  }
+  &--fl {
+    &--1 { color: #5f8dca; }
+    &--3 { color: #5174a4; }
+    &--5 { color: #405777; }
+    &--7 { color: #303b4b; }
+    &--9 { color: #232529; }
+  }
+  &--rp {
+    &--1 { color: #1e9e88; }
+    &--3 { color: #31b57a; }
+    &--5 { color: #6fce57; }
+    &--7 { color: #c1df23; }
+    &--9 { color: #fde724; }
+  }
+  &--ms {
+    &--strong-buy { color: $sentiment-strong-buy; }
+    &--buy { color: $sentiment-buy; }
+    &--hold { color: $sentiment-hold; }
+    &--sell { color: $sentiment-sell; }
+    &--strong-sell { color: $sentiment-strong-sell; }
+  }
+}
 
 // ----- CONSTITUENT DETAIL ----------------------------------------------------
 $gics-communication: $cyan-500;
@@ -304,45 +401,23 @@ $gics-utilities: $yellow-500;
 }
 
 .constituent-detail__timeline {
-  &--communication {
-    .col:before { border-color: $gics-communication !important; }
-  }
-  &--discretionary {
-    .col:before { border-color: $gics-discretionary !important; }
-  }
-  &--staples {
-    .col:before { border-color: $gics-staples !important; }
-  }
-  &--energy {
-    .col:before { border-color: $gics-energy !important; }
-  }
-  &--financials {
-    .col:before { border-color: $gics-financials !important; }
-  }
-  &--health {
-    .col:before { border-color: $gics-health !important; }
-  }
-  &--industrials {
-    .col:before { border-color: $gics-industrials !important; }
-  }
-  &--it {
-    .col:before { border-color: $gics-it !important; }
-  }
-  &--materials {
-    .col:before { border-color: $gics-materials !important; }
-  }
-  &--realestate {
-    .col:before { border-color: $gics-realestate !important; }
-  }
-  &--utilities {
-    .col:before { border-color: $gics-utilities !important; }
-  }
+  &--communication { .col:before { border-color: $gics-communication !important; } }
+  &--discretionary { .col:before { border-color: $gics-discretionary !important; } }
+  &--staples { .col:before { border-color: $gics-staples !important; } }
+  &--energy { .col:before { border-color: $gics-energy !important; } }
+  &--financials { .col:before { border-color: $gics-financials !important; } }
+  &--health { .col:before { border-color: $gics-health !important; } }
+  &--industrials { .col:before { border-color: $gics-industrials !important; } }
+  &--it { .col:before { border-color: $gics-it !important; } }
+  &--materials { .col:before { border-color: $gics-materials !important; } }
+  &--realestate { .col:before { border-color: $gics-realestate !important; } }
+  &--utilities { .col:before { border-color: $gics-utilities !important; } }
 }
 
-@mixin recommendation-icon($recommendation-color) {
-    color: $recommendation-color;
+@mixin sentiment-icon($sentiment-color) {
+    color: $sentiment-color;
     &:before {
-      border-bottom: 2px solid darken($recommendation-color, 36%);
+      border-bottom: 2px solid darken($sentiment-color, 36%);
     }
 }
 
@@ -350,14 +425,14 @@ $gics-utilities: $yellow-500;
   &:before {
     border-radius: 0.25rem;
   }
-  &--strong-buy { @include recommendation-icon($recommendation-strong-buy); }
-  &--buy { @include recommendation-icon($recommendation-buy); }
-  &--overperform { @include recommendation-icon($recommendation-overperform); }
-  &--hold { @include recommendation-icon($recommendation-hold); }
-  &--none { @include recommendation-icon($recommendation-none); }
-  &--underperform { @include recommendation-icon($recommendation-underperform); }
-  &--sell { @include recommendation-icon($recommendation-sell); }
-  &--strong-sell { @include recommendation-icon($recommendation-strong-sell); }
+  &--strong-buy { @include sentiment-icon($sentiment-strong-buy); }
+  &--buy { @include sentiment-icon($sentiment-buy); }
+  &--overperform { @include sentiment-icon($sentiment-overperform); }
+  &--hold { @include sentiment-icon($sentiment-hold); }
+  &--none { @include sentiment-icon($sentiment-none); }
+  &--underperform { @include sentiment-icon($sentiment-underperform); }
+  &--sell { @include sentiment-icon($sentiment-sell); }
+  &--strong-sell { @include sentiment-icon($sentiment-strong-sell); }
 }
 
 
