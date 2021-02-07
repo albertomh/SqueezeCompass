@@ -1,10 +1,10 @@
-<div *ngFor="let constituent of snapshots"
+<div *ngFor="let snapshot of snapshots"
      class="constituent-grid__constituent-tile"
-     [ngClass]="'constituent-grid__constituent-tile' + recommendationClasses[constituent.summary.recommendation]"
-     [routerLink]="['', constituent.symbol]" queryParamsHandling="merge">
+     [ngClass]="getVisualisationPaletteClass(snapshot)"
+     [routerLink]="['', snapshot.symbol]" queryParamsHandling="merge">
 
   <div class="constituent-grid__constituent-tile__content">
-    <span class="text-nowrap">{{constituent.symbol}}</span>
+    <span class="text-nowrap">{{snapshot.symbol}}</span>
   </div>
 
 </div>
