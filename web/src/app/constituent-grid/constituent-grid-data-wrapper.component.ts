@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
 import {ActivatedRoute} from "@angular/router";
-import {SortBy} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 import {environment} from "../../environments/environment";
-import {max, min} from "rxjs/operators";
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
 
 
 @Component({
@@ -42,18 +39,33 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
 
   onQueryParamsChange(queryParams: FilterQueryParams): void {
     this.filtersReturnNothing = false;
-    let resultSnapshots: ConstituentSnapshot[] = [];
+    let filteredSnapshots: ConstituentSnapshot[] = [];
+    let orderedSnapshots: ConstituentSnapshot[] = [];
 
     // Filter
     let sentimentSnapshots: ConstituentSnapshot[] = this.filterByMarketSentiment(queryParams.fms);
     let marketCapSnapshots: ConstituentSnapshot[] = this.filterByMarketCap(queryParams.fcp);
     // Find intersection of both filtered arrays of snapshots.
-    resultSnapshots = sentimentSnapshots.filter(({ symbol: sy1 }) => marketCapSnapshots.some(({ symbol: sy2 }) => sy2 === sy1));
+    filteredSnapshots = sentimentSnapshots.filter(({ symbol: sy1 }) => marketCapSnapshots.some(({ symbol: sy2 }) => sy2 === sy1));
     // Sort
-    resultSnapshots = this.sortAlphabetical(resultSnapshots, queryParams.so);
+    switch (queryParams.so) {
+      case 'ca':
+        orderedSnapshots = this.sortByMarketCap(filteredSnapshots);
+        break;
+      case 'sh':
+        orderedSnapshots = this.sortByShortRatio(filteredSnapshots);
+        break;
+      case 'fl':
+        orderedSnapshots = this.sortByShortPercentageOfFloat(filteredSnapshots);
+        break;
+      case 'al':
+      default:
+        orderedSnapshots = this.sortAlphabetical(filteredSnapshots);
+        break;
+    }
 
-    this.filtersReturnNothing = resultSnapshots.length === 0;
-    this.snapshots = resultSnapshots;
+    this.filtersReturnNothing = orderedSnapshots.length === 0;
+    this.snapshots = orderedSnapshots;
   }
 
 // ----- FILTER ----------------------------------------------------------------
@@ -106,16 +118,20 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   }
 
 // ----- SORT ------------------------------------------------------------------
-  sortAlphabetical(snapshots: ConstituentSnapshot[], order?: string): ConstituentSnapshot[] {
-    if (order != null) {
-      let orderedSnapshots: ConstituentSnapshot[] = [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
-      if (order === SortBy[SortBy.al]) {
-        return orderedSnapshots;
-      } else if (order === SortBy[SortBy.re]) {
-        return orderedSnapshots.reverse();
-      }
-    }
-    return snapshots;
+  sortAlphabetical(snapshots: ConstituentSnapshot[]): ConstituentSnapshot[] {
+    return [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => a.symbol.localeCompare(b.symbol));
+  }
+
+  sortByMarketCap(snapshots: ConstituentSnapshot[]): ConstituentSnapshot[] {
+    return [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => b.financial.market_cap - a.financial.market_cap);
+  }
+
+  sortByShortRatio(snapshots: ConstituentSnapshot[]): ConstituentSnapshot[] {
+    return [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => b.key_stats.short_ratio - a.key_stats.short_ratio);
+  }
+
+  sortByShortPercentageOfFloat(snapshots: ConstituentSnapshot[]): ConstituentSnapshot[] {
+    return [...snapshots].sort((a: ConstituentSnapshot, b: ConstituentSnapshot) => b.key_stats.short_percent_of_float - a.key_stats.short_percent_of_float);
   }
 
 // ----- VISUALISE -------------------------------------------------------------
