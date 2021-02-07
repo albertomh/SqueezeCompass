@@ -160,6 +160,24 @@ nav {
     border-right: 1px solid $gray-400;
   }
 }
+@include media-breakpoint-down(xl) {
+  .filter-tray__collapsible__btn-group .btn.tiny {
+    &:first-of-type {
+      padding-right: 0 !important;
+    }
+    &:not(:first-of-type):not(:last-of-type) {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+    &:last-of-type {
+      padding-left: 0 !important;
+    }
+    span {
+      font-size: 0.8rem;
+      line-height: 1.6rem;
+    }
+  }
+}
 
 
 
@@ -328,7 +346,7 @@ $gics-utilities: $yellow-500;
     }
 }
 
-.constituent-detail__summary__recommendation {
+.colour-swatch {
   &:before {
     border-radius: 0.25rem;
   }

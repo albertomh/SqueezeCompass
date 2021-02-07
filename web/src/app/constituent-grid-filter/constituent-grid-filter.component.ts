@@ -93,7 +93,6 @@ export class ConstituentGridFilterComponent implements OnInit {
         // If the clicked filter option was already applied, remove it.
         categoryQueryParams = categoryQueryParams.filter(qp => qp !== filterValue);
         categoryQueryString = categoryQueryParams.join(',');
-        console.log("filterBy | ", categoryQueryStringKey, filterValue, categoryQueryString)
       } else {
         // Add a filter option that had not yet been applied.
         categoryQueryString += ',' + filterValue;
