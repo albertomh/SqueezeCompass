@@ -70,7 +70,7 @@
             <dt class="col-7">Market sentiment</dt>
             <dd class="col-5" [class.pe-0]="recommendation === 'underperform' || recommendation === 'overperform'">
               <i class="bi bi-square-fill pe-1"
-                 [ngClass]="'constituent-detail__summary__recommendation constituent-detail__summary__recommendation' + sentimentsClasses[recommendation]"></i>
+                 [ngClass]="'colour-swatch colour-swatch' + sentimentsClasses[recommendation]"></i>
               <span [class.small]="recommendation === 'underperform' || recommendation === 'overperform'">{{sentimentsHumanized[recommendation]}}</span>
             </dd>
 

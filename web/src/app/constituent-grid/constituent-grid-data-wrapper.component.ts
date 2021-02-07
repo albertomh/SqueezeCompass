@@ -4,6 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {SortBy} from '../enum/FilterQueryParamValues';
 import {FilterQueryParams} from "../interface/FilterQueryParams";
 import {environment} from "../../environments/environment";
+import {max, min} from "rxjs/operators";
+import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
 
 
 @Component({
@@ -40,10 +42,13 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
 
   onQueryParamsChange(queryParams: FilterQueryParams): void {
     this.filtersReturnNothing = false;
-    let resultSnapshots: ConstituentSnapshot[] = this.originalSnapshots;
+    let resultSnapshots: ConstituentSnapshot[] = [];
 
     // Filter
-    resultSnapshots = this.applyMarketSentimentFilter(resultSnapshots, queryParams.fms);
+    let sentimentSnapshots: ConstituentSnapshot[] = this.filterByMarketSentiment(queryParams.fms);
+    let marketCapSnapshots: ConstituentSnapshot[] = this.filterByMarketCap(queryParams.fcp);
+    // Find intersection of both filtered arrays of snapshots.
+    resultSnapshots = sentimentSnapshots.filter(({ symbol: sy1 }) => marketCapSnapshots.some(({ symbol: sy2 }) => sy2 === sy1));
     // Sort
     resultSnapshots = this.sortAlphabetical(resultSnapshots, queryParams.so);
 
@@ -52,20 +57,51 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   }
 
 // ----- FILTER ----------------------------------------------------------------
-  applyMarketSentimentFilter(snapshots: ConstituentSnapshot[], marketSentiment?: string) {
+  filterByMarketSentiment(marketSentimentQueryValue?: string): ConstituentSnapshot[] {
     const sentimentMap: {[sentiment: string]: string[]} = {
       'b': ['strong_buy', 'buy', 'overperform'],
       'h': ['hold'],
       's': ['underperform', 'sell', 'strong_sell'],
     };
 
-    if (marketSentiment == null) {
-      return [];
-    }
+    if (marketSentimentQueryValue == null) { return []; }
 
-    let sentiments: string[] = marketSentiment.split(',');
+    let sentiments: string[] = marketSentimentQueryValue.split(',');
     let sentimentSlugs: string[] = sentiments.reduce((acc: string[], s: string) => acc.concat(sentimentMap[s]), []);
-    let filteredSnapshots = [...snapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
+    let filteredSnapshots = [...this.originalSnapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
+    return filteredSnapshots;
+  }
+
+  filterByMarketCap(marketCapQueryValue?: string): ConstituentSnapshot[] {
+    /* Market cap statistics:
+     * avg:    68 807 283 035
+     * q25:    15 109 095 936
+     * q50:    26 098 293 760
+     * q75:    55 620 502 528
+     * min:     4 172 057 600
+     * max: 2 215 357 710 336
+     */
+    const marketCapMap: {[marketCap: string]: number[]} = {
+      'lt': [0, 20000000000],
+      'bt': [20000000000, 100000000000],
+      'gt': [100000000000, 10000000000000],
+    };
+
+    if (marketCapQueryValue == null) { return []; }
+
+    let marketCaps: string[] = marketCapQueryValue.split(',');
+    let marketCapRanges: number[][] = marketCaps.map(capVal => marketCapMap[capVal]);
+
+    let filteredSnapshots: ConstituentSnapshot[] = [];
+
+    marketCapRanges.forEach(range => {
+      let snapshotsWithinRange: ConstituentSnapshot[] = [...this.originalSnapshots].filter(snap => {
+        let cap: number = snap.financial.market_cap;
+        return range[0] <= cap && cap <= range[1];
+      });
+      filteredSnapshots.push(...snapshotsWithinRange);
+    });
+
     return filteredSnapshots;
   }
 
