@@ -8,9 +8,9 @@ export enum FilterSentiment {  // fms:
 }
 
 export enum FilterMarketCap {  // fcp:
-  lt,  // lower than $½tn
-  bt,  // between $½-1tn
-  gt,  // greater than $1tn
+  lt,  // lower than 20bn
+  bt,  // between 20-100bn
+  gt,  // greater than 100bn
 }
 
 
@@ -18,7 +18,6 @@ export enum FilterMarketCap {  // fcp:
 
 export enum SortBy {  // so:
   al,  // alphabetical
-  re,  // reverse alphabetical
   ca,  // market cap
   sh,  // short ratio
   fl,  // short % of float

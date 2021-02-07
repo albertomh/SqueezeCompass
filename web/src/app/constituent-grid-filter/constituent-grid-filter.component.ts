@@ -61,9 +61,10 @@ export class ConstituentGridFilterComponent implements OnInit {
   /*
   * FILTER:
   * fms: market sentiment [s: sell, h: hold, b: buy]
+  * fcp: market cap [lt: <20bn, bt: 20-100bn, gt: >100bn]
   *
   * SORT:
-  * so: [al: alphabetical | re: reverse]
+  * so: [al: alphabetical | ca: market cap | sh: short ratio | fl: short % of float]
   *
   * VISUALISE - COLOUR SCHEME:
   * vi: [ms: market sentiment | ca: market cap | sh: short interest | gi: GICS sector]
@@ -117,26 +118,6 @@ export class ConstituentGridFilterComponent implements OnInit {
   }
 
 // ----- SORT ------------------------------------------------------------------
-  orderAlphabetically(order: SortBy): void {
-    let alphaSortQueryString: string = <string>this.route.snapshot.queryParamMap.get('so');
-
-    if (alphaSortQueryString === null) {
-      alphaSortQueryString = SortBy[SortBy.al];
-    }
-    if (SortBy[order] === alphaSortQueryString) {
-      return;
-    }
-
-    let newQueryValue: SortBy;
-    if (alphaSortQueryString === SortBy[SortBy.al]) {
-      newQueryValue = SortBy.re;
-    } else {
-      newQueryValue = SortBy.al;
-    }
-
-    this.router.navigate(['/'], { queryParams: { so: SortBy[newQueryValue] }, queryParamsHandling: "merge" });
-  }
-
   sortByUpdateRoute(order: SortBy) {
     this.router.navigate(['/'], { queryParams: { so: SortBy[order] }, queryParamsHandling: "merge" });
   }
