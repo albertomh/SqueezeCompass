@@ -187,10 +187,14 @@ nav {
 $constituent-margin: 1px;
 @mixin constituent-tile() {
   @include media-breakpoint-down(xs) {
-    $constituents-per-row: 9;
+    $constituents-per-row: 7;
     flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
   }
   @include media-breakpoint-up(sm) {
+    $constituents-per-row: 10;
+    flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
+  }
+  @include media-breakpoint-up(md) {
     $constituents-per-row: 13;
     flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
   }
@@ -198,23 +202,27 @@ $constituent-margin: 1px;
     $constituents-per-row: 20;
     flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
   }
+  @include media-breakpoint-up(xxl) {
+    $constituents-per-row: 23;
+    flex-basis: calc(100% / #{$constituents-per-row} - #{$constituent-margin} * 2);
+  }
 }
 @mixin constituent-tile__content() {
   @extend .font-monospace;
   @include media-breakpoint-down(xs) {
-    font-size: 0.65rem;
+    font-size: 0.90rem;
   }
   @include media-breakpoint-up(sm) {
-    font-size: 0.75rem;
-  }
-  @include media-breakpoint-up(md) {
-    font-size: 0.80rem;
+    font-size: 1rem;
   }
   @include media-breakpoint-up(lg) {
     font-size: 0.85rem;
   }
   @include media-breakpoint-up(xl) {
-    font-size: 1.25rem;
+    font-size: 1rem;
+  }
+  @include media-breakpoint-up(xxl) {
+    font-size: 1.1rem;
   }
 }
 
