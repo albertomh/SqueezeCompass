@@ -19,7 +19,31 @@
           About
         </a>
       </div>
+
       <hr class="d-lg-none text-white">
+
+      <div class="d-block d-lg-none">
+        <h1 class="mt-4 mb-3 text-muted">QUICKLINKS</h1>
+        <div class="navbar-nav mb-2">
+          <a class="nav-link"
+             [routerLink]="['/']" [queryParams]="{fms: 's,h,b', fcp: 'gt', so: 'fl', vi: 'fl', ft: 'c'}" queryParamsHandling="merge">
+            Blue chips by short % of float
+          </a>
+        </div>
+        <div class="navbar-nav mb-2">
+          <a class="nav-link"
+             [routerLink]="['/']" [queryParams]="{fms: 'h,b', fcp: 'lt', so: 'ca', vi: 'sh', ft: 'c'}" queryParamsHandling="merge">
+            Mid-caps by short ratio
+          </a>
+        </div>
+        <div class="navbar-nav mb-2">
+          <a class="nav-link"
+             [routerLink]="['/']" [queryParams]="{fms: 's,h,b', fcp: 'lt,bt,gt', so: 'al', vi: 'ca', ft: 'c'}" queryParamsHandling="merge">
+            All stocks by market cap
+          </a>
+        </div>
+      </div>
+
     </div>
 
   </div>
