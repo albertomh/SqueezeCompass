@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "./",
             "outputPath": "dist",
             "deployUrl": "./",
             "index": "src/index.html",
@@ -36,7 +37,8 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            ],
+            "extractLicenses": false
           },
           "configurations": {
             "production": {
