@@ -27,7 +27,7 @@ export class ConstituentGridFilterComponent implements OnInit {
   }
 
   inQueryParams = (key: string, val: string): boolean => {
-    if (typeof this.queryParams[key] !== 'undefined') {
+    if (this.queryParams.hasOwnProperty(key) && typeof this.queryParams[key] !== 'undefined') {
       // @ts-ignore
       return this.queryParams[key].includes(val);
     }
