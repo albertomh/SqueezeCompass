@@ -26,13 +26,20 @@
 
 // ----- HTML ELEMENTS ---------------------------------------------------------
 html {
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
+
   font-size: 16px;
 }
 
-html,
 body {
-  height: 100%;
-  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 $footer-height: 71px;  // Height including margin.
@@ -467,7 +474,7 @@ $gics-utilities: $yellow-500;
     width: $footer-icon-size;
     min-width: $footer-icon-size;
     position: absolute;
-    left: calc(50vw - (#{$footer-icon-size} / 4));
+    left: calc(50vw - (#{$footer-icon-size} / 2));
     bottom: 1.8rem;
 
     display: inline-flex;
@@ -479,7 +486,7 @@ $gics-utilities: $yellow-500;
 
     i {
       font-size: $footer-icon-size * 0.8;
-      transform: translate(0.0375rem, -0.09rem);
+      transform: translate(0.0375rem, -0.12rem);
     }
   }
 }
