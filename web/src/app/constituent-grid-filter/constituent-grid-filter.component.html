@@ -236,7 +236,7 @@
     <div class="col-auto me-auto me-xl-0 ps-lg-5">
       <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
          (click)="onToggleFilterTrayOpen()">
-        <i class="bi" [ngClass]="{'bi-caret-down-fill': inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.c]), 'bi-caret-up-fill': inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o])}"></i> {{inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'Hide filters' : 'Show filters'}}
+        <i class="bi" [ngClass]="inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i> {{inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'Hide filters' : 'Show filters'}}
       </a>
     </div>
 
