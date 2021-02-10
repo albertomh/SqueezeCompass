@@ -8,9 +8,10 @@ import {AboutComponent} from "./about/about.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: '404', component: FourOhFourComponent},
   {path: 'about', component: AboutComponent},
+  {path: '404', component: FourOhFourComponent},
   {path: ':symbol', component: ConstituentDetailDataWrapperComponent},
+  {path: '**', redirectTo: '/404'},
 ];
 
 @NgModule({

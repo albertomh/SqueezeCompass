@@ -48,7 +48,7 @@ In order to update the snapshot or constituents file, simply update the paths in
 
 Serve from the `/web` directory with `ng serve`
 
-Build for hosting on GitHub pages with `ng build --prod --output-path dist`
+Build for hosting on GitHub pages with `npm run build`
 
 
 TODO:

@@ -17,8 +17,8 @@ export class ConstituentGridFilterComponent implements OnInit {
   public SortBy = SortBy;
   public Visualise = Visualise;
 
-  queryParams: FilterQueryParams = <FilterQueryParams>{};
-  readonly defaultParams: FilterQueryParams = {
+  curQueryParams: FilterQueryParams = <FilterQueryParams>{};
+  readonly defaultQueryParams: FilterQueryParams = {
     ft: FilterTrayOpen[FilterTrayOpen.c],
     fms: [FilterSentiment[FilterSentiment.s], FilterSentiment[FilterSentiment.h], FilterSentiment[FilterSentiment.b]].join(','),
     fcp: [FilterMarketCap[FilterMarketCap.lt], FilterMarketCap[FilterMarketCap.bt], FilterMarketCap[FilterMarketCap.gt]].join(','),
@@ -27,25 +27,43 @@ export class ConstituentGridFilterComponent implements OnInit {
   }
 
   inQueryParams = (key: string, val: string): boolean => {
-    if (this.queryParams.hasOwnProperty(key) && typeof this.queryParams[key] !== 'undefined') {
+    if (this.curQueryParams.hasOwnProperty(key) && typeof this.curQueryParams[key] !== 'undefined') {
       // @ts-ignore
-      return this.queryParams[key].includes(val);
+      return this.curQueryParams[key].includes(val);
     }
     return false;
   };
 
-  typeOf = (val: any): string => typeof val;
+  curQueryParamsAreDefault(): boolean {
+    // Check whether the filter query params are currently set to the default values.
+    // Ignore parameter `ft` since we don't want to enable / disable the
+    // 'Reset filters' button each time the filtertray is opened/closed.
+    let defaultQueryParamsWithoutFT = {...this.defaultQueryParams};
+    let curQueryParamsWithoutFT = {...this.curQueryParams};
+    delete defaultQueryParamsWithoutFT.ft;
+    delete curQueryParamsWithoutFT.ft;
 
-  //filterTrayOpen: boolean = false;
+    let defaultQueryParamKeys = Object.keys(defaultQueryParamsWithoutFT).sort();
+    let defaultQueryParamValues = Object.values(defaultQueryParamsWithoutFT).sort();
+    let curQueryParamKeys = Object.keys(curQueryParamsWithoutFT).sort();
+    let curQueryParamValues = Object.values(curQueryParamsWithoutFT).sort();
+
+    let keysAreEqual = JSON.stringify(curQueryParamKeys) === JSON.stringify(defaultQueryParamKeys);
+    let valuesAreEqual = JSON.stringify(curQueryParamValues) === JSON.stringify(defaultQueryParamValues);
+
+    return keysAreEqual && valuesAreEqual;
+  }
+
+  typeOf = (val: any): string => typeof val;
 
   constructor(public router: Router, public route: ActivatedRoute) {
     // Listen for changes to the query params.
     route.queryParams.subscribe(p => {
-      this.queryParams = p;
+      this.curQueryParams = p;
     });
 
-    let queryParamKeys = Object.keys(this.queryParams);
-    if (queryParamKeys.length === 0 || JSON.stringify(queryParamKeys.sort()) !== JSON.stringify(Object.keys(this.defaultParams).sort())) {
+    let queryParamKeys = Object.keys(this.curQueryParams);
+    if (queryParamKeys.length === 0 || !this.curQueryParamsAreDefault()) {
       this.resetToDefaultFilters();
     }
   }
@@ -57,7 +75,7 @@ export class ConstituentGridFilterComponent implements OnInit {
   onToggleFilterTrayOpen() {
     let filterStatus: string;
 
-    if (this.queryParams.ft === FilterTrayOpen[FilterTrayOpen.c]) {
+    if (this.curQueryParams.ft === FilterTrayOpen[FilterTrayOpen.c]) {
       filterStatus = FilterTrayOpen[FilterTrayOpen.o];
     } else {
       filterStatus = FilterTrayOpen[FilterTrayOpen.c];
@@ -67,9 +85,11 @@ export class ConstituentGridFilterComponent implements OnInit {
   }
 
   resetToDefaultFilters(): void {
-    let defaults = this.defaultParams;
-    defaults.ft = this.queryParams.ft;
-    this.router.navigate(['/'], { queryParams: this.defaultParams, queryParamsHandling: "merge" });
+    let defaultQueryParams = this.defaultQueryParams;
+    if (this.curQueryParams.ft != null) {
+      defaultQueryParams.ft = this.curQueryParams.ft;
+    }
+    this.router.navigate(['/'], { queryParams: defaultQueryParams, queryParamsHandling: "merge" });
   }
 
   // --- Filter, Sort, and Visualise Query Parameters --------------------------
@@ -115,13 +135,13 @@ export class ConstituentGridFilterComponent implements OnInit {
       }
     }
 
-    let queryParams: {[index: string]: string|null} = {};
+    let newQueryParams: {[index: string]: string|null} = {};
     if (categoryQueryString.length === 0) {
-      queryParams[categoryQueryStringKey] = null;
+      newQueryParams[categoryQueryStringKey] = null;
     } else {
-      queryParams[categoryQueryStringKey] = categoryQueryString;
+      newQueryParams[categoryQueryStringKey] = categoryQueryString;
     }
-    this.router.navigate(['/'], { queryParams: queryParams, queryParamsHandling: "merge" })
+    this.router.navigate(['/'], { queryParams: newQueryParams, queryParamsHandling: "merge" })
   }
 
   filterByMarketSentiment(sentiment: FilterSentiment): void {
