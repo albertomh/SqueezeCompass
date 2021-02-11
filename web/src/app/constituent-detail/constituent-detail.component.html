@@ -68,17 +68,20 @@
 
           <dl class="row m-0" *ngIf="snapshot.summary.recommendation; let recommendation">
             <dt class="col-7">Market sentiment</dt>
-            <dd class="col-5" [class.pe-0]="recommendation === 'underperform' || recommendation === 'overperform'">
+            <dd class="col-5" [class.pe-0]="recommendation === 'underperform' || recommendation === 'overperform'" *ngIf="recommendation !== null">
               <i class="bi bi-square-fill pe-1"
                  [ngClass]="'colour-swatch colour-swatch' + sentimentsClasses[recommendation]"></i>
               <span [class.small]="recommendation === 'underperform' || recommendation === 'overperform'">{{sentimentsHumanized[recommendation]}}</span>
             </dd>
+            <dd class="col-5" *ngIf="recommendation === null">n/a</dd>
 
             <dt class="col-7">Avg vol (3 months)</dt>
-            <dd class="col-5">{{snapshot.summary.avg_vol_3_months / million | currency}}M</dd>
+            <dd class="col-5" *ngIf="snapshot.summary.avg_vol_3_months !== null">{{snapshot.summary.avg_vol_3_months / million | currency}}M</dd>
+            <dd class="col-5" *ngIf="snapshot.summary.avg_vol_3_months === null">n/a</dd>
 
             <dt class="col-7">Avg vol (10 days)</dt>
-            <dd class="col-5">{{snapshot.summary.avg_vol_10_days / million | currency}}M</dd>
+            <dd class="col-5" *ngIf="snapshot.summary.avg_vol_10_days !== null">{{snapshot.summary.avg_vol_10_days / million | currency}}M</dd>
+            <dd class="col-5" *ngIf="snapshot.summary.avg_vol_10_days === null">n/a</dd>
           </dl>
         </div>
       </div>
@@ -97,27 +100,40 @@
 
           <dl class="row m-0">
               <dt class="col-7">Market cap</dt>
-              <dd class="col-5" *ngIf="snapshot.financial.market_cap <= billion">{{snapshot.financial.market_cap / million | currency}}M</dd>
-              <dd class="col-5" *ngIf="billion < snapshot.financial.market_cap && snapshot.financial.market_cap <= trillion">{{snapshot.financial.market_cap / billion | currency}}B</dd>
-              <dd class="col-5" *ngIf="snapshot.financial.market_cap > trillion">{{snapshot.financial.market_cap / trillion | currency}}T</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.market_cap !== null">
+                <span *ngIf="snapshot.financial.market_cap <= billion">{{snapshot.financial.market_cap / million | currency}}M</span>
+                <span *ngIf="billion < snapshot.financial.market_cap && snapshot.financial.market_cap <= trillion">{{snapshot.financial.market_cap / billion | currency}}B</span>
+                <span *ngIf="snapshot.financial.market_cap > trillion">{{snapshot.financial.market_cap / trillion | currency}}T</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.financial.market_cap === null">n/a</dd>
 
               <dt class="col-7">Total revenue</dt>
-              <dd class="col-5" *ngIf="snapshot.financial.total_revenue <= billion">{{snapshot.financial.total_revenue / million | currency}}M</dd>
-              <dd class="col-5" *ngIf="snapshot.financial.total_revenue > billion">{{snapshot.financial.total_revenue / billion | currency}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_revenue !== null">
+                <span *ngIf="snapshot.financial.total_revenue <= billion">{{snapshot.financial.total_revenue / million | currency}}M</span>
+                <span *ngIf="snapshot.financial.total_revenue > billion">{{snapshot.financial.total_revenue / billion | currency}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_revenue === null">n/a</dd>
 
               <dt class="col-7">Total cash</dt>
-              <dd class="col-5" *ngIf="snapshot.financial.total_cash <= billion">{{snapshot.financial.total_cash / million | currency}}M</dd>
-              <dd class="col-5" *ngIf="snapshot.financial.total_cash > billion">{{snapshot.financial.total_cash / billion | currency}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_cash !== null">
+                <span *ngIf="snapshot.financial.total_cash <= billion">{{snapshot.financial.total_cash / million | currency}}M</span>
+                <span *ngIf="snapshot.financial.total_cash > billion">{{snapshot.financial.total_cash / billion | currency}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_cash === null">n/a</dd>
 
               <dt class="col-7">Total debt</dt>
-              <dd class="col-5" *ngIf="snapshot.financial.total_debt <= billion">{{snapshot.financial.total_debt / million | currency}}M</dd>
-              <dd class="col-5" *ngIf="snapshot.financial.total_debt > billion">{{snapshot.financial.total_debt / billion | currency}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_debt !== null">
+                <span *ngIf="snapshot.financial.total_debt <= billion">{{snapshot.financial.total_debt / million | currency}}M</span>
+                <span *ngIf="snapshot.financial.total_debt > billion">{{snapshot.financial.total_debt / billion | currency}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.financial.total_debt === null">n/a</dd>
 
-              <dt class="col-7">Gross profits</dt>
-              <dd class="col-5" *ngIf="abs(snapshot.financial.gross_profits) <= billion" [ngClass]="{'text-success': snapshot.financial.gross_profits > 0, 'text-danger': snapshot.financial.gross_profits < 0}">
-                {{snapshot.financial.gross_profits / million | currency}}M</dd>
-              <dd class="col-5" *ngIf="abs(snapshot.financial.gross_profits) > billion" [ngClass]="{'text-success': snapshot.financial.gross_profits > 0, 'text-danger': snapshot.financial.gross_profits < 0}">
-                {{snapshot.financial.gross_profits / billion | currency}}B</dd>
+              <dt class="col-7">Gross profit</dt>
+              <dd class="col-5" *ngIf="snapshot.financial.gross_profits !== null">
+                <span *ngIf="abs(snapshot.financial.gross_profits) <= billion" [ngClass]="{'text-success': snapshot.financial.gross_profits > 0, 'text-danger': snapshot.financial.gross_profits < 0}">{{snapshot.financial.gross_profits / million | currency}}M</span>
+                <span *ngIf="abs(snapshot.financial.gross_profits) > billion" [ngClass]="{'text-success': snapshot.financial.gross_profits > 0, 'text-danger': snapshot.financial.gross_profits < 0}">{{snapshot.financial.gross_profits / billion | currency}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.financial.gross_profits === null">n/a</dd>
           </dl>
 
         </div>
@@ -132,22 +148,35 @@
 
           <dl class="row m-0">
               <dt class="col-7">Shares outstanding</dt>
-              <dd class="col-5" *ngIf="snapshot.key_stats.shares_outstanding <= billion">{{snapshot.key_stats.shares_outstanding / million | number:'1.2-2'}}M</dd>
-              <dd class="col-5" *ngIf="snapshot.key_stats.shares_outstanding > billion">{{snapshot.key_stats.shares_outstanding / billion | number:'1.2-2'}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.shares_outstanding !== null">
+                <span *ngIf="snapshot.key_stats.shares_outstanding <= billion">{{snapshot.key_stats.shares_outstanding / million | number:'1.2-2'}}M</span>
+                <span *ngIf="snapshot.key_stats.shares_outstanding > billion">{{snapshot.key_stats.shares_outstanding / billion | number:'1.2-2'}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.shares_outstanding === null">n/a</dd>
 
               <dt class="col-7">Float</dt>
-              <dd class="col-5" *ngIf="snapshot.key_stats.float_shares <= billion">{{snapshot.key_stats.float_shares / million | number:'1.2-2'}}M</dd>
-              <dd class="col-5" *ngIf="snapshot.key_stats.float_shares > billion">{{snapshot.key_stats.float_shares / billion | number:'1.2-2'}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.float_shares !== null">
+                <span *ngIf="snapshot.key_stats.float_shares <= billion">{{snapshot.key_stats.float_shares / million | number:'1.2-2'}}M</span>
+                <span *ngIf="snapshot.key_stats.float_shares > billion">{{snapshot.key_stats.float_shares / billion | number:'1.2-2'}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.float_shares === null">n/a</dd>
 
               <dt class="col-7">Shares short</dt>
-              <dd class="col-5" *ngIf="snapshot.key_stats.shares_short <= billion">{{snapshot.key_stats.shares_short / million | number:'1.2-2'}}M</dd>
-              <dd class="col-5" *ngIf="snapshot.key_stats.shares_short > billion">{{snapshot.key_stats.shares_short / billion | number:'1.2-2'}}B</dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.shares_short !== null">
+                <span *ngIf="snapshot.key_stats.shares_short <= billion">{{snapshot.key_stats.shares_short / million | number:'1.2-2'}}M</span>
+                <span *ngIf="snapshot.key_stats.shares_short > billion">{{snapshot.key_stats.shares_short / billion | number:'1.2-2'}}B</span>
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.shares_short === null">n/a</dd>
 
               <dt class="col-7">Short % of float</dt>
-              <dd class="col-5">{{snapshot.key_stats.short_percent_of_float | percent:'1.2-2'}}</dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.short_percent_of_float !== null">
+                {{snapshot.key_stats.short_percent_of_float | percent:'1.2-2'}}
+              </dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.short_percent_of_float === null">n/a</dd>
 
               <dt class="col-7">Short ratio</dt>
-              <dd class="col-5">{{snapshot.key_stats.short_ratio}}</dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.short_ratio !== null">{{snapshot.key_stats.short_ratio}}</dd>
+              <dd class="col-5" *ngIf="snapshot.key_stats.short_ratio === null">n/a</dd>
           </dl>
 
         </div>

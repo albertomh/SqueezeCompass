@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ConstituentSnapshot} from "../interface/ConstituentSnapshot";
-import {ActivatedRoute} from "@angular/router";
-import {FilterQueryParams} from "../interface/FilterQueryParams";
-import {environment} from "../../environments/environment";
+import {ConstituentSnapshot} from '../interface/ConstituentSnapshot';
+import {ActivatedRoute} from '@angular/router';
+import {FilterQueryParams} from '../interface/FilterQueryParams';
+import {environment} from '../../environments/environment';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
   private route: ActivatedRoute;
   originalSnapshots: ConstituentSnapshot[];  // Store original array as fetched from JSON.
   snapshots: ConstituentSnapshot[];  // Store transformations of originalSnapshots according to applied filters.
-  filtersReturnNothing: boolean = false;
+  filtersReturnNothing = false;
 
   constructor(route: ActivatedRoute) {
     this.route = route;
@@ -43,8 +43,8 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
     let orderedSnapshots: ConstituentSnapshot[] = [];
 
     // Filter
-    let sentimentSnapshots: ConstituentSnapshot[] = this.filterByMarketSentiment(queryParams.fms);
-    let marketCapSnapshots: ConstituentSnapshot[] = this.filterByMarketCap(queryParams.fcp);
+    const sentimentSnapshots: ConstituentSnapshot[] = this.filterByMarketSentiment(queryParams.fms);
+    const marketCapSnapshots: ConstituentSnapshot[] = this.filterByMarketCap(queryParams.fcp);
     // Find intersection of both filtered arrays of snapshots.
     filteredSnapshots = sentimentSnapshots.filter(({ symbol: sy1 }) => marketCapSnapshots.some(({ symbol: sy2 }) => sy2 === sy1));
     // Sort
@@ -74,16 +74,16 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
 // ----- FILTER ----------------------------------------------------------------
   filterByMarketSentiment(marketSentimentQueryValue?: string): ConstituentSnapshot[] {
     const sentimentMap: {[sentiment: string]: string[]} = {
-      'b': ['strong_buy', 'buy', 'overperform'],
-      'h': ['hold'],
-      's': ['underperform', 'sell', 'strong_sell'],
+      b: ['strong_buy', 'buy', 'overperform'],
+      h: ['hold'],
+      s: ['underperform', 'sell', 'strong_sell'],
     };
 
     if (marketSentimentQueryValue == null) { return []; }
 
-    let sentiments: string[] = marketSentimentQueryValue.split(',');
-    let sentimentSlugs: string[] = sentiments.reduce((acc: string[], s: string) => acc.concat(sentimentMap[s]), []);
-    let filteredSnapshots = [...this.originalSnapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
+    const sentiments: string[] = marketSentimentQueryValue.split(',');
+    const sentimentSlugs: string[] = sentiments.reduce((acc: string[], s: string) => acc.concat(sentimentMap[s]), []);
+    const filteredSnapshots = [...this.originalSnapshots].filter(snap => sentimentSlugs.includes(snap.summary.recommendation));
     return filteredSnapshots;
   }
 
@@ -97,21 +97,21 @@ export class ConstituentGridDataWrapperComponent implements OnInit {
      * max: 2 215 357 710 336
      */
     const marketCapMap: {[marketCap: string]: number[]} = {
-      'lt': [0, 20000000000],
-      'bt': [20000000000, 100000000000],
-      'gt': [100000000000, 10000000000000],
+      lt: [0, 20000000000],
+      bt: [20000000000, 100000000000],
+      gt: [100000000000, 10000000000000],
     };
 
     if (marketCapQueryValue == null) { return []; }
 
-    let marketCaps: string[] = marketCapQueryValue.split(',');
-    let marketCapRanges: number[][] = marketCaps.map(capVal => marketCapMap[capVal]);
+    const marketCaps: string[] = marketCapQueryValue.split(',');
+    const marketCapRanges: number[][] = marketCaps.map(capVal => marketCapMap[capVal]);
 
-    let filteredSnapshots: ConstituentSnapshot[] = [];
+    const filteredSnapshots: ConstituentSnapshot[] = [];
 
     marketCapRanges.forEach(range => {
-      let snapshotsWithinRange: ConstituentSnapshot[] = [...this.originalSnapshots].filter(snap => {
-        let cap: number = snap.financial.market_cap;
+      const snapshotsWithinRange: ConstituentSnapshot[] = [...this.originalSnapshots].filter(snap => {
+        const cap: number = snap.financial.market_cap;
         return range[0] <= cap && cap <= range[1];
       });
       filteredSnapshots.push(...snapshotsWithinRange);
