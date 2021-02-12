@@ -63,7 +63,7 @@ export class ConstituentGridFilterComponent implements OnInit {
     });
 
     const queryParamKeys = Object.keys(this.curQueryParams);
-    if (queryParamKeys.length === 0 || !this.curQueryParamsAreDefault()) {
+    if (queryParamKeys.length === 0) {
       this.resetToDefaultFilters();
     }
   }
