@@ -35,12 +35,12 @@ class SymbolFetcher:
         #
         # Update the constituents file if it is stale. Then assign a list of stock symbols to self.symbols.
         if self.constituents_file_is_stale():
-            self.create_new_constituents_file([constituent for constituent in self.scrape_constituent_data()])
+            self.create_new_constituents_file([constituent for constituent in self.fetch_constituent_data()])
 
         self.symbols: List[str] = [constituent['symbol'] for constituent in self.read_constituent_data_from_file()]
 
     @staticmethod
-    def scrape_constituent_data() -> Generator[Dict[str, Union[str, date]], None, None]:
+    def fetch_constituent_data() -> Generator[Dict[str, Union[str, date]], None, None]:
         # Return a generator that yields data for a single S&P500 constituent.
         r: Response = Response()
         try:
@@ -58,7 +58,7 @@ class SymbolFetcher:
 
         for row in row_data:
             yield {
-                # Some symbols have dots in the symbols list but dashes in the scraped datasource. eg. BRK.B vs BRK-B
+                # Some symbols have dots in the symbols list but dashes in the fetched datasource. eg. BRK.B vs BRK-B
                 'symbol': row[0].replace('.', '-'),
                 'name': row[1],
                 'gics_sector': row[3],

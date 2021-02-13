@@ -25,7 +25,7 @@ class SymbolDailySnapshot(Base):
     __tablename__ = 'symbol_daily_snapshot'
     id: str = Column(String(15), primary_key=True)
     symbol:str = Column(String(5), nullable=False)
-    scraped_on: date = Column(Date)
+    created_on: date = Column(Date)
     summary__recommendation: str = Column(String())
     summary__avg_vol_3_months: int = Column(Integer)
     summary__avg_vol_10_days: int = Column(Integer)
@@ -45,9 +45,9 @@ class SymbolDailySnapshot(Base):
     key_stats__date_short_interest: date = Column(Date)
 
     def __init__(self, data: Dict[str, Union[str, dict, date]]) -> None:
-        self.id: str = f"{data['symbol']}_{data['scraped_on']}"
+        self.id: str = f"{data['symbol']}_{data['created_on']}"
         self.symbol:str = data['symbol']
-        self.scraped_on: date = data['scraped_on']
+        self.created_on: date = data['created_on']
         self.summary__recommendation = data['summary']['recommendation']
         self.summary__avg_vol_3_months = data['summary']['avg_vol_3_months']
         self.summary__avg_vol_10_days = data['summary']['avg_vol_10_days']
@@ -67,4 +67,4 @@ class SymbolDailySnapshot(Base):
         self.key_stats__date_short_interest: date = data['key_stats']['date_short_interest']
 
     def __repr__(self) -> str:
-        return f"{self.symbol} scraped on {self.scraped_on}"
+        return f"{self.symbol} fetched on {self.created_on}"

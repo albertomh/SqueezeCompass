@@ -5,17 +5,17 @@ https://www.youtube.com/watch?v=c1JKV0yv9qw
 https://www.highshortinterest.com/  
 
 
-# SCRAPER
+# DATA FETCHER
 ## Project setup
-1. Navigate to the `scraper` directory.
+1. Navigate to the `data_fetcher` directory.
 2. Create a virtual environment with `python3 -m venv .env`.
 3. Activate it with `source .env/bin/activate`.
 4. Install dependencies inside the virtual environment with `pip install -r requirements.txt`.
-5. Run the scraper with `python3 src/main.py`.
+5. Run the data fetcher with `python3 src/main.py`.
 
 # TODO:
 symbol_fetcher ->
-data_scraper   ->
+data_fetcher   ->
 database
 
 ## Data
