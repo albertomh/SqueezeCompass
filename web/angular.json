@@ -20,9 +20,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "./",
+            "baseHref": "/SqueezeCompass/",
             "outputPath": "dist",
-            "deployUrl": "./",
+            "deployUrl": "https://www.albertomh.com/SqueezeCompass/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
