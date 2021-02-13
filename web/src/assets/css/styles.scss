@@ -4,6 +4,30 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import '../../../node_modules/bootstrap-icons/font/bootstrap-icons';
 
+// ----- BOOTSTRAP OVERRIDES ---------------------------------------------------
+.dropdown {
+  a[role=button] {
+    background-color: black;
+    min-width: calc(10.6rem);
+    width: calc(10.6rem);
+    position: relative;
+    span {
+      float: left;
+    }
+    &::after {
+      position: absolute;
+      right: 0.25rem;
+      top: 1rem;
+    }
+  }
+
+  ul {
+    box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
+  }
+}
+
 // ----- UTILITIES -------------------------------------------------------------
 @mixin brand-font {
   font-family: 'Lexend Mega', sans-serif;
@@ -22,6 +46,11 @@
   &:before {
     transform: translateY(-4px);
   }
+}
+
+.--stroke-font-white {
+  -webkit-text-stroke: 1px white;
+  text-stroke: 1px white;
 }
 
 // ----- HTML ELEMENTS ---------------------------------------------------------
@@ -155,9 +184,6 @@ nav {
     i, i + span {
       float: left;
     }
-  }
-  .--mobile-border-right {
-    border-right: 1px solid $gray-400;
   }
 }
 @include media-breakpoint-down(xl) {

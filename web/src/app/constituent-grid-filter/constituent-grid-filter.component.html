@@ -6,7 +6,7 @@
     <div class="row px-2 px-sm-0 px-lg-5">
 
 <!-- COLUMN 1/4: FILTER BY -->
-      <div class="col-12 col-md-4 col-xl-4 col-xxl-3 ps-lg-0 mb-3">
+      <div class="col-12 col-md-4 col-xl-4 col-xxl-3 ps-lg-0 mb-2">
 
       <!-- FILTER BY MARKET SENTIMENT -->
         <div class="row">
@@ -72,15 +72,37 @@
 
 
   <!-- COLUMN 2/4: SORT BY -->
-      <div class="col-6 col-md-3 col-xl-2 --mobile-border-right">
+      <div class="col-12 col-md-3 col-xl-2">
 
-      <!-- SORT ALPHABETICALLY -->
         <div class="row">
           <div class="col">
             <span class="filter-label fw-bold"><i class="bi bi-arrow-down-up pe-1"></i> Sort by</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row d-sm-none mt-1 mb-2"> <!-- MOBILE DROPDOWN -->
+          <div class="col ps-4">
+
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" role="button" id="sortByMobileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <span *ngIf="inQueryParams('so', SortBy[SortBy.ca])">Market cap</span>
+                <span *ngIf="inQueryParams('so', SortBy[SortBy.sh])">Short ratio</span>
+                <span *ngIf="inQueryParams('so', SortBy[SortBy.fl])">Short % of float</span>
+                <span *ngIf="inQueryParams('so', SortBy[SortBy.rp])">Revenue per share</span>
+                <span *ngIf="inQueryParams('so', SortBy[SortBy.al])">Ticker symbol</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" (click)="sortByUpdateRoute(SortBy.ca);">Market cap</a></li>
+                <li><a class="dropdown-item" (click)="sortByUpdateRoute(SortBy.sh);">Short ratio</a></li>
+                <li><a class="dropdown-item" (click)="sortByUpdateRoute(SortBy.fl);">Short % of float</a></li>
+                <li><a class="dropdown-item" (click)="sortByUpdateRoute(SortBy.rp);">Revenue per share</a></li>
+                <li><a class="dropdown-item" (click)="sortByUpdateRoute(SortBy.al);">Ticker symbol</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div> <!-- /MOBILE DROPDOWN -->
+
+        <div class="row d-none d-sm-block"> <!-- DESKTOP RADIO BUTTONS -->
           <div class="col ps-0 ps-sm-3">
 
             <div class="--btn-radio">
@@ -120,21 +142,43 @@
             </div>
 
           </div>
-        </div>
+        </div> <!-- /DESKTOP RADIO BUTTONS -->
 
       </div> <!-- /col 2/4 -->
 
 
-<!-- COLUMN 3/4: COLOUR SCHEME -->
-      <div class="col-6 col-md-3 col-xl-2">
+<!-- COLUMN 3/4: VISUALISE -->
+      <div class="col-12 col-md-3 col-xl-2">
 
-      <!-- COLOUR BY -->
         <div class="row">
-          <div class="col ps-4 ps-sm-0 pe-0 pe-sm-3">
+          <div class="col pe-sm-3">
             <span class="filter-label fw-bold"><i class="bi bi-eye pe-1"></i> Visualise</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row d-sm-none mt-1 mb-2"> <!-- MOBILE DROPDOWN -->
+          <div class="col ps-4">
+
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" role="button" id="visualiseMobileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <span *ngIf="inQueryParams('vi', Visualise[Visualise.ca])">Market cap</span>
+                <span *ngIf="inQueryParams('vi', Visualise[Visualise.sh])">Short ratio</span>
+                <span *ngIf="inQueryParams('vi', Visualise[Visualise.fl])">Short % of float</span>
+                <span *ngIf="inQueryParams('vi', Visualise[Visualise.rp])">Revenue per share</span>
+                <span *ngIf="inQueryParams('vi', Visualise[Visualise.ms])">Market sentiment</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" (click)="visualiseByUpdateRoute(Visualise.ca);">Market cap</a></li>
+                <li><a class="dropdown-item" (click)="visualiseByUpdateRoute(Visualise.sh);">Short ratio</a></li>
+                <li><a class="dropdown-item" (click)="visualiseByUpdateRoute(Visualise.fl);">Short % of float</a></li>
+                <li><a class="dropdown-item" (click)="visualiseByUpdateRoute(Visualise.rp);">Revenue per share</a></li>
+                <li><a class="dropdown-item" (click)="visualiseByUpdateRoute(Visualise.ms);">Market sentiment</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div> <!-- /MOBILE DROPDOWN -->
+
+        <div class="row d-none d-sm-block">  <!-- DESKTOP RADIO BUTTONS -->
           <div class="col pe-0 pe-sm-3">
 
             <div class="--btn-radio">
@@ -174,55 +218,57 @@
             </div>
 
           </div>
-        </div>
+        </div> <!-- /DESKTOP RADIO BUTTONS -->
 
       </div> <!-- /col 3/4 -->
 
 <!-- COLUMN 4/4: COLOUR SCHEME KEY -->
-      <div class="col-12 col-md-2 col-xl-2 mt-2 mt-md-0" id="filter-tray__collapsible__colour-key">
+      <div class="col-12 col-md-2 col-xl-2 mt-1 mt-md-0" id="filter-tray__collapsible__colour-key">
 
         <div class="row">
           <div class="col">
             <span class="filter-label fw-bold">Key</span>
           </div>
         </div>
-  <!-- market cap key -->
-        <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.ca])">
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--1"></i> $12bn</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--3"></i> $50bn</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--5"></i> $250bn</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--7"></i> $1tn</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--9"></i> $2tn</div>
-        </div>
-  <!-- short ratio key -->
-        <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.sh])">
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--1"></i> 1.0</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--3"></i> 2.0</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--5"></i> 3.5</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--7"></i> 7.0</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--9"></i> 18</div>
-        </div>
-  <!-- short % of float key -->
-        <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.fl])">
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--1"></i> 1%</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--3"></i> 3%</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--5"></i> 5%</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--7"></i> 50%</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--9"></i> 230%</div>
-        </div>
-  <!-- revenue per share key -->
-        <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.rp])">
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--1"></i> 15</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--3"></i> 50</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--5"></i> 400</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--7"></i> 40k</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--9"></i> 160k</div>
-        </div>
-  <!-- market sentiment key -->
-        <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.ms])">
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ms--strong-sell me-1"></i> Sell</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ms--hold"></i> Hold</div>
-          <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ms--strong-buy me-1"></i> Buy</div>
+        <div class="ps-3 ps-sm-0">
+    <!-- market cap key -->
+          <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.ca])">
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--1"></i> $12bn</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--3"></i> $50bn</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--5"></i> $250bn</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--7"></i> $1tn</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ca--9"></i> $2tn</div>
+          </div>
+    <!-- short ratio key -->
+          <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.sh])">
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--1"></i> 1.0</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--3"></i> 2.0</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--5"></i> 3.5</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--7"></i> 7.0</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--sh--9"></i> 18</div>
+          </div>
+    <!-- short % of float key -->
+          <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.fl])">
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--1"></i> 1%</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--3"></i> 3%</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--5"></i> 5%</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--7"></i> 50%</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--fl--9"></i> 230%</div>
+          </div>
+    <!-- revenue per share key -->
+          <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.rp])">
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--1"></i> 15</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--3"></i> 50</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--5"></i> 400</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--7"></i> 40k</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--rp--9"></i> 160k</div>
+          </div>
+    <!-- market sentiment key -->
+          <div class="row ps-2 ps-md-0" *ngIf="inQueryParams('vi', Visualise[Visualise.ms])">
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ms--strong-sell me-1"></i> Sell</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ms--hold"></i> Hold</div>
+            <div class="col col-md-12 ps-1 pe-0 ps-md-3 pe-md-3 text-nowrap"><i class="bi bi-square-fill colour-swatch--ms--strong-buy me-1"></i> Buy</div>
+          </div>
         </div>
 
       </div> <!-- /col 4/4 -->
@@ -236,7 +282,7 @@
     <div class="col-auto me-auto me-xl-0 ps-lg-5">
       <a role="button" class="btn btn-primary float-start" data-bs-toggle="collapse" href="#filter-tray__collapsible"
          (click)="onToggleFilterTrayOpen()">
-        <i class="bi" [ngClass]="inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i> {{inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'Hide filters' : 'Show filters'}}
+        <i class="--stroke-font-white bi" [ngClass]="inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'bi-dash' : 'bi-plus'"></i> {{inQueryParams('ft', FilterTrayOpen[FilterTrayOpen.o]) ? 'Hide filters' : 'Show filters'}}
       </a>
     </div>
 

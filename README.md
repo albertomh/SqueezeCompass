@@ -48,7 +48,9 @@ In order to update the snapshot or constituents file, simply update the paths in
 
 Serve from the `/web` directory with `ng serve`
 
-Build for hosting on GitHub pages with `npm run build`
+Build for hosting on GitHub pages with `npm run build`.  
+(Don't run `ng build --prod` directly since there is an npm postbuild script that calls `scripts/minify_json.py` on the 
+JSON datafiles in the `dist` directory).
 
 
 TODO:
