@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  filePathForSnapshot: './assets/data/2021-02-12_snapshot.json',
-  filePathForConstituents: './assets/data/2021-02-01_constituents.json'
+  filePathForConstituents: './assets/data/constituents/2021-02-15_constituents.json',
+  filePathForSnapshot: './assets/data/snapshots/2021-02-15_snapshot.json',
 };
 
 /*

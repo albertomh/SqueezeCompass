@@ -37,10 +37,12 @@ class DataFetcher:
     @staticmethod
     def fetch_data_for_single_symbol(symbol: str) -> Dict[str, Union[str, dict, datetime]]:
         #
+        # Some symbols have dots in the symbols list but dashes in the fetched datasource. eg. BRK.B vs BRK-B
+        symbol_for_url = symbol.replace('.', '-')
         r: Response = Response()
         try:
             print(f"{conf.TIMESTAMP()} | Fetching data for {symbol}.")
-            datasource_url: str = f"{util.decode_url(conf.DATASOURCE_URL_1)}{symbol}{util.decode_url(conf.DATASOURCE_URL_2)}"
+            datasource_url: str = f"{util.decode_url(conf.DATASOURCE_URL_1)}{symbol_for_url}{util.decode_url(conf.DATASOURCE_URL_2)}"
             r = requests.get(datasource_url, headers=conf.random_header())
         except requests.exceptions.RequestException as e:
             print(f"{conf.TIMESTAMP()} | Attempted request for {symbol} data failed.\n{e}")
