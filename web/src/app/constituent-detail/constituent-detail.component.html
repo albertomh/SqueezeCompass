@@ -44,13 +44,17 @@
     <div class="col-10 offset-1 mt-3 mt-sm-0 col-md-4 offset-xl-0 col-xl-3">
       <div class="row text-center"
            [ngClass]="'constituent-detail__timeline constituent-detail__timeline' + [gicsSectorIcons[constituent.gics_sector][1]]">
-        <div class="col" *ngIf="constituent.founded !== null">
+        <div class="col" *ngIf="constituent.added === null || constituent.founded !== null && constituent.founded.slice(0, 4) <= constituent.added.slice(0, 4)">
           <span class="fw-bold">{{constituent.founded.slice(0, 4)}}</span><br>
           <span class="text-muted">Founded</span>
         </div>
         <div class="col" *ngIf="constituent.added !== null">
           <span class="fw-bold">{{constituent.added.slice(0, 4)}}</span><br>
           <span class="text-muted">Listed on S&P500</span>
+        </div>
+        <div class="col" *ngIf="constituent.founded !== null && constituent.added !== null && constituent.founded.slice(0, 4) > constituent.added.slice(0, 4)">
+          <span class="fw-bold">{{constituent.founded.slice(0, 4)}}</span><br>
+          <span class="text-muted">Founded (via M&A)</span>
         </div>
       </div>
     </div>

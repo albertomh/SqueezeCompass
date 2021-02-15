@@ -12,6 +12,7 @@ from typing import (
     Generator,
 )
 from itertools import groupby
+import re
 import json
 from datetime import (
     datetime,
@@ -58,13 +59,12 @@ class SymbolFetcher:
 
         for row in row_data:
             yield {
-                # Some symbols have dots in the symbols list but dashes in the fetched datasource. eg. BRK.B vs BRK-B
-                'symbol': row[0].replace('.', '-'),
+                'symbol': row[0],
                 'name': row[1],
                 'gics_sector': row[3],
                 'gics_sub-industry': row[4],
                 'added': None if not row[6] else str(datetime.strptime(row[6][0:10], '%Y-%m-%d').date()),
-                'founded': row[8]
+                'founded': min(re.findall(r'[1-2][0-9]{3}', row[8])),
             }
 
     @staticmethod
