@@ -16,9 +16,10 @@ Inspired in part by [highshortinterest.com](https://www.highshortinterest.com/  
 ---
 
 The project consists of two modules:
-- A Python data fetcher that stores snapshots of the make up of the S&P500 and financial data for these constituents given day.
+- A Python data fetcher that stores snapshots of the make up of the S&P500 and financial data for these constituents on a given day.
 - An Angular application with which to display and browse this data.
 
+---
 
 ## Data Fetcher
 
@@ -63,8 +64,6 @@ Refer to the next section to see how the constituents and snapshot JSON files ar
 ## Web interface
 
 SqueezeCompass' interface consists of an Angular 11 webapp with Bootstrap 5.
-
----
 
 ### Setup for development
 Bear in mind that `npm` is favoured, strict type checking is enabled, the app uses default Angular 
