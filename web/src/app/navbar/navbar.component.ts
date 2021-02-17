@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   navigateToHomepage() {
-    this.router.navigate(['/'], { queryParamsHandling: "merge" });
+    this.router.navigate(['/'], { queryParamsHandling: "merge", replaceUrl: true });
   }
 
   onToggleoffCanvasMenu() {

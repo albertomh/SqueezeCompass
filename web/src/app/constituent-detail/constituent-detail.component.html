@@ -50,7 +50,7 @@
         </div>
         <div class="col" *ngIf="constituent.added !== null">
           <span class="fw-bold">{{constituent.added.slice(0, 4)}}</span><br>
-          <span class="text-muted">Listed on S&P500</span>
+          <span class="text-muted">Listed on S&amp;P500</span>
         </div>
         <div class="col" *ngIf="constituent.founded !== null && constituent.added !== null && constituent.founded.slice(0, 4) > constituent.added.slice(0, 4)">
           <span class="fw-bold">{{constituent.founded.slice(0, 4)}}</span><br>

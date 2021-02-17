@@ -45,7 +45,7 @@ export class ConstituentDetailDataWrapperComponent implements OnInit {
       this.selectedConstituent = this.constituents.filter(c => c.symbol === this.symbol)[0];
 
       if (typeof this.selectedConstituent === 'undefined') {
-        this.router.navigate(['/404'], { queryParamsHandling: "merge" });
+        this.router.navigate(['/404'], { queryParamsHandling: "merge", replaceUrl: true });
       }
 
     }).catch(function (error) {

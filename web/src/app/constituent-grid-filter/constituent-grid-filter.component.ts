@@ -81,7 +81,7 @@ export class ConstituentGridFilterComponent implements OnInit {
       filterStatus = FilterTrayOpen[FilterTrayOpen.c];
     }
 
-    this.router.navigate(['/'], { queryParams: { ft: filterStatus }, queryParamsHandling: 'merge' });
+    this.router.navigate(['/'], { queryParams: { ft: filterStatus }, queryParamsHandling: 'merge', replaceUrl: true });
   }
 
   resetToDefaultFilters(): void {
@@ -89,7 +89,7 @@ export class ConstituentGridFilterComponent implements OnInit {
     if (this.curQueryParams.ft != null) {
       defaultQueryParams.ft = this.curQueryParams.ft;
     }
-    this.router.navigate(['/'], { queryParams: defaultQueryParams, queryParamsHandling: 'merge' });
+    this.router.navigate(['/'], { queryParams: defaultQueryParams, queryParamsHandling: 'merge', replaceUrl: true });
   }
 
   // --- Filter, Sort, and Visualise Query Parameters --------------------------
@@ -141,7 +141,7 @@ export class ConstituentGridFilterComponent implements OnInit {
     } else {
       newQueryParams[categoryQueryStringKey] = categoryQueryString;
     }
-    this.router.navigate(['/'], { queryParams: newQueryParams, queryParamsHandling: 'merge' });
+    this.router.navigate(['/'], { queryParams: newQueryParams, queryParamsHandling: 'merge', replaceUrl: true });
   }
 
   filterByMarketSentiment(sentiment: FilterSentiment): void {
@@ -154,12 +154,12 @@ export class ConstituentGridFilterComponent implements OnInit {
 
 // ----- SORT ------------------------------------------------------------------
   sortByUpdateRoute(order: SortBy): void {
-    this.router.navigate(['/'], { queryParams: { so: SortBy[order] }, queryParamsHandling: 'merge' });
+    this.router.navigate(['/'], { queryParams: { so: SortBy[order] }, queryParamsHandling: 'merge', replaceUrl: true });
   }
 
 // ----- VISUALISE -------------------------------------------------------------
   visualiseByUpdateRoute(scheme: Visualise): void {
-    this.router.navigate(['/'], { queryParams: { vi: Visualise[scheme] }, queryParamsHandling: 'merge' });
+    this.router.navigate(['/'], { queryParams: { vi: Visualise[scheme] }, queryParamsHandling: 'merge', replaceUrl: true });
   }
 
 }

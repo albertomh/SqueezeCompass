@@ -1,6 +1,6 @@
 # :compass:	SqueezeCompass
 
-SqueezeCompass ranks, filters, and visualises the stocks that make up the S&P500 based on metrics such as short interest.
+SqueezeCompass ranks, filters, and visualises S&P500 stocks based on metrics such as short interest.
 
 It is available at: [albertomh.com/SqueezeCompass](https://www.albertomh.com/SqueezeCompass/)
 
@@ -10,8 +10,7 @@ SqueezeCompass emerges in the wake of the `$GME` bubble of early 2021.  It is pa
 fundamentals of a short squeeze, tracking indicators of one, as well as an opportunity to explore a couple of 
 technologies I had been wanting to make something with.
 
-Data derived from multiple sources including Morningstar and quarterly or annual reports.  
-Inspired in part by [highshortinterest.com](https://www.highshortinterest.com/  )
+Data derived from multiple sources including Morningstar and quarterly or annual reports. Inspired in part by [highshortinterest.com](https://www.highshortinterest.com/)
 
 ---
 
