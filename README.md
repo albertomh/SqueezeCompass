@@ -99,3 +99,19 @@ The existing config is intended for deployment to GitHub Pages.
 Build a production-ready artefact with `npm run build`. Don't run `ng build --prod` directly since otherwise 
 npm postbuild scripts will not run.   
 The postbuild script calls `scripts/minify_json.py` on the JSON datafiles in the `dist` directory.
+
+Originally built with Node 16. In order to build using Node 17+, the environment variable `NODE_OPTIONS=--openssl-legacy-provider` must be set.
+
+The project used to be hosted on GitHub Pages, have since moved on to using Cloudflare Pages.
+Use the following build configuration:  
+- No framework preset.  
+- Build command: `npm run build`.  
+- Build output directory: `/dist`.  
+- Root directory: `/web`.  
+
+Environment variables:  
+
+| Variable name | Value                     |
+| ------------- | ------------------------- |
+| NODE_VERSION  | 17.8.0                    |
+| NODE_OPTIONS  | --openssl-legacy-provider |
