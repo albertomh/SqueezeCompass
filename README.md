@@ -2,9 +2,9 @@
 
 SqueezeCompass ranks, filters, and visualises S&P500 stocks based on metrics such as short interest.
 
-It is available at: [albertomh.com/SqueezeCompass](https://www.albertomh.com/SqueezeCompass/)
+It is available at: [sc.albertomh.com/SqueezeCompass](https://sc.albertomh.com/SqueezeCompass/)
 
-[<img src="https://raw.githubusercontent.com/albertomh/SqueezeCompass/dist/assets/img/squeezecompass-og-image.png" alt="SqueezeCompass" width="600">](https://www.albertomh.com/SqueezeCompass/)
+[<img src="https://raw.githubusercontent.com/albertomh/SqueezeCompass/dist/assets/img/squeezecompass-og-image.png" alt="SqueezeCompass" width="600">](https://sc.albertomh.com/SqueezeCompass/)
 
 SqueezeCompass emerges in the wake of the `$GME` bubble of early 2021.  It is partly an attempt to delve into the 
 fundamentals of a short squeeze, tracking indicators of one, as well as an opportunity to explore a couple of 
