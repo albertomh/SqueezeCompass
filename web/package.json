@@ -9,7 +9,8 @@
     "postbuild": "python3 scripts/minify_json.py",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cfPages": ""
   },
   "private": true,
   "dependencies": {
