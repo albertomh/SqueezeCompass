@@ -94,7 +94,7 @@ component when the JSON data has been received.
 
 ### Deployments
 All necessary configuration is kept in `angular.json` and `package.json` instead of using Angular CLI flags. 
-The existing config is intended for deployment to GitHub Pages.
+~~The existing config is intended for deployment to GitHub Pages.~~
 
 Build a production-ready artefact with `npm run build`. Don't run `ng build --prod` directly since otherwise 
 npm postbuild scripts will not run.   
